@@ -217,14 +217,14 @@ public class CityForecastInfo {
         private int gndLevel;
 
 
-        public Main(int temp, int pressure, int humidity, int temp_min, int temp_max, int sea_level, int gnd_level) {
+        public Main(int temp, int pressure, int humidity, int tempMin, int tempMax, int seaLevel, int gndLevel) {
             this.temp = temp;
             this.pressure = pressure;
             this.humidity = humidity;
-            this.tempMin = temp_min;
-            this.tempMax = temp_max;
-            this.seaLevel = sea_level;
-            this.gndLevel = gnd_level;
+            this.tempMin = tempMin;
+            this.tempMax = tempMax;
+            this.seaLevel = seaLevel;
+            this.gndLevel = gndLevel;
         }
 
         public float getTemp() {

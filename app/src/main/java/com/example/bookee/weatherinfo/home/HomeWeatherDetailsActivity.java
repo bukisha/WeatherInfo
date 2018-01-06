@@ -1,4 +1,4 @@
-package com.example.bookee.weatherinfo.homeweather;
+package com.example.bookee.weatherinfo.home;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -16,11 +16,14 @@ import com.example.bookee.weatherinfo.mvp.BaseView;
 
 
 public class HomeWeatherDetailsActivity extends AppCompatActivity implements BaseView {
-     TextView city,temperature,windSpeed,humidity;
-     FloatingActionButton floatingActionButton;
+    private TextView city;
+    private TextView temperature;
+    private TextView windSpeed;
+    private TextView humidity;
+    private FloatingActionButton floatingActionButton;
 
-     WeatherPresenter WeatherPresenter;
-     ActivitySwitcher SwitcherPresenter;
+     private WeatherPresenter weatherPresenter;
+     private ActivitySwitcherPresenter switcherPresenter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,16 +36,16 @@ public class HomeWeatherDetailsActivity extends AppCompatActivity implements Bas
 
 
 
-        WeatherPresenter=new WeatherPresenter(this);
-        WeatherPresenter.getData();
+        weatherPresenter =new WeatherPresenter(this);
+        weatherPresenter.getData();
 
-        SwitcherPresenter=new ActivitySwitcher(this);
+        switcherPresenter =new ActivitySwitcherPresenter(this);
     }
 
 
     @Override
     public void setText(CityForecastInfo info) {
-       int tempToDisplay;
+        int tempToDisplay;
         city.setText(info.getName());
         tempToDisplay= (int) (info.getMain().getTemp()-273.15 );
         temperature.setText(String.valueOf(tempToDisplay));
@@ -55,7 +58,7 @@ public class HomeWeatherDetailsActivity extends AppCompatActivity implements Bas
         Toast.makeText(this,"Doslo je do greske!",Toast.LENGTH_LONG).show();
     }
     public void findCityForecast(View v) {
-        SwitcherPresenter.floatingActionButtonIsClicked();
+        switcherPresenter.floatingActionButtonIsClicked();
 
 
     }

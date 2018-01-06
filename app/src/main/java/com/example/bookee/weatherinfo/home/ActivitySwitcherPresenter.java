@@ -1,17 +1,15 @@
-package com.example.bookee.weatherinfo.homeweather;
+package com.example.bookee.weatherinfo.home;
 
-
-import android.view.View;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.mvp.BasePresenter;
 import com.example.bookee.weatherinfo.mvp.BaseView;
 
-public class ActivitySwitcher implements BasePresenter {
-    BaseView myView;
+public class ActivitySwitcherPresenter implements BasePresenter {
+    private BaseView attachedView;
 
-    public ActivitySwitcher(BaseView v) {
-    myView=v;
+    public ActivitySwitcherPresenter(BaseView v) {
+    attachedView =v;
     }
 
     @Override
@@ -31,8 +29,6 @@ public class ActivitySwitcher implements BasePresenter {
 
     @Override
     public void floatingActionButtonIsClicked() {
-
-
-        myView.startNewActivity();
+        attachedView.startNewActivity();
     }
 }

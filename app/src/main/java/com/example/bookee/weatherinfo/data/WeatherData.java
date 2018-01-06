@@ -18,7 +18,7 @@ public class WeatherData implements BaseData {
 
 
     private Call<CityForecastInfo> call;
-    private BasePresenter myPresenter;
+    private BasePresenter presenter;
 
     public WeatherData(BasePresenter p) {
         Retrofit  retrofit = new Retrofit.Builder()
@@ -29,7 +29,7 @@ public class WeatherData implements BaseData {
         WeatherApi  myApi = retrofit.create(WeatherApi.class);
          call = myApi.getForecast("Belgrade",WeatherApi.API_KEY);
 
-         this.myPresenter=p;
+         this.presenter =p;
 
 
     }
@@ -40,7 +40,7 @@ public class WeatherData implements BaseData {
         call.enqueue(new Callback<CityForecastInfo>() {
             @Override
             public void onResponse( Call<CityForecastInfo> call, Response<CityForecastInfo> response) {
-                myPresenter.setText(response.body());
+                presenter.setText(response.body());
 
 
             }
@@ -49,7 +49,7 @@ public class WeatherData implements BaseData {
             public void onFailure(Call<CityForecastInfo> call, Throwable t) {
                 Log.i("GET URL JE ",call.request().toString());
                 Log.i("greska je " ,t.toString());
-                  myPresenter.errorMessage();
+                  presenter.errorMessage();
             }
         });
 

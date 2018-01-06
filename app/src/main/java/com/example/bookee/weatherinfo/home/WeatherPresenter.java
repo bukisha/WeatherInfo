@@ -1,4 +1,4 @@
-package com.example.bookee.weatherinfo.homeweather;
+package com.example.bookee.weatherinfo.home;
 
 
 
