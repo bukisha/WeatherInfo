@@ -23,7 +23,7 @@ public class HomeWeatherDetailsActivity extends AppCompatActivity implements Bas
     private FloatingActionButton floatingActionButton;
 
      private WeatherPresenter weatherPresenter;
-     private ActivitySwitcherPresenter switcherPresenter;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +39,7 @@ public class HomeWeatherDetailsActivity extends AppCompatActivity implements Bas
         weatherPresenter =new WeatherPresenter(this);
         weatherPresenter.getData();
 
-        switcherPresenter =new ActivitySwitcherPresenter(this);
+
     }
 
 
@@ -58,7 +58,7 @@ public class HomeWeatherDetailsActivity extends AppCompatActivity implements Bas
         Toast.makeText(this,"Doslo je do greske!",Toast.LENGTH_LONG).show();
     }
     public void findCityForecast(View v) {
-        switcherPresenter.floatingActionButtonIsClicked();
+       weatherPresenter.floatingActionButtonIsClicked();
 
 
     }

@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class FindCityActivity extends AppCompatActivity  {
-   private  Button getForecast;
+   private Button getForecast;
    private  EditText cityName;
 
     @Override
