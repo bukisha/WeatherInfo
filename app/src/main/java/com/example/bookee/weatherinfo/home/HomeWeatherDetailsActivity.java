@@ -40,7 +40,11 @@ public class HomeWeatherDetailsActivity extends AppCompatActivity implements Bas
 
 
 
-
+//todo ovde ispitujes da li je "extras" null i ako nije, picis dalje. A sta ako ti u extras nedostaje "temp" vrednost!?
+//Onda na liniji 63 imas NPE
+//Generalno, sve sto imas povadi iz extras i prosledi ga presenteru.
+// Presenter ce da odluci da li ce te podatke da ispise preko neke povratnme view metode
+// (na primer view.drawTemperature(long temp) ili ce da radi neku kalkulaciju...
 
            extras=getIntent().getExtras();
            if(extras!=null) {
@@ -75,6 +79,11 @@ public class HomeWeatherDetailsActivity extends AppCompatActivity implements Bas
     public void errorHappened() {
         Toast.makeText(this,"Doslo je do greske!",Toast.LENGTH_LONG).show();
     }
+
+
+    //TODO vidis ovaj komentar! On je tu jer sam kod nije jasan. Ako trebas da stavis komentar,znaci nesto nije dobro.
+    //A ono sto nije dobro je kretenska mogucnost da stavis onClick listenere u XML i tako mesas babe i zabe.
+    //Najbolje je da uzmes referencu na FAB i zakacis klasican listener.
     //this method is attached to FAB in xml
     public void findCityForecast(View v) {
        weatherPresenter.ActionSomethingIsClicked();
@@ -97,6 +106,8 @@ public class HomeWeatherDetailsActivity extends AppCompatActivity implements Bas
     public void recieveDataFromPresenter(CityForecastInfo info) {
         int tempToDisplay;
         city.setText(info.getName());
+        //todo ja kada pogledam ovo 273.15 ja nemam pojma sta je to! Izvuci to u konstantnu da bude
+        //tempToDisplay= (int) (info.getMain().getTemp() - SOME_COOL_CONSTANT );
         tempToDisplay= (int) (info.getMain().getTemp()-273.15 );
         temperature.setText(String.valueOf(tempToDisplay));
         windSpeed.setText(String.valueOf((int) info.getWind().getSpeed()));

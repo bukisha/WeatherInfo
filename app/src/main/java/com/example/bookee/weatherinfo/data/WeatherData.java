@@ -11,9 +11,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WeatherData implements BaseData {
-
-
-    private  Call<CityForecastInfo> call;
+    private static final String TAG = "WeatherData";
+    private Call<CityForecastInfo> call;
     private BasePresenter presenter;
     private  Retrofit attachedRetrofitClient=null;
     private  WeatherApi myApi;
@@ -78,6 +77,8 @@ public class WeatherData implements BaseData {
             public void onFailure(Call<CityForecastInfo> call, Throwable t) {
                 Log.i("GET URL JE ",call.request().toString());
                 Log.i("greska je " ,t.toString());
+                //todo kada imas exception, onda koristi Log.e tag
+                Log.e(TAG, "onFailure: ", t);
                 presenter.errorMessage();
             }
         });
