@@ -17,6 +17,8 @@
 
         android:hint="@string/enter_name_of_the_city"
         android:textColorHint="@color/white"
+
+        android:imeOptions="actionDone"
         />
 
     <Button
@@ -27,6 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
 
+        android:onClick="getCityForecastClicked"
 
         android:text="@string/get_forecast" />
 </RelativeLayout>

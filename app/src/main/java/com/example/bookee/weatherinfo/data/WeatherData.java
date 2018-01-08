@@ -1,8 +1,4 @@
 package com.example.bookee.weatherinfo.data;
-
-
-
-
 import android.util.Log;
 
 import com.example.bookee.weatherinfo.mvp.BaseData;
@@ -17,30 +13,39 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class WeatherData implements BaseData {
 
 
-    private Call<CityForecastInfo> call;
+    private  Call<CityForecastInfo> call;
     private BasePresenter presenter;
+    private  Retrofit attachedRetrofitClient=null;
+    private  WeatherApi myApi;
 
-    public WeatherData(BasePresenter p) {
+    public Retrofit BuildRetrofit() {
+
         Retrofit  retrofit = new Retrofit.Builder()
                 .baseUrl(WeatherApi.BASE_URL_LIVE)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        WeatherApi  myApi = retrofit.create(WeatherApi.class);
-         call = myApi.getForecast("Belgrade",WeatherApi.API_KEY);
 
-         this.presenter =p;
+        return  retrofit;
+    }
 
+    public WeatherData(BasePresenter p) {
 
+        this.attachedRetrofitClient=BuildRetrofit();
+        this.presenter =p;
     }
 
     @Override
     public void getData() {
 
+         myApi = attachedRetrofitClient.create(WeatherApi.class);
+        call = myApi.getForecast("Belgrade",WeatherApi.API_KEY);
+
         call.enqueue(new Callback<CityForecastInfo>() {
             @Override
             public void onResponse( Call<CityForecastInfo> call, Response<CityForecastInfo> response) {
-                presenter.setText(response.body());
+                presenter.passResultToView(response.body());
+
 
 
             }
@@ -52,6 +57,31 @@ public class WeatherData implements BaseData {
                   presenter.errorMessage();
             }
         });
+
+    }
+
+    @Override
+    public void getData(String s) {
+          myApi = attachedRetrofitClient.create(WeatherApi.class);
+        call = myApi.getForecast(s,WeatherApi.API_KEY);
+
+        call.enqueue(new Callback<CityForecastInfo>() {
+            @Override
+            public void onResponse( Call<CityForecastInfo> call, Response<CityForecastInfo> response) {
+
+                presenter.passResultToView(response.body());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<CityForecastInfo> call, Throwable t) {
+                Log.i("GET URL JE ",call.request().toString());
+                Log.i("greska je " ,t.toString());
+                presenter.errorMessage();
+            }
+        });
+
 
     }
 }

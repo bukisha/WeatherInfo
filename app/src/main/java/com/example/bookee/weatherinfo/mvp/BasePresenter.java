@@ -1,18 +1,20 @@
 package com.example.bookee.weatherinfo.mvp;
 
 
-import android.view.View;
-
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 
 public interface BasePresenter {
 
-    public void getData();
+
+    //binding presenter to its data model
+    public void bindDataModel(BaseData model);
+    //binding presenter to its view
+    public void bindView(BaseView view);
 
 
-    void setText(CityForecastInfo s);
 
     void errorMessage();
 
-    public void floatingActionButtonIsClicked();
+
+    void passResultToView(CityForecastInfo body);
 }

@@ -217,7 +217,7 @@ public class CityForecastInfo {
         private int gndLevel;
 
 
-        public Main(int temp, int pressure, int humidity, int tempMin, int tempMax, int seaLevel, int gndLevel) {
+        public Main(float temp, int pressure, int humidity, float tempMin, float tempMax, int seaLevel, int gndLevel) {
             this.temp = temp;
             this.pressure = pressure;
             this.humidity = humidity;
@@ -239,19 +239,19 @@ public class CityForecastInfo {
             return humidity;
         }
 
-        public float getTemp_min() {
+        public float getTempMin() {
             return tempMin;
         }
 
-        public float getTemp_max() {
+        public float getTempMax() {
             return tempMax;
         }
 
-        public int getSea_level() {
+        public int getSeaLevel() {
             return seaLevel;
         }
 
-        public int getGnd_level() {
+        public int getGndLevel() {
             return gndLevel;
         }
     }
@@ -339,10 +339,10 @@ public class CityForecastInfo {
     public static class Wind {
 
       private float speed;
-      private int deg;
+      private float deg;
 
 
-        public Wind(float speed, int deg) {
+        public Wind(float speed, float deg) {
             this.speed = speed;
             this.deg = deg;
         }
@@ -351,7 +351,7 @@ public class CityForecastInfo {
             return speed;
         }
 
-        public int getDeg() {
+        public float getDeg() {
             return deg;
         }
     }
