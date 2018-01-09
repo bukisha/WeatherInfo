@@ -13,12 +13,8 @@ public interface BaseView  {
         void errorHappened();
 
 
-        void startNewActivity();
 
 
-
-
-        ;
 }
 
 

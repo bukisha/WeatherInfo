@@ -66,7 +66,7 @@ public class FindCityActivity extends AppCompatActivity implements mvpView {
         extraData.putString("name",name);
         extraData.putDouble("temp",temperature);
         extraData.putDouble("wind",windSpeed);
-        extraData.putDouble("humid",humidity);
+        extraData.putInt("humid",humidity);
         i.putExtras(extraData);
 
 

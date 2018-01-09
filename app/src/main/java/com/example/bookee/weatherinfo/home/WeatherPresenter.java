@@ -2,15 +2,15 @@ package com.example.bookee.weatherinfo.home;
 
 
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.WeatherData;
-import com.example.bookee.weatherinfo.findcity.FindCityActivity;
 import com.example.bookee.weatherinfo.mvp.BaseData;
 import com.example.bookee.weatherinfo.mvp.BasePresenter;
 import com.example.bookee.weatherinfo.mvp.BaseView;
+
+import static com.example.bookee.weatherinfo.home.HomeWeatherDetailsActivity.CELSIOUS_FAHRENHEIT_DIFFERENCE;
 
 class WeatherPresenter implements BasePresenter {
 
@@ -62,14 +62,16 @@ class WeatherPresenter implements BasePresenter {
 
 
     public void displayNewData(Bundle extras) {
+
         String name=extras.getString("name");
-        Double temp=extras.getDouble("temp");
-        Double wind=extras.getDouble("temp");
-        Double humid=extras.getDouble("humid");
-        if(name!=null && temp!=null && wind!=null && humid!=null) {
-            String tempString=String.valueOf(temp);
-            String windString=String.valueOf(wind);
-            String humidString=String.valueOf(humid);
+        double temp=extras.getDouble("temp");
+        double wind=extras.getDouble("wind");
+        int humid=extras.getInt("humid");
+        if(name!=null ) {     //TODO smisli kako da proveris da li su ti stigle i sotale vrednosti pored name-a
+            temp=(temp-CELSIOUS_FAHRENHEIT_DIFFERENCE);
+            String tempString=String.valueOf((int)temp);
+            String windString=String.valueOf((int)wind);
+            String humidString=String.valueOf((int)humid);
             attachedView.updateWithNewData(name,tempString,windString,humidString);
 
     } else {
