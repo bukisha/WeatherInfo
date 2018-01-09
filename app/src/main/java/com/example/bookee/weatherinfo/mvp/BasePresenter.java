@@ -17,4 +17,6 @@ public interface BasePresenter {
 
 
     void passResultToView(CityForecastInfo body);
+
+    void unbindView();
 }

@@ -53,7 +53,7 @@ public class WeatherData implements BaseData {
             @Override
             public void onFailure(Call<CityForecastInfo> call, Throwable t) {
                 Log.i("GET URL JE ",call.request().toString());
-                Log.i("greska je " ,t.toString());
+                Log.e("greska je " ,t.toString());
                   presenter.errorMessage();
             }
         });

@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@id/current_temp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="100dp"
         >
 
 
@@ -127,6 +127,8 @@
             android:textColor="@color/colorAccent"/>
     </LinearLayout>
 
+
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
@@ -138,6 +140,6 @@
         android:onClick="findCityForecast"
         android:src="@drawable/fab_icon"
 
-        />
+        android:focusable="true" />
 
 </RelativeLayout>

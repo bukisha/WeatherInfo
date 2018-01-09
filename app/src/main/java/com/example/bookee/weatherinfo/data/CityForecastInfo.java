@@ -182,42 +182,42 @@ public class CityForecastInfo {
 
     public static class Coord {
 
-        private float lon;
+        private double lon;
 
-        private float lat;
+        private double lat;
 
 
-        public Coord(int lon, int lat) {
+        public Coord(double lon, double lat) {
             this.lon = lon;
             this.lat = lat;
         }
 
 
-        public float getLon() {
+        public double getLon() {
             return lon;
         }
 
-        public float getLat() {
+        public double getLat() {
             return lat;
         }
     }
 
     public static class Main {
 
-        private float temp;
+        private double temp;
         private int pressure;
         private int humidity;
         @SerializedName("temp_min")
-        private float tempMin;
+        private double tempMin;
         @SerializedName("temp_max")
-        private float tempMax;
+        private double tempMax;
         @SerializedName("sea_level")
         private int seaLevel;
         @SerializedName("gnd_level")
         private int gndLevel;
 
 
-        public Main(float temp, int pressure, int humidity, float tempMin, float tempMax, int seaLevel, int gndLevel) {
+        public Main(double temp, int pressure, int humidity, double tempMin, double tempMax, int seaLevel, int gndLevel) {
             this.temp = temp;
             this.pressure = pressure;
             this.humidity = humidity;
@@ -227,7 +227,7 @@ public class CityForecastInfo {
             this.gndLevel = gndLevel;
         }
 
-        public float getTemp() {
+        public double getTemp() {
             return temp;
         }
 
@@ -239,11 +239,11 @@ public class CityForecastInfo {
             return humidity;
         }
 
-        public float getTempMin() {
+        public double getTempMin() {
             return tempMin;
         }
 
-        public float getTempMax() {
+        public double getTempMax() {
             return tempMax;
         }
 
@@ -260,12 +260,12 @@ public class CityForecastInfo {
 
         private int type;
         private int id;
-        private float message;
+        private double message;
         private String country;
         private int sunrise;
         private int sunset;
 
-        public Sys(int type, int id, float message, String country, int sunrise, int sunset) {
+        public Sys(int type, int id, double message, String country, int sunrise, int sunset) {
             this.type = type;
             this.id = id;
             this.message = message;
@@ -283,7 +283,7 @@ public class CityForecastInfo {
             return id;
         }
 
-        public float getMessage() {
+        public double getMessage() {
             return message;
         }
 
@@ -338,20 +338,20 @@ public class CityForecastInfo {
 
     public static class Wind {
 
-      private float speed;
-      private float deg;
+      private double speed;
+      private double deg;
 
 
-        public Wind(float speed, float deg) {
+        public Wind(double speed, double deg) {
             this.speed = speed;
             this.deg = deg;
         }
 
-        public float getSpeed() {
+        public double getSpeed() {
             return speed;
         }
 
-        public float getDeg() {
+        public double getDeg() {
             return deg;
         }
     }

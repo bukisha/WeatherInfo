@@ -37,6 +37,11 @@ public class FindCityPresenter implements BasePresenter {
         attachedView.recieveDataFromPresenter(body);
     }
 
+    @Override
+    public void unbindView() {
+        attachedView=null;
+    }
+
 
     public void getData(String desiredCity) {
         attachedDataInstance.getData(desiredCity);

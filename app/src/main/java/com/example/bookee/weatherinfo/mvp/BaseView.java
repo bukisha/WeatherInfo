@@ -12,8 +12,13 @@ public interface BaseView  {
         public void recieveDataFromPresenter(CityForecastInfo info);
         void errorHappened();
 
-//redundant delete sometimes
+
         void startNewActivity();
+
+
+
+
+        ;
 }
 
 

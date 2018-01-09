@@ -3,28 +3,24 @@ import com.example.bookee.weatherinfo.*;
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.home.HomeWeatherDetailsActivity;
 import com.example.bookee.weatherinfo.mvp.BasePresenter;
-import com.example.bookee.weatherinfo.mvp.BaseView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class FindCityActivity extends AppCompatActivity implements BaseView {
+public class FindCityActivity extends AppCompatActivity implements mvpView {
 
     private Button getForecast;
     private  EditText cityName;
     private FindCityPresenter presenter;
 
     private String name;
-    private float temperature;
-    private float windSpeed;
+    private double temperature;
+    private double windSpeed;
     private int humidity;
 
     @Override
@@ -41,6 +37,12 @@ public class FindCityActivity extends AppCompatActivity implements BaseView {
     @Override
     public void bindPresenter(BasePresenter presenter) {
         this.presenter= (FindCityPresenter) presenter;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.unbindView();
     }
 
     @Override
@@ -62,15 +64,17 @@ public class FindCityActivity extends AppCompatActivity implements BaseView {
         Intent i=new Intent(this, HomeWeatherDetailsActivity.class);
         Bundle extraData=new Bundle();
         extraData.putString("name",name);
-        extraData.putFloat("temp",temperature);
-        extraData.putFloat("wind",windSpeed);
-        extraData.putFloat("humid",humidity);
+        extraData.putDouble("temp",temperature);
+        extraData.putDouble("wind",windSpeed);
+        extraData.putDouble("humid",humidity);
         i.putExtras(extraData);
 
 
         startActivity(i);
     }
 
+
+        //TODO i ovde dodaj normalan lsitener
     //sta se desava kad pritisnem dugme
     public void getCityForecastClicked(View view) {
         String desiredCity;
