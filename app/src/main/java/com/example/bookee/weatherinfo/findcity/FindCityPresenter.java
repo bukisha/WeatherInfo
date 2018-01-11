@@ -2,29 +2,30 @@ package com.example.bookee.weatherinfo.findcity;
 
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
-import com.example.bookee.weatherinfo.data.WeatherData;
-import com.example.bookee.weatherinfo.mvp.BaseData;
-import com.example.bookee.weatherinfo.mvp.BasePresenter;
+import com.example.bookee.weatherinfo.data.BaseModel;
+import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 import com.example.bookee.weatherinfo.mvp.BaseView;
 
-public class FindCityPresenter implements BasePresenter {
-    private BaseData attachedDataInstance;
-    private BaseView attachedView;
+public class FindCityPresenter implements mvpContract.Presenter {
+    private mvpContract.Model attachedDataInstance;
+    private mvpContract.View attachedView;
 
     public FindCityPresenter() {
-        this.attachedDataInstance = new WeatherData(this);
+        RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
+        attachedDataInstance = new Model(repository);
+        attachedDataInstance.bindPresenter(this);
     }
 
 
 
     @Override
-    public void bindDataModel(BaseData model) {
-        this.attachedDataInstance=model;
+    public void bindDataModel(BaseModel model) {
+        this.attachedDataInstance= (mvpContract.Model) model;
     }
 
     @Override
     public void bindView(BaseView view) {
-       this.attachedView=view;
+       this.attachedView= (mvpContract.View) view;
     }
 
     @Override

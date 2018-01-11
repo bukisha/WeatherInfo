@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
 
-        android:onClick="getCityForecastClicked"
+
 
         android:text="@string/get_forecast" />
 </RelativeLayout>

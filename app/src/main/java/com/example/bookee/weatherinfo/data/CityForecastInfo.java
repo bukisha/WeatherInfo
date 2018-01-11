@@ -8,108 +8,107 @@ import java.util.List;
 public class CityForecastInfo {
 
 
-
-            private Coord coord=null;
-            private List<Weather> weather=null;
-            private String base;
-            private Main main=null;
-            private int visibility;
-            private Wind wind=null;
-            private Cloud clouds=null;
-            private int dt;
-            private Sys sys=null;
-            private int id;
-            private String name;
-            private int cod;
+    private Coord coord = null;
+    private List<Weather> weather = null;
+    private String base;
+    private Main main = null;
+    private int visibility;
+    private Wind wind = null;
+    private Cloud clouds = null;
+    private int dt;
+    private Sys sys = null;
+    private int id;
+    private String name;
+    private int cod;
 //=================================================================================================
 
-            public static class  CityForecastInfoBuilder {
-                private Coord coord=null;
-                private List<Weather> weather=null;
-                private String base;
-                private Main main=null;
-                private int visibility;
-                private Wind wind=null;
-                private Cloud clouds=null;
-                private int dt;
-                private Sys sys=null;
-                private int id;
-                private String name;
-                private int cod;
+    public static class CityForecastInfoBuilder {
+        private Coord coord = null;
+        private List<Weather> weather = null;
+        private String base;
+        private Main main = null;
+        private int visibility;
+        private Wind wind = null;
+        private Cloud clouds = null;
+        private int dt;
+        private Sys sys = null;
+        private int id;
+        private String name;
+        private int cod;
 
-                public CityForecastInfoBuilder setCoord(Coord coord) {
-                    this.coord = coord;
-                    return this;
-                }
+        public CityForecastInfoBuilder setCoord(Coord coord) {
+            this.coord = coord;
+            return this;
+        }
 
-                public CityForecastInfoBuilder setWeather(List<Weather> weather) {
-                    this.weather = weather;
-                    return this;
-                }
+        public CityForecastInfoBuilder setWeather(List<Weather> weather) {
+            this.weather = weather;
+            return this;
+        }
 
-                public CityForecastInfoBuilder setBase(String base) {
-                    this.base = base;
-                    return this;
-                }
+        public CityForecastInfoBuilder setBase(String base) {
+            this.base = base;
+            return this;
+        }
 
-                public CityForecastInfoBuilder setMain(Main main) {
-                    this.main = main;
-                    return this;
-                }
+        public CityForecastInfoBuilder setMain(Main main) {
+            this.main = main;
+            return this;
+        }
 
-                public CityForecastInfoBuilder setVisibility(int visibility) {
-                    this.visibility = visibility;
-                    return this;
-                }
+        public CityForecastInfoBuilder setVisibility(int visibility) {
+            this.visibility = visibility;
+            return this;
+        }
 
-                public CityForecastInfoBuilder setWind(Wind wind) {
-                    this.wind = wind;
-                    return this;
-                }
+        public CityForecastInfoBuilder setWind(Wind wind) {
+            this.wind = wind;
+            return this;
+        }
 
-                public CityForecastInfoBuilder setClouds(Cloud clouds) {
-                    this.clouds = clouds;
-                    return this;
-                }
+        public CityForecastInfoBuilder setClouds(Cloud clouds) {
+            this.clouds = clouds;
+            return this;
+        }
 
-                public CityForecastInfoBuilder setDt(int dt) {
-                    this.dt = dt;
-                    return this;
-                }
+        public CityForecastInfoBuilder setDt(int dt) {
+            this.dt = dt;
+            return this;
+        }
 
-                public CityForecastInfoBuilder setSys(Sys sys) {
-                    this.sys = sys;
-                    return this;
-                }
+        public CityForecastInfoBuilder setSys(Sys sys) {
+            this.sys = sys;
+            return this;
+        }
 
-                public CityForecastInfoBuilder setId(int id) {
-                    this.id = id;
-                    return this;
-                }
+        public CityForecastInfoBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
 
-                public CityForecastInfoBuilder setName(String name) {
-                    this.name = name;
-                    return this;
-                }
+        public CityForecastInfoBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
 
-                public CityForecastInfoBuilder setCod(int cod) {
-                    this.cod = cod;
-                    return this;
-                }
+        public CityForecastInfoBuilder setCod(int cod) {
+            this.cod = cod;
+            return this;
+        }
 
-                CityForecastInfo build() {
+        CityForecastInfo build() {
 
-                    return new CityForecastInfo(this);
-                }
-            }
+            return new CityForecastInfo(this);
+        }
+    }
 
-    public CityForecastInfo( CityForecastInfoBuilder builder) {
+    public CityForecastInfo(CityForecastInfoBuilder builder) {
         this.coord = builder.coord;
         this.weather = builder.weather;
         this.base = builder.base;
         this.main = builder.main;
         this.visibility = builder.visibility;
-        this.wind =builder. wind;
+        this.wind = builder.wind;
         this.clouds = builder.clouds;
         this.dt = builder.dt;
         this.sys = builder.sys;
@@ -302,13 +301,13 @@ public class CityForecastInfo {
 
     public static class Weather {
 
-         private int id;
-         private String main;
-         private String description;
-         private String icon;
-          // "weather":[{"id":300,"main":"Drizzle","description":"light intensity drizzle","icon":"09d"}],
+        private int id;
+        private String main;
+        private String description;
+        private String icon;
+        // "weather":[{"id":300,"main":"Drizzle","description":"light intensity drizzle","icon":"09d"}],
 
-        public Weather(int id, String main, String description,String icon) {
+        public Weather(int id, String main, String description, String icon) {
             this.id = id;
             this.main = main;
             this.description = description;
@@ -316,8 +315,8 @@ public class CityForecastInfo {
         }
 
         public int getId() {
-              return id;
-          }
+            return id;
+        }
 
         public String getMain() {
             return main;
@@ -332,14 +331,12 @@ public class CityForecastInfo {
         }
 
 
-
-
     }
 
     public static class Wind {
 
-      private double speed;
-      private double deg;
+        private double speed;
+        private double deg;
 
 
         public Wind(double speed, double deg) {

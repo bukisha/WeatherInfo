@@ -137,7 +137,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         android:clickable="true"
-        android:onClick="findCityForecast"
+
         android:src="@drawable/fab_icon"
 
         android:focusable="true" />
