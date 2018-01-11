@@ -5,7 +5,6 @@ import android.util.Log;
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitCreator;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
-import com.example.bookee.weatherinfo.data.WeatherApi;
 import com.example.bookee.weatherinfo.mvp.BasePresenter;
 
 import retrofit2.Call;
@@ -13,7 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Model implements mvpContract.Model {
+public class Model implements MvpContract.Model {
 
     private Presenter presenter;
     private RetrofitWeatherRepository repository;
@@ -41,7 +40,7 @@ public class Model implements mvpContract.Model {
 
             @Override
             public void onFailure(Call<CityForecastInfo> call, Throwable t) {
-                presenter.errorMessage();
+                presenter.errorMessage("Doslo je do greske");
             }
         });
 

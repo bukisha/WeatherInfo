@@ -1,12 +1,7 @@
 package com.example.bookee.weatherinfo.data;
 
 
-import com.example.bookee.weatherinfo.home.mvpContract;
 import com.example.bookee.weatherinfo.mvp.BasePresenter;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RetrofitWeatherRepository implements BaseModel {
 

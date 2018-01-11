@@ -12,9 +12,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Model implements mvpContract.Model {
+public class Model implements MvpContract.Model {
 
-    private mvpContract.Presenter presenter;
+    private MvpContract.Presenter presenter;
     private RetrofitWeatherRepository repository;
 
     public Model(RetrofitWeatherRepository repository) {
@@ -24,24 +24,26 @@ public class Model implements mvpContract.Model {
 
     @Override
     public void bindPresenter(BasePresenter presenter) {
-        this.presenter= (mvpContract.Presenter) presenter;
+        this.presenter= (MvpContract.Presenter) presenter;
         repository.bindPresenter(presenter);
     }
 
     @Override
     public void getData(String s) {
+
+
         Call<CityForecastInfo> call=repository.getApi().getForecast(s, RetrofitCreator.getApiKey());
 
         call.enqueue(new Callback<CityForecastInfo>() {
             @Override
             public void onResponse(Call<CityForecastInfo> call, Response<CityForecastInfo> response) {
-                Log.i("city name ",response.body().getName());
+               // Log.i("city name ",response.body().getName());
                 presenter.passResultToView(response.body());
             }
 
             @Override
             public void onFailure(Call<CityForecastInfo> call, Throwable t) {
-                presenter.errorMessage();
+                presenter.errorMessage("Doslo je do greske!");
             }
         });
 

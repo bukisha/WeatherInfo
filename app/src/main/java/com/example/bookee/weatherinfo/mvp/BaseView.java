@@ -10,7 +10,7 @@ public interface BaseView  {
         public void bindPresenter(BasePresenter presenter);
 
         public void recieveDataFromPresenter(CityForecastInfo info);
-        void errorHappened();
+        void errorHappened(String s);
 
 
 

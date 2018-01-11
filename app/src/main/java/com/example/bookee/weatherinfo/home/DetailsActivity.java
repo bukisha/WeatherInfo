@@ -12,11 +12,11 @@ import android.widget.Toast;
 
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
-import com.example.bookee.weatherinfo.findcity.FindCityActivity;
+import com.example.bookee.weatherinfo.findcity.SearchActivity;
 import com.example.bookee.weatherinfo.mvp.BasePresenter;
 
 
-public class DetailsActivity extends AppCompatActivity implements mvpContract.View {
+public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
 
     public static final double CELSIOUS_FAHRENHEIT_DIFFERENCE = 273.15;
     private TextView city;
@@ -71,8 +71,8 @@ public class DetailsActivity extends AppCompatActivity implements mvpContract.Vi
 
 
     @Override
-    public void errorHappened() {
-        Toast.makeText(this, "Doslo je do greske!", Toast.LENGTH_LONG).show();
+    public void errorHappened(String errorMessage) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
 
 
@@ -80,7 +80,7 @@ public class DetailsActivity extends AppCompatActivity implements mvpContract.Vi
 
     @Override
     public void startNewActivity() {
-        Intent i = new Intent(this, FindCityActivity.class);
+        Intent i = new Intent(this, SearchActivity.class);
         startActivity(i);
     }
 

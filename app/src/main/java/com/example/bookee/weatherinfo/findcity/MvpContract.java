@@ -6,18 +6,19 @@ import com.example.bookee.weatherinfo.mvp.BasePresenter;
 import com.example.bookee.weatherinfo.mvp.BaseView;
 
 
-public interface mvpContract  {
+public interface MvpContract {
 
    interface View extends BaseView {
        void startNewActivity();
-//TODO koje metode presenter za ovaj view moze da poziva
+
+
    }
 
    interface Presenter extends BasePresenter {
 
        public void passResultToView(CityForecastInfo body);
 
-       void errorMessage();
+       void errorMessage(String s);
 
    }
 

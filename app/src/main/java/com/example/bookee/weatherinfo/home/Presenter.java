@@ -6,15 +6,14 @@ import android.os.Bundle;
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 import com.example.bookee.weatherinfo.data.BaseModel;
-import com.example.bookee.weatherinfo.mvp.BasePresenter;
 import com.example.bookee.weatherinfo.mvp.BaseView;
 
 import static com.example.bookee.weatherinfo.home.DetailsActivity.CELSIOUS_FAHRENHEIT_DIFFERENCE;
 
-class Presenter implements mvpContract.Presenter {
+class Presenter implements MvpContract.Presenter {
 
-    private mvpContract.View attachedView;
-    private mvpContract.Model attachedDataInstance;
+    private MvpContract.View attachedView;
+    private MvpContract.Model attachedDataInstance;
 
     Presenter() {
         RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
@@ -27,19 +26,19 @@ class Presenter implements mvpContract.Presenter {
 
     @Override
     public void bindDataModel(BaseModel model) {
-        this.attachedDataInstance = (mvpContract.Model) model;
+        this.attachedDataInstance = (MvpContract.Model) model;
 
     }
 
     @Override
     public void bindView(BaseView view) {
-        this.attachedView = (mvpContract.View) view;
+        this.attachedView = (MvpContract.View) view;
     }
 
 
     @Override
-    public void errorMessage() {
-        attachedView.errorHappened();
+    public void errorMessage(String s) {
+        attachedView.errorHappened(s);
     }
 
 
@@ -77,7 +76,7 @@ class Presenter implements mvpContract.Presenter {
 
         } else {
 
-            attachedView.errorHappened();
+            attachedView.errorHappened("Pogresno uneto ime grada");
         }
     }
 }

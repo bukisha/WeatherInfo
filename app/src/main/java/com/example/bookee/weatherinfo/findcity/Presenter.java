@@ -6,11 +6,11 @@ import com.example.bookee.weatherinfo.data.BaseModel;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 import com.example.bookee.weatherinfo.mvp.BaseView;
 
-public class FindCityPresenter implements mvpContract.Presenter {
-    private mvpContract.Model attachedDataInstance;
-    private mvpContract.View attachedView;
+public class Presenter implements MvpContract.Presenter {
+    private MvpContract.Model attachedDataInstance;
+    private MvpContract.View attachedView;
 
-    public FindCityPresenter() {
+    public Presenter() {
         RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
         attachedDataInstance = new Model(repository);
         attachedDataInstance.bindPresenter(this);
@@ -20,22 +20,27 @@ public class FindCityPresenter implements mvpContract.Presenter {
 
     @Override
     public void bindDataModel(BaseModel model) {
-        this.attachedDataInstance= (mvpContract.Model) model;
+        this.attachedDataInstance= (MvpContract.Model) model;
     }
 
     @Override
     public void bindView(BaseView view) {
-       this.attachedView= (mvpContract.View) view;
+       this.attachedView= (MvpContract.View) view;
     }
 
     @Override
-    public void errorMessage() {
-        attachedView.errorHappened();
+    public void errorMessage(String s) {
+        attachedView.errorHappened(s);
     }
 
     @Override
     public void passResultToView(CityForecastInfo body) {
-        attachedView.recieveDataFromPresenter(body);
+        if(body!=null) {
+            attachedView.recieveDataFromPresenter(body);
+        } else {
+
+            attachedView.errorHappened("Pogresno ime grada");
+        }
     }
 
     @Override
@@ -45,6 +50,7 @@ public class FindCityPresenter implements mvpContract.Presenter {
 
 
     public void getData(String desiredCity) {
+
         attachedDataInstance.getData(desiredCity);
     }
 }
