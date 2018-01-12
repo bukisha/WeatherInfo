@@ -43,7 +43,7 @@ public class Model implements MvpContract.Model {
 
             @Override
             public void onFailure(Call<CityForecastInfo> call, Throwable t) {
-                presenter.errorMessage("Doslo je do greske!");
+                presenter.errorMessage("Doslo je do greske! ");
             }
         });
 

@@ -25,7 +25,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private TextView humidity;
     private FloatingActionButton floatingActionButton;
 
-    private static Bundle extras;
+    private Bundle extras;
     private Presenter weatherPresenter;
 
 
@@ -39,6 +39,9 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         windSpeed = findViewById(R.id.wind_info);
         humidity = findViewById(R.id.humidity_info);
 
+        weatherPresenter = new Presenter();
+        weatherPresenter.bindView(this);
+
         floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,35 +50,43 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
             }
         });
 
-        extras = getIntent().getExtras();
-        if (extras != null) {
-            Log.i("DEBUG", "pre vadjenja iz extras");
-
-            // displayNewValues();
-            weatherPresenter = new Presenter();
-            weatherPresenter.bindView(this);
-            weatherPresenter.displayNewData(extras);
-        } else {
-            weatherPresenter = new Presenter();
-            weatherPresenter.bindView(this);
-            weatherPresenter.getData();
-        }
 
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
         weatherPresenter.unbindView();
+
+
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(getIntent().hasExtra("name")) {
+            extras = getIntent().getExtras();
+        }
+
+        if (extras != null) {
+            Log.i("DEBUG", "pre vadjenja iz extras");
+
+
+            weatherPresenter.displayNewData(extras);
+        } else {
+            Log.i("DEBUG", "NE VADIM NSITA IZ extras");
+
+            weatherPresenter.getData();
+        }
+
+
+    }
 
     @Override
     public void errorHappened(String errorMessage) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
-
-
 
 
     @Override

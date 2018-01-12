@@ -1,14 +1,9 @@
 package com.example.bookee.weatherinfo.findcity;
 
-import com.example.bookee.weatherinfo.*;
-import com.example.bookee.weatherinfo.data.CityForecastInfo;
-import com.example.bookee.weatherinfo.home.DetailsActivity;
-import com.example.bookee.weatherinfo.mvp.BasePresenter;
-
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -17,6 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.bookee.weatherinfo.R;
+import com.example.bookee.weatherinfo.data.CityForecastInfo;
+import com.example.bookee.weatherinfo.home.DetailsActivity;
+import com.example.bookee.weatherinfo.mvp.BasePresenter;
 
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
 
@@ -35,8 +35,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         setContentView(R.layout.activity_find_city);
         getForecast = findViewById(R.id.get_forecast_button);
         cityName = findViewById(R.id.desired_city_name);
-        presenter = new Presenter();
-        presenter.bindView(this);
+
 
         cityName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -69,8 +68,16 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onResume() {
+        super.onResume();
+        presenter = new Presenter();
+        presenter.bindView(this);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         presenter.unbindView();
     }
 

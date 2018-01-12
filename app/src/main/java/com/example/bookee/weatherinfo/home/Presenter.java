@@ -38,7 +38,7 @@ class Presenter implements MvpContract.Presenter {
 
     @Override
     public void errorMessage(String s) {
-        attachedView.errorHappened(s);
+        this.attachedView.errorHappened(s);
     }
 
 
@@ -67,8 +67,8 @@ class Presenter implements MvpContract.Presenter {
         double temp = extras.getDouble("temp");
         double wind = extras.getDouble("wind");
         int humid = extras.getInt("humid");
-        if (name != null) {     //TODO smisli kako da proveris da li su ti stigle i sotale vrednosti pored name-a
-            temp = (temp - CELSIOUS_FAHRENHEIT_DIFFERENCE);
+        if (extras != null) {
+            temp=(temp-CELSIOUS_FAHRENHEIT_DIFFERENCE);
             String tempString = String.valueOf((int) temp);
             String windString = String.valueOf((int) wind);
             String humidString = String.valueOf((int) humid);
