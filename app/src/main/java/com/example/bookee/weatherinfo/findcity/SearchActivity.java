@@ -22,7 +22,8 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
 
     private Button getForecast;
     private EditText cityName;
-    private Presenter presenter;
+    private Presenter presenter;//todo ovde ne treba da koristis referencu na Presenter vec na  MvpContract.Presenter
+    private MvpContract.Presenter presenterHowItShouldBeReferenced;
 
     private String name;
     private double temperature;

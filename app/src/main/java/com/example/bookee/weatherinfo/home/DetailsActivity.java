@@ -1,10 +1,9 @@
-package com.example.bookee.weatherinfo.home;
+package com.example.bookee.weatherinfo.home;//todo Zasto ovde u "details" domenu koristis "home" pezenter? Pretpostavljam greska
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -25,8 +24,8 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private TextView humidity;
     private FloatingActionButton floatingActionButton;
 
-    private Bundle extras;
     private Presenter weatherPresenter;
+    private Bundle    extras;//todo nema potrebe za field ako se ovaj extras koristi samo lokalno
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,23 +64,35 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     @Override
     protected void onResume() {
         super.onResume();
-        if(getIntent().hasExtra("name")) {
+        Bundle extras = null;
+        if (getIntent().hasExtra("name")){//todo ako si ovde ispitivao da li postoji "name" bundle onda ga u if body i izvuci
+//            extras = getIntent().getBundleExtra("name");//todo ovako
             extras = getIntent().getExtras();
         }
 
         if (extras != null) {
             Log.i("DEBUG", "pre vadjenja iz extras");
-
-
             weatherPresenter.displayNewData(extras);
         } else {
             Log.i("DEBUG", "NE VADIM NSITA IZ extras");
-
             weatherPresenter.getData();
         }
 
-
+        //todo ali ovo moze i krace da bude. na primer: pogledaj zakomentarisanu metodu ispod.
+        //todo manje linija koda = manje prostora za gresku i kod citljiviji
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        if (getIntent().getBundleExtra("name") != null){
+//            Log.i("DEBUG", "pre vadjenja iz extras");
+//            weatherPresenter.displayNewData(getIntent().getBundleExtra("name"));
+//        } else {
+//            Log.i("DEBUG", "NE VADIM NSITA IZ extras");
+//            weatherPresenter.getData();
+//        }
+//    }
 
     @Override
     public void errorHappened(String errorMessage) {
@@ -110,13 +121,12 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
     @Override
     public void recieveDataFromPresenter(CityForecastInfo info) {
-        int tempToDisplay;
+//        int tempToDisplay;//todo izbegavaj nepotrebne lokalne promenljive
         city.setText(info.getName());
-        tempToDisplay = (int) (info.getMain().getTemp() - CELSIOUS_FAHRENHEIT_DIFFERENCE);
+//        tempToDisplay = (int) (info.getMain().getTemp() - CELSIOUS_FAHRENHEIT_DIFFERENCE);
+        int tempToDisplay = (int) (info.getMain().getTemp() - CELSIOUS_FAHRENHEIT_DIFFERENCE);
         temperature.setText(String.valueOf(tempToDisplay));
         windSpeed.setText(String.valueOf((int) info.getWind().getSpeed()));
         humidity.setText(String.valueOf(info.getMain().getHumidity()));
-
     }
-
 }

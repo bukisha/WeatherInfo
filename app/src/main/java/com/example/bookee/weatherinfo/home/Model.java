@@ -30,6 +30,8 @@ public class Model implements MvpContract.Model {
 
     @Override
     public void getData() {
+        //todo zasto ti je ovde "Belgrade" hardkodiran?
+        //todo kako bi ga prosledio modelu ako ne zelis da ga hardkodiras?
         Call<CityForecastInfo> call = repository.getApi().getForecast("Belgrade", RetrofitCreator.getApiKey());
         call.enqueue(new Callback<CityForecastInfo>() {
             @Override

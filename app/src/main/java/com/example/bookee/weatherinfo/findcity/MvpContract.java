@@ -25,5 +25,14 @@ public interface MvpContract {
    interface Model extends BaseModel {
 
        public void getData(String s);
+
+       //todo napravio sam novu metodu da ne pojebem ceo kod
+       //todo obrati paznju na to koliko je razumljivije ime ove metode u odnosu na ovu gore.
+       void fetchForecastInfoOfCity(String city, CityForecastCallback callback);
    }
+    //todo dodas interface koji ce da bude struktura za callback
+    interface CityForecastCallback {
+        void data(CityForecastInfo cityForecastInfo);
+        void error(Throwable throwable);
+    }
 }

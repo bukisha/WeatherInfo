@@ -12,8 +12,8 @@ import static com.example.bookee.weatherinfo.home.DetailsActivity.CELSIOUS_FAHRE
 
 class Presenter implements MvpContract.Presenter {
 
-    private MvpContract.View attachedView;
-    private MvpContract.Model attachedDataInstance;
+    private MvpContract.View attachedView;//todo da li ovde postoji jos neki view osim ovoga? Ako nema, cemu onda attached prefix
+    private MvpContract.Model attachedDataInstance;//tood isto kao gore
 
     Presenter() {
         RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
@@ -55,7 +55,7 @@ class Presenter implements MvpContract.Presenter {
         attachedView = null;
     }
 
-    public void ActionSomethingIsClicked() {
+    public void ActionSomethingIsClicked() {//todo veliko slovo :(
         attachedView.startNewActivity();
 
     }

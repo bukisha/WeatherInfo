@@ -30,6 +30,7 @@ public class Presenter implements MvpContract.Presenter {
 
     @Override
     public void errorMessage(String s) {
+        //todo sta ce se desiti ako je sistem vec uradio onDestroy() i metoda unbindView() je pozvana neposredno pre ove metode?
         attachedView.errorHappened(s);
     }
 
@@ -51,6 +52,18 @@ public class Presenter implements MvpContract.Presenter {
 
     public void getData(String desiredCity) {
 
-        attachedDataInstance.getData(desiredCity);
+//        attachedDataInstance.getData(desiredCity);
+        //todo opet o imanovanju: cim pogledas ovaj poziv 100% je jasno sta dovlcis i kako.
+        attachedDataInstance.fetchForecastInfoOfCity(desiredCity, new MvpContract.CityForecastCallback() {
+            @Override
+            public void data(CityForecastInfo cityForecastInfo) {
+                attachedView.recieveDataFromPresenter(cityForecastInfo);
+            }
+
+            @Override
+            public void error(Throwable throwable) {
+                attachedView.errorHappened("Pogresno ime grada");
+            }
+        });
     }
 }
