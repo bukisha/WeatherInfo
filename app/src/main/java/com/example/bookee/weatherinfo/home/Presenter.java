@@ -37,7 +37,7 @@ class Presenter implements MvpContract.Presenter {
             }
 
             @Override
-            public void error(String message) {
+            public void error() {
 
                 attachedView.errorHappened("GRESKA");
             }
@@ -69,7 +69,7 @@ class Presenter implements MvpContract.Presenter {
             temp=(temp-CELSIOUS_FAHRENHEIT_DIFFERENCE);
             String tempString = String.valueOf((int) temp);
             String windString = String.valueOf((int) wind);
-            String humidString = String.valueOf((int) humid);
+            String humidString = String.valueOf(humid);
             attachedView.updateWithNewData(name, tempString, windString, humidString);
 
         } else {

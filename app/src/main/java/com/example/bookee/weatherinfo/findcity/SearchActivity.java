@@ -20,7 +20,7 @@ import com.example.bookee.weatherinfo.mvp.BasePresenter;
 
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
 
-    private Button getForecast;
+
     private EditText cityName;
     private MvpContract.Presenter presenter;
 
@@ -33,6 +33,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_city);
+        Button getForecast;
         getForecast = findViewById(R.id.get_forecast_button);
         cityName = findViewById(R.id.desired_city_name);
 
@@ -43,7 +44,10 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                    if (imm != null) {
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    }
 
                     return true;
 

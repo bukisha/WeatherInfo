@@ -1,7 +1,9 @@
 package com.example.bookee.weatherinfo.findcity;
 
 
-import android.util.Log;
+
+
+import android.support.annotation.NonNull;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitCreator;
@@ -17,7 +19,7 @@ public class Model implements MvpContract.Model {
 
     private RetrofitWeatherRepository repository;
 
-    public Model(RetrofitWeatherRepository repository) {
+    Model(RetrofitWeatherRepository repository) {
         this.repository=  repository;
 
     }
@@ -28,13 +30,13 @@ public class Model implements MvpContract.Model {
 
         call.enqueue(new Callback<CityForecastInfo>() {
             @Override
-            public void onResponse(Call<CityForecastInfo> call, Response<CityForecastInfo> response) {
+            public void onResponse(@NonNull Call<CityForecastInfo> call, @NonNull Response<CityForecastInfo> response) {
                 callback.fetchNewData(city,response.body());
             }
 
             @Override
-            public void onFailure(Call<CityForecastInfo> call, Throwable t) {
-                callback.error("Greska dublje!");
+            public void onFailure(@NonNull Call<CityForecastInfo> call, @NonNull Throwable t) {
+                callback.error();
 
             }
         });

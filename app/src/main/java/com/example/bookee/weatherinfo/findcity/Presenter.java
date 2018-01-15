@@ -9,7 +9,7 @@ public class Presenter implements MvpContract.Presenter {
     private MvpContract.Model attachedDataInstance;
     private MvpContract.View attachedView;
 
-    public Presenter() {
+    Presenter() {
         RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
         attachedDataInstance = new Model(repository);
 
@@ -36,7 +36,7 @@ public class Presenter implements MvpContract.Presenter {
             }
 
             @Override
-            public void error(String message) {
+            public void error() {
 
                 attachedView.errorHappened("GRESKA");
             }

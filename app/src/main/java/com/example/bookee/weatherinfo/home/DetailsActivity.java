@@ -23,7 +23,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private TextView temperature;
     private TextView windSpeed;
     private TextView humidity;
-    private FloatingActionButton floatingActionButton;
+
 
 
     private MvpContract.Presenter weatherPresenter;
@@ -43,7 +43,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         weatherPresenter = new Presenter();
 
 
-        floatingActionButton = findViewById(R.id.floatingActionButton);
+        FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

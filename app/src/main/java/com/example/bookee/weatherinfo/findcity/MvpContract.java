@@ -28,7 +28,7 @@ public interface MvpContract {
    interface FetchNewDataCallback {
 
        void fetchNewData(String cityName,CityForecastInfo info);
-       void error(String message);
+       void error();
 
    }
 }

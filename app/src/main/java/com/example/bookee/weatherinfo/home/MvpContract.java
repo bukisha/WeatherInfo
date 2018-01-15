@@ -44,7 +44,7 @@ public interface MvpContract {
 
             void fetchData(CityForecastInfo info);
 
-             void error(String message);
+             void error();
     }
 
 

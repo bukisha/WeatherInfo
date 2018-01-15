@@ -1,7 +1,7 @@
 package com.example.bookee.weatherinfo.data;
 
 
-import com.example.bookee.weatherinfo.mvp.BasePresenter;
+
 
 public class RetrofitWeatherRepository  {
 
