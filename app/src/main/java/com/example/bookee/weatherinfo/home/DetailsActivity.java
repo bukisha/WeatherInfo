@@ -70,19 +70,15 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         super.onResume();
         weatherPresenter.bindView(this);
         Log.i("DEBUG","onRESUME");
-         Bundle extras=null;
-        if(getIntent().hasExtra("name")) {
-            extras = getIntent().getExtras();
-        }
 
+//
+        Intent intent=getIntent();
+        Bundle extras=intent.getExtras();
         if (extras != null) {
             Log.i("DEBUG", "pre vadjenja iz extras");
-
-
             weatherPresenter.displayNewData(extras);
         } else {
             Log.i("DEBUG", "NE VADIM NSITA IZ extras");
-
             weatherPresenter.getData();
         }
 
@@ -108,18 +104,4 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         windSpeed.setText(wind);
         humidity.setText(humid);
     }
-
-
-
-//    @Override
-//    public void recieveDataFromPresenter(CityForecastInfo info) {
-//
-//        city.setText(info.getName());
-//        temperature.setText(String.valueOf(prepareTempForDisplay(info)));
-//        windSpeed.setText(String.valueOf((int) info.getWind().getSpeed()));
-//        humidity.setText(String.valueOf(info.getMain().getHumidity()));
-//
-//    }
-
-
 }
