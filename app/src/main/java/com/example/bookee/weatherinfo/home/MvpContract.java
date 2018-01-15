@@ -1,5 +1,7 @@
 package com.example.bookee.weatherinfo.home;
 
+import android.os.Bundle;
+
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.BaseModel;
 import com.example.bookee.weatherinfo.mvp.BasePresenter;
@@ -27,13 +29,29 @@ public interface MvpContract {
 
         void passResultToView(CityForecastInfo body);
 
+        void ActionSomethingIsClicked();
+
+        void displayNewData(Bundle extras);
+
+        void getData();
+
     }
 
     interface Model extends BaseModel {
 
-         public void getData();
+        // public void getData();
 
+         void fetchInitialData(InitialDataFetchCallback callback);
 
 
     }
+
+    interface InitialDataFetchCallback {
+
+            void fetchData(CityForecastInfo info);
+
+             void error(Throwable t);
+    }
+
+
 }

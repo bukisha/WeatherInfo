@@ -20,10 +20,18 @@ public interface MvpContract {
 
        void errorMessage(String s);
 
+       void getData(String desiredCity);
    }
 
    interface Model extends BaseModel {
 
-       public void getData(String s);
+       public void fetchData(String city,FetchNewDataCallback callback);
+   }
+
+   public interface FetchNewDataCallback {
+
+       void fetchNewData(String cityName,CityForecastInfo info);
+       void error(String message);
+
    }
 }

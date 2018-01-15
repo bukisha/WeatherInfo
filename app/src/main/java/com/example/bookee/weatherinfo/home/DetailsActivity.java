@@ -25,8 +25,8 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private TextView humidity;
     private FloatingActionButton floatingActionButton;
 
-    private Bundle extras;
-    private Presenter weatherPresenter;
+
+    private MvpContract.Presenter weatherPresenter;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,8 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     @Override
     protected void onResume() {
         super.onResume();
+
+        Bundle extras=null;
         if(getIntent().hasExtra("name")) {
             extras = getIntent().getExtras();
         }
@@ -110,13 +112,16 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
     @Override
     public void recieveDataFromPresenter(CityForecastInfo info) {
-        int tempToDisplay;
+
         city.setText(info.getName());
-        tempToDisplay = (int) (info.getMain().getTemp() - CELSIOUS_FAHRENHEIT_DIFFERENCE);
-        temperature.setText(String.valueOf(tempToDisplay));
+        temperature.setText(String.valueOf(prepareTempForDisplay(info)));
         windSpeed.setText(String.valueOf((int) info.getWind().getSpeed()));
         humidity.setText(String.valueOf(info.getMain().getHumidity()));
 
+    }
+
+    private int prepareTempForDisplay(CityForecastInfo info) {
+        return (int) (info.getMain().getTemp() - CELSIOUS_FAHRENHEIT_DIFFERENCE);
     }
 
 }

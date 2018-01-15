@@ -14,36 +14,54 @@ import retrofit2.Response;
 
 public class Model implements MvpContract.Model {
 
-    private Presenter presenter;
+   // private Presenter presenter;
     private RetrofitWeatherRepository repository;
 
     public Model(RetrofitWeatherRepository repository) {
         this.repository = repository;
     }
 
-    @Override
-    public void bindPresenter(BasePresenter presenter) {
-        this.presenter = (Presenter) presenter;
-        repository.bindPresenter(presenter);
-    }
+//    @Override
+//    public void bindPresenter(BasePresenter presenter) {
+//        this.presenter = (Presenter) presenter;
+//        repository.bindPresenter(presenter);
+//    }
 
 
+  //  @Override
+ //  public void getData() {
+//        Call<CityForecastInfo> call = repository.getApi().getForecast("Belgrade", RetrofitCreator.getApiKey());
+//        call.enqueue(new Callback<CityForecastInfo>() {
+//            @Override
+//            public void onResponse(Call<CityForecastInfo> call, Response<CityForecastInfo> response) {
+//                Log.i("city name ",response.body().getName());
+//                presenter.passResultToView(response.body());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<CityForecastInfo> call, Throwable t) {
+//                presenter.errorMessage("Doslo je do greske 1");
+//            }
+//        });
+//
+  // }
+
     @Override
-    public void getData() {
-        Call<CityForecastInfo> call = repository.getApi().getForecast("Belgrade", RetrofitCreator.getApiKey());
+    public void fetchInitialData(final MvpContract.InitialDataFetchCallback callback) {
+
+        Call<CityForecastInfo> call = repository.getApi().getForecast("belgrade", RetrofitCreator.getApiKey());
+
         call.enqueue(new Callback<CityForecastInfo>() {
             @Override
             public void onResponse(Call<CityForecastInfo> call, Response<CityForecastInfo> response) {
-                Log.i("city name ",response.body().getName());
-                presenter.passResultToView(response.body());
+                callback.fetchData(response.body());
             }
 
             @Override
             public void onFailure(Call<CityForecastInfo> call, Throwable t) {
-                presenter.errorMessage("Doslo je do greske 1");
+                callback.error(t);
             }
         });
-
     }
 
 

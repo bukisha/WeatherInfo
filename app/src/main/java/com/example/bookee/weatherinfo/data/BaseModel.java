@@ -6,6 +6,6 @@ import com.example.bookee.weatherinfo.mvp.BasePresenter;
 
 public interface BaseModel {
 
-        public void bindPresenter(BasePresenter presenter);
+        //public void bindPresenter(BasePresenter presenter);
 
 }

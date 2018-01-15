@@ -18,7 +18,7 @@ class Presenter implements MvpContract.Presenter {
     Presenter() {
         RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
         attachedDataInstance = new Model(repository);
-        attachedDataInstance.bindPresenter(this);
+        //attachedDataInstance.bindPresenter(this);
 
     }
 
@@ -37,14 +37,26 @@ class Presenter implements MvpContract.Presenter {
 
 
     @Override
-    public void errorMessage(String s) {
-        this.attachedView.errorHappened(s);
+    public void errorMessage(String message) {
+        this.attachedView.errorHappened(message);
     }
 
 
     public void getData() {
-        attachedDataInstance.getData();
+        attachedDataInstance.fetchInitialData(new MvpContract.InitialDataFetchCallback() {
+            @Override
+            public void fetchData(CityForecastInfo info) {
+                attachedView.recieveDataFromPresenter(info);
+            }
+
+            @Override
+            public void error(Throwable t) {
+                attachedView.errorHappened(t.toString());
+            }
+        });
     }
+
+
 
     public void passResultToView(CityForecastInfo body) {
         attachedView.recieveDataFromPresenter(body);
@@ -63,11 +75,12 @@ class Presenter implements MvpContract.Presenter {
 
     public void displayNewData(Bundle extras) {
 
-        String name = extras.getString("name");
-        double temp = extras.getDouble("temp");
-        double wind = extras.getDouble("wind");
-        int humid = extras.getInt("humid");
-        if (extras != null) {
+
+        if (!extras.isEmpty() ) {
+            String name = extras.getString("name");
+            double temp = extras.getDouble("temp");
+            double wind = extras.getDouble("wind");
+            int humid = extras.getInt("humid");
             temp=(temp-CELSIOUS_FAHRENHEIT_DIFFERENCE);
             String tempString = String.valueOf((int) temp);
             String windString = String.valueOf((int) wind);

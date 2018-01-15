@@ -13,7 +13,7 @@ public class Presenter implements MvpContract.Presenter {
     public Presenter() {
         RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
         attachedDataInstance = new Model(repository);
-        attachedDataInstance.bindPresenter(this);
+       // attachedDataInstance.bindPresenter(this);
     }
 
 
@@ -33,6 +33,24 @@ public class Presenter implements MvpContract.Presenter {
         attachedView.errorHappened(s);
     }
 
+   @Override
+   public void getData(String desiredCity) {
+        attachedDataInstance.fetchData(desiredCity, new MvpContract.FetchNewDataCallback() {
+
+
+            @Override
+            public void fetchNewData(String cityName, CityForecastInfo info) {
+                attachedView.recieveDataFromPresenter(info);
+            }
+
+            @Override
+            public void error(String message) {
+                attachedView.errorHappened(message);
+            }
+        });
+
+    }
+
     @Override
     public void passResultToView(CityForecastInfo body) {
         if(body!=null) {
@@ -49,8 +67,8 @@ public class Presenter implements MvpContract.Presenter {
     }
 
 
-    public void getData(String desiredCity) {
+    public void fetchData(String desiredCity,MvpContract.FetchNewDataCallback callback) {
 
-        attachedDataInstance.getData(desiredCity);
+        attachedDataInstance.fetchData(desiredCity,callback);
     }
 }

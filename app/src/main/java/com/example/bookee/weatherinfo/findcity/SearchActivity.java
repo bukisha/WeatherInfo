@@ -22,7 +22,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
 
     private Button getForecast;
     private EditText cityName;
-    private Presenter presenter;
+    private MvpContract.Presenter presenter;
 
     private String name;
     private double temperature;
