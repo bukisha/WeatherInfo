@@ -2,7 +2,6 @@ package com.example.bookee.weatherinfo.findcity;
 
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
-import com.example.bookee.weatherinfo.data.BaseModel;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 import com.example.bookee.weatherinfo.mvp.BaseView;
 
@@ -13,25 +12,18 @@ public class Presenter implements MvpContract.Presenter {
     public Presenter() {
         RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
         attachedDataInstance = new Model(repository);
-       // attachedDataInstance.bindPresenter(this);
+
     }
 
 
 
-    @Override
-    public void bindDataModel(BaseModel model) {
-        this.attachedDataInstance= (MvpContract.Model) model;
-    }
 
     @Override
     public void bindView(BaseView view) {
        this.attachedView= (MvpContract.View) view;
     }
 
-    @Override
-    public void errorMessage(String s) {
-        attachedView.errorHappened(s);
-    }
+
 
    @Override
    public void getData(String desiredCity) {
@@ -45,21 +37,14 @@ public class Presenter implements MvpContract.Presenter {
 
             @Override
             public void error(String message) {
-                attachedView.errorHappened(message);
+
+                attachedView.errorHappened("GRESKA");
             }
         });
 
     }
 
-    @Override
-    public void passResultToView(CityForecastInfo body) {
-        if(body!=null) {
-            attachedView.recieveDataFromPresenter(body);
-        } else {
 
-            attachedView.errorHappened("Pogresno ime grada");
-        }
-    }
 
     @Override
     public void unbindView() {
@@ -67,8 +52,5 @@ public class Presenter implements MvpContract.Presenter {
     }
 
 
-    public void fetchData(String desiredCity,MvpContract.FetchNewDataCallback callback) {
 
-        attachedDataInstance.fetchData(desiredCity,callback);
-    }
 }

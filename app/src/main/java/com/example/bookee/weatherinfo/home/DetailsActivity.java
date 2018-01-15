@@ -33,6 +33,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
 
         super.onCreate(savedInstanceState);
+        Log.i("DEBUG","onCREATE");
         setContentView(R.layout.main_activity);
         city = findViewById(R.id.current_city);
         temperature = findViewById(R.id.current_temp);
@@ -40,7 +41,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         humidity = findViewById(R.id.humidity_info);
 
         weatherPresenter = new Presenter();
-        weatherPresenter.bindView(this);
+
 
         floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +57,9 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     @Override
     protected void onPause() {
         super.onPause();
+        Log.i("DEBUG","onPAUSE");
         weatherPresenter.unbindView();
+
 
 
     }
@@ -65,8 +68,9 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     @Override
     protected void onResume() {
         super.onResume();
-
-        Bundle extras=null;
+        weatherPresenter.bindView(this);
+        Log.i("DEBUG","onRESUME");
+         Bundle extras=null;
         if(getIntent().hasExtra("name")) {
             extras = getIntent().getExtras();
         }

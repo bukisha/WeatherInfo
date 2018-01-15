@@ -3,9 +3,9 @@ package com.example.bookee.weatherinfo.data;
 
 import com.example.bookee.weatherinfo.mvp.BasePresenter;
 
-public class RetrofitWeatherRepository implements BaseModel {
+public class RetrofitWeatherRepository  {
 
-   // private BasePresenter presenter;
+
     private WeatherApi api;
 
     public RetrofitWeatherRepository() {
@@ -13,10 +13,7 @@ public class RetrofitWeatherRepository implements BaseModel {
     }
 
 
-//    @Override
-//    public void bindPresenter(BasePresenter presenter) {
-//        this.presenter=presenter;
-//    }
+
 
     public WeatherApi getApi() {
 

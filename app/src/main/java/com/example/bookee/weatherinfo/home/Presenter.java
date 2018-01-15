@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
-import com.example.bookee.weatherinfo.data.BaseModel;
 import com.example.bookee.weatherinfo.mvp.BaseView;
 
 import static com.example.bookee.weatherinfo.home.DetailsActivity.CELSIOUS_FAHRENHEIT_DIFFERENCE;
@@ -18,15 +17,7 @@ class Presenter implements MvpContract.Presenter {
     Presenter() {
         RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
         attachedDataInstance = new Model(repository);
-        //attachedDataInstance.bindPresenter(this);
 
-    }
-
-
-
-    @Override
-    public void bindDataModel(BaseModel model) {
-        this.attachedDataInstance = (MvpContract.Model) model;
 
     }
 
@@ -36,10 +27,6 @@ class Presenter implements MvpContract.Presenter {
     }
 
 
-    @Override
-    public void errorMessage(String message) {
-        this.attachedView.errorHappened(message);
-    }
 
 
     public void getData() {
@@ -50,17 +37,15 @@ class Presenter implements MvpContract.Presenter {
             }
 
             @Override
-            public void error(Throwable t) {
-                attachedView.errorHappened(t.toString());
+            public void error(String message) {
+
+                attachedView.errorHappened("GRESKA");
             }
         });
     }
 
 
 
-    public void passResultToView(CityForecastInfo body) {
-        attachedView.recieveDataFromPresenter(body);
-    }
 
     @Override
     public void unbindView() {

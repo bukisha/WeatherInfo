@@ -3,7 +3,6 @@ package com.example.bookee.weatherinfo.home;
 import android.os.Bundle;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
-import com.example.bookee.weatherinfo.data.BaseModel;
 import com.example.bookee.weatherinfo.mvp.BasePresenter;
 import com.example.bookee.weatherinfo.mvp.BaseView;
 
@@ -16,7 +15,7 @@ public interface MvpContract {
 
         void updateWithNewData(String name, String temp, String wind, String humid);
 
-        public void recieveDataFromPresenter(CityForecastInfo info);
+        void recieveDataFromPresenter(CityForecastInfo info);
 
         void errorHappened(String s);
     }
@@ -24,10 +23,7 @@ public interface MvpContract {
     interface Presenter extends BasePresenter {
 
 
-        void errorMessage(String s);
 
-
-        void passResultToView(CityForecastInfo body);
 
         void ActionSomethingIsClicked();
 
@@ -37,11 +33,9 @@ public interface MvpContract {
 
     }
 
-    interface Model extends BaseModel {
+    interface Model  {
 
-        // public void getData();
-
-         void fetchInitialData(InitialDataFetchCallback callback);
+        void fetchInitialData(InitialDataFetchCallback callback);
 
 
     }
@@ -50,7 +44,7 @@ public interface MvpContract {
 
             void fetchData(CityForecastInfo info);
 
-             void error(Throwable t);
+             void error(String message);
     }
 
 

@@ -36,6 +36,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         getForecast = findViewById(R.id.get_forecast_button);
         cityName = findViewById(R.id.desired_city_name);
 
+        presenter = new Presenter();
 
         cityName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -70,7 +71,6 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     @Override
     protected void onResume() {
         super.onResume();
-        presenter = new Presenter();
         presenter.bindView(this);
 
     }
@@ -78,16 +78,21 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     @Override
     protected void onPause() {
         super.onPause();
-        presenter.unbindView();
+       presenter.unbindView();
     }
 
     @Override
     public void recieveDataFromPresenter(CityForecastInfo info) {
+
+        if(info!=null) {
         name = info.getName();
         temperature = info.getMain().getTemp();
         windSpeed = info.getWind().getSpeed();
         humidity = info.getMain().getHumidity();
         startNewActivity();
+        }else {
+            Toast.makeText(this,"pogresno uneto ime grada",Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
