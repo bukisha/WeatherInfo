@@ -6,7 +6,7 @@ public interface BasePresenter {
 
 
     //binding presenter to its view
-    public void bindView(BaseView view);
+     void bindView(BaseView view);
 
     void unbindView();
 

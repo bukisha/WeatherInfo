@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.findcity.SearchActivity;
-import com.example.bookee.weatherinfo.mvp.BasePresenter;
+
 
 
 public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
@@ -109,10 +109,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         humidity.setText(humid);
     }
 
-    @Override
-    public void bindPresenter(BasePresenter presenter) {
-        this.weatherPresenter = (Presenter) presenter;
-    }
+
 
     @Override
     public void recieveDataFromPresenter(CityForecastInfo info) {

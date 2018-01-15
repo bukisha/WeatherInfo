@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.home.DetailsActivity;
-import com.example.bookee.weatherinfo.mvp.BasePresenter;
+
 
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
 
@@ -67,10 +67,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
 
     }
 
-    @Override
-    public void bindPresenter(BasePresenter presenter) {
-        this.presenter = (Presenter) presenter;
-    }
+
 
     @Override
     protected void onResume() {
