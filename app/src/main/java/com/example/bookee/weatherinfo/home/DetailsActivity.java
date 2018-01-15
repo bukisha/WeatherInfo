@@ -11,14 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bookee.weatherinfo.R;
-import com.example.bookee.weatherinfo.data.CityForecastInfo;
+
 import com.example.bookee.weatherinfo.findcity.SearchActivity;
 
 
 
 public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
 
-    public static final double CELSIOUS_FAHRENHEIT_DIFFERENCE = 273.15;
+
     private TextView city;
     private TextView temperature;
     private TextView windSpeed;
@@ -111,18 +111,15 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
 
 
-    @Override
-    public void recieveDataFromPresenter(CityForecastInfo info) {
+//    @Override
+//    public void recieveDataFromPresenter(CityForecastInfo info) {
+//
+//        city.setText(info.getName());
+//        temperature.setText(String.valueOf(prepareTempForDisplay(info)));
+//        windSpeed.setText(String.valueOf((int) info.getWind().getSpeed()));
+//        humidity.setText(String.valueOf(info.getMain().getHumidity()));
+//
+//    }
 
-        city.setText(info.getName());
-        temperature.setText(String.valueOf(prepareTempForDisplay(info)));
-        windSpeed.setText(String.valueOf((int) info.getWind().getSpeed()));
-        humidity.setText(String.valueOf(info.getMain().getHumidity()));
-
-    }
-
-    private int prepareTempForDisplay(CityForecastInfo info) {
-        return (int) (info.getMain().getTemp() - CELSIOUS_FAHRENHEIT_DIFFERENCE);
-    }
 
 }

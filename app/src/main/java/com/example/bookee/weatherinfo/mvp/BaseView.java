@@ -9,7 +9,7 @@ public interface BaseView  {
 
 
 
-        void recieveDataFromPresenter(CityForecastInfo info);
+       // void recieveDataFromPresenter(CityForecastInfo info);
         void errorHappened(String s);
 
 

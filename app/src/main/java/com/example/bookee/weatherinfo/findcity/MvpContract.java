@@ -10,6 +10,8 @@ public interface MvpContract {
    interface View extends BaseView {
        void startNewActivity();
 
+       void reciveDataFromPresenter(String name,String temp,String windSpeed,String humidity);
+
 
    }
 

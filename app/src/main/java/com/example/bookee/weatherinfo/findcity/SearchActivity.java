@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bookee.weatherinfo.R;
-import com.example.bookee.weatherinfo.data.CityForecastInfo;
+
 import com.example.bookee.weatherinfo.home.DetailsActivity;
 
 
@@ -25,9 +25,9 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     private MvpContract.Presenter presenter;
 
     private String name;
-    private double temperature;
-    private double windSpeed;
-    private int humidity;
+    private String temperature;
+    private String windSpeed;
+    private String humidity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,17 +83,15 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     }
 
     @Override
-    public void recieveDataFromPresenter(CityForecastInfo info) {
+    public void reciveDataFromPresenter(String name,String temp,String windSpeed,String humidity) {
 
-        if(info!=null) {
-        name = info.getName();
-        temperature = info.getMain().getTemp();
-        windSpeed = info.getWind().getSpeed();
-        humidity = info.getMain().getHumidity();
+
+        this.name = name;
+        this.temperature=temp;
+        this.windSpeed=windSpeed;
+        this.humidity=humidity;
         startNewActivity();
-        }else {
-            Toast.makeText(this,"pogresno uneto ime grada",Toast.LENGTH_LONG).show();
-        }
+
     }
 
     @Override
@@ -106,9 +104,9 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         Intent i = new Intent(this, DetailsActivity.class);
         Bundle extraData = new Bundle();
         extraData.putString("name", name);
-        extraData.putDouble("temp", temperature);
-        extraData.putDouble("wind", windSpeed);
-        extraData.putInt("humid", humidity);
+        extraData.putString("temp", temperature);
+        extraData.putString("wind", windSpeed);
+        extraData.putString("humid", humidity);
         i.putExtras(extraData);
 
 

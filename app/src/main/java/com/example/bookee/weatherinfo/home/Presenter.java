@@ -7,7 +7,8 @@ import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 import com.example.bookee.weatherinfo.mvp.BaseView;
 
-import static com.example.bookee.weatherinfo.home.DetailsActivity.CELSIOUS_FAHRENHEIT_DIFFERENCE;
+
+import static com.example.bookee.weatherinfo.utils.Constants.CELSIOUS_FAHRENHEIT_DIFFERENCE;
 
 class Presenter implements MvpContract.Presenter {
 
@@ -26,6 +27,9 @@ class Presenter implements MvpContract.Presenter {
         this.attachedView = (MvpContract.View) view;
     }
 
+    private int prepareTempForDisplay(CityForecastInfo info) {
+        return (int) (info.getMain().getTemp() - CELSIOUS_FAHRENHEIT_DIFFERENCE);
+    }
 
 
 
@@ -33,7 +37,12 @@ class Presenter implements MvpContract.Presenter {
         attachedDataInstance.fetchInitialData(new MvpContract.InitialDataFetchCallback() {
             @Override
             public void fetchData(CityForecastInfo info) {
-                attachedView.recieveDataFromPresenter(info);
+
+                String name=info.getName();
+                String temp=String.valueOf(prepareTempForDisplay(info));
+                String wind=String.valueOf(info.getWind().getSpeed());
+                String humidity=String.valueOf(info.getMain().getHumidity());
+                attachedView.updateWithNewData(name,temp,wind,humidity);
             }
 
             @Override
@@ -63,14 +72,12 @@ class Presenter implements MvpContract.Presenter {
 
         if (!extras.isEmpty() ) {
             String name = extras.getString("name");
-            double temp = extras.getDouble("temp");
-            double wind = extras.getDouble("wind");
-            int humid = extras.getInt("humid");
-            temp=(temp-CELSIOUS_FAHRENHEIT_DIFFERENCE);
-            String tempString = String.valueOf((int) temp);
-            String windString = String.valueOf((int) wind);
-            String humidString = String.valueOf(humid);
-            attachedView.updateWithNewData(name, tempString, windString, humidString);
+            String temp = extras.getString("temp");
+            String wind = extras.getString("wind");
+            String humid = extras.getString("humid");
+
+
+            attachedView.updateWithNewData(name, temp, wind, humid);
 
         } else {
 

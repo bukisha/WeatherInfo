@@ -15,7 +15,7 @@ public interface MvpContract {
 
         void updateWithNewData(String name, String temp, String wind, String humid);
 
-        void recieveDataFromPresenter(CityForecastInfo info);
+       // void recieveDataFromPresenter(CityForecastInfo info);
 
         void errorHappened(String s);
     }

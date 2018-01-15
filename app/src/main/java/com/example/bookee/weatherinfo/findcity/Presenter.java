@@ -5,6 +5,9 @@ import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 import com.example.bookee.weatherinfo.mvp.BaseView;
 
+
+import static com.example.bookee.weatherinfo.utils.Constants.CELSIOUS_FAHRENHEIT_DIFFERENCE;
+
 public class Presenter implements MvpContract.Presenter {
     private MvpContract.Model attachedDataInstance;
     private MvpContract.View attachedView;
@@ -23,7 +26,9 @@ public class Presenter implements MvpContract.Presenter {
        this.attachedView= (MvpContract.View) view;
     }
 
-
+    private int prepareTempForDisplay(CityForecastInfo info) {
+        return (int) (info.getMain().getTemp() - CELSIOUS_FAHRENHEIT_DIFFERENCE);
+    }
 
    @Override
    public void getData(String desiredCity) {
@@ -32,7 +37,16 @@ public class Presenter implements MvpContract.Presenter {
 
             @Override
             public void fetchNewData(String cityName, CityForecastInfo info) {
-                attachedView.recieveDataFromPresenter(info);
+               if(info!=null) {
+                   String name = info.getName();
+                   String temp = String.valueOf(prepareTempForDisplay(info));
+                   String wind = String.valueOf(info.getWind().getSpeed());
+                   String humidity = String.valueOf(info.getMain().getHumidity());
+
+                   attachedView.reciveDataFromPresenter(name, temp, wind, humidity);
+               } else {
+                   attachedView.errorHappened("porgesno uneto ime grada");
+               }
             }
 
             @Override
