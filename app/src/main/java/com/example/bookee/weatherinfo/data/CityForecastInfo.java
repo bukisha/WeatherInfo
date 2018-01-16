@@ -1,15 +1,18 @@
 package com.example.bookee.weatherinfo.data;
 import com.google.gson.annotations.SerializedName;
 
-public class CityForecastInfo {
 
+
+
+
+
+public class CityForecastInfo {
     private Main main = null;
     private Wind wind = null;
     private int id;
     private String name;
 
 //=================================================================================================
-
     public static class CityForecastInfoBuilder {
         @SerializedName("main")
         private Main main = null;
@@ -20,12 +23,10 @@ public class CityForecastInfo {
         @SerializedName("name")
         private String name;
 
-
         public CityForecastInfoBuilder setId(int id) {
             this.id = id;
             return this;
         }
-
         public CityForecastInfoBuilder setName(String name) {
             this.name = name;
             return this;
