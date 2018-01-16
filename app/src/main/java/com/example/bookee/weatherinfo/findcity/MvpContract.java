@@ -1,7 +1,5 @@
 package com.example.bookee.weatherinfo.findcity;
-
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
-
 
 interface MvpContract {
 
@@ -29,7 +27,7 @@ interface MvpContract {
 
    interface FetchNewCityWeatherInfoCallback {
 
-       void fetchNewWeather(String cityName, CityForecastInfo info);
+       void fetchNewWeather( CityForecastInfo info);
        void error(Throwable t);
 
    }

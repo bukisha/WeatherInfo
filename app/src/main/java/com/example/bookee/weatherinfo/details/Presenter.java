@@ -1,12 +1,9 @@
 package com.example.bookee.weatherinfo.details;
 
-
 import android.os.Bundle;
-
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
-
-
+import com.example.bookee.weatherinfo.data.WeatherRepository;
 import static com.example.bookee.weatherinfo.utils.Constants.CELSIOUS_FAHRENHEIT_DIFFERENCE;
 
 class Presenter implements MvpContract.Presenter {
@@ -15,7 +12,7 @@ class Presenter implements MvpContract.Presenter {
     private MvpContract.Model attachedDataInstance;
 
     Presenter() {
-        RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
+        WeatherRepository repository = new RetrofitWeatherRepository();
         attachedDataInstance = new Model(repository);
     }
 
@@ -30,7 +27,6 @@ class Presenter implements MvpContract.Presenter {
 
     public void getData() {
         attachedDataInstance.fetchInitialData(new MvpContract.InitialCityForecastFetchCallback() {
-
             @Override
             public void fetchWeatherInfo(CityForecastInfo info) {
             if(info!=null) {
@@ -43,7 +39,6 @@ class Presenter implements MvpContract.Presenter {
                 attachedView.errorHappened("Doslo je do greske");
                 }
             }
-
             @Override
             public void error(Throwable t) {
 
@@ -62,8 +57,6 @@ class Presenter implements MvpContract.Presenter {
     }
 
     public void displayNewData(Bundle extras) {
-
-
         if (!extras.isEmpty() ) {
             String name = extras.getString("name");
             String temp = extras.getString("temp");

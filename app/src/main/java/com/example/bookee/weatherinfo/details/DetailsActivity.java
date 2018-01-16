@@ -17,15 +17,12 @@ import com.example.bookee.weatherinfo.findcity.SearchActivity;
 
 public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
 
-
     private TextView city;
     private TextView temperature;
     private TextView windSpeed;
     private TextView humidity;
 
-
     private MvpContract.Presenter weatherPresenter;
-
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -39,7 +36,6 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         humidity = findViewById(R.id.humidity_info);
 
         weatherPresenter = new Presenter();
-
 
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +62,6 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         Intent intent = getIntent();
 
         Bundle extras = intent.getExtras();
-
 
         if (extras != null) {
             Log.i("DEBUG", "pre vadjenja iz extras");

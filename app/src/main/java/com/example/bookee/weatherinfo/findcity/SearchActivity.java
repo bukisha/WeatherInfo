@@ -17,7 +17,6 @@ import com.example.bookee.weatherinfo.R;
 
 import com.example.bookee.weatherinfo.details.DetailsActivity;
 
-
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
 
     private EditText cityName;

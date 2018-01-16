@@ -1,9 +1,6 @@
 package com.example.bookee.weatherinfo.details;
-
 import android.os.Bundle;
-
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
-
 
 interface MvpContract {
 
@@ -16,7 +13,6 @@ interface MvpContract {
     }
 
     interface Presenter  {
-
 
         void bindView(View v);
 

@@ -30,9 +30,8 @@ public class Presenter implements MvpContract.Presenter {
    public void getData(String desiredCity) {
         attachedDataInstance.fetchData(desiredCity, new MvpContract.FetchNewCityWeatherInfoCallback() {
 
-
             @Override
-            public void fetchNewWeather(String cityName, CityForecastInfo info) {
+            public void fetchNewWeather( CityForecastInfo info) {
                if(info!=null) {
                    String name = info.getName();
                    String temp = String.valueOf(prepareTempForDisplay(info));
