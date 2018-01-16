@@ -1,4 +1,5 @@
 package com.example.bookee.weatherinfo.data;
+
 import com.google.gson.annotations.SerializedName;
 
 public class CityForecastInfo {

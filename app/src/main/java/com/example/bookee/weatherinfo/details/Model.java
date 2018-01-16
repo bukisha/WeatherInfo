@@ -1,13 +1,9 @@
 package com.example.bookee.weatherinfo.details;
-import android.support.annotation.NonNull;
+
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
-import com.example.bookee.weatherinfo.data.RetrofitCreator;
 import com.example.bookee.weatherinfo.data.WeatherRepository;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import static com.example.bookee.weatherinfo.utils.Constants.BELGRADE;
 
 
 public class Model implements MvpContract.Model {
@@ -21,7 +17,7 @@ public class Model implements MvpContract.Model {
     @Override
     public void fetchInitialData(final MvpContract.InitialCityForecastFetchCallback callback) {
 
-        repository.fetchWeatherForCity("belgrade", new WeatherRepository.ForecastCallback() {
+        repository.fetchWeatherForCity(BELGRADE, new WeatherRepository.ForecastCallback() {
 
                  @Override
                  public void onSucess(CityForecastInfo info) {
