@@ -62,7 +62,9 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
 
 
+
     }
+
 
 
     @Override
@@ -73,10 +75,15 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
 //
         Intent intent=getIntent();
-        Bundle extras=intent.getExtras();
-        if (extras != null) {
+
+        Bundle extras = intent.getExtras();
+
+
+        if (extras!=null) {
             Log.i("DEBUG", "pre vadjenja iz extras");
+            //Toast.makeText(getApplicationContext(),extras.getString("name"),Toast.LENGTH_LONG).show();
             weatherPresenter.displayNewData(extras);
+
         } else {
             Log.i("DEBUG", "NE VADIM NSITA IZ extras");
             weatherPresenter.getData();

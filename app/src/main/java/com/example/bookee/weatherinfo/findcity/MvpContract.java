@@ -1,23 +1,24 @@
 package com.example.bookee.weatherinfo.findcity;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
-import com.example.bookee.weatherinfo.mvp.BasePresenter;
-import com.example.bookee.weatherinfo.mvp.BaseView;
 
 
 public interface MvpContract {
 
-   interface View extends BaseView {
+   interface View  {
        void startNewActivity();
 
        void reciveDataFromPresenter(String name,String temp,String windSpeed,String humidity);
 
 
+       void errorHappened(String message);
    }
 
-   interface Presenter extends BasePresenter {
+   interface Presenter  {
 
+       void bindView(View v);
 
+       void unbindView();
 
        void getData(String desiredCity);
    }

@@ -3,14 +3,12 @@ package com.example.bookee.weatherinfo.home;
 import android.os.Bundle;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
-import com.example.bookee.weatherinfo.mvp.BasePresenter;
-import com.example.bookee.weatherinfo.mvp.BaseView;
 
 
 public interface MvpContract {
 
 
-    interface View extends BaseView {
+    interface View  {
         void startNewActivity();
 
         void updateWithNewData(String name, String temp, String wind, String humid);
@@ -20,10 +18,12 @@ public interface MvpContract {
         void errorHappened(String s);
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter  {
 
 
+        void bindView(View v);
 
+        void unbindView();
 
         void ActionSomethingIsClicked();
 

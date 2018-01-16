@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
-import com.example.bookee.weatherinfo.mvp.BaseView;
 
 
 import static com.example.bookee.weatherinfo.utils.Constants.CELSIOUS_FAHRENHEIT_DIFFERENCE;
@@ -23,8 +22,8 @@ class Presenter implements MvpContract.Presenter {
     }
 
     @Override
-    public void bindView(BaseView view) {
-        this.attachedView = (MvpContract.View) view;
+    public void bindView(MvpContract.View view) {
+        this.attachedView =  view;
     }
 
     private int prepareTempForDisplay(CityForecastInfo info) {
@@ -37,12 +36,15 @@ class Presenter implements MvpContract.Presenter {
         attachedDataInstance.fetchInitialData(new MvpContract.InitialDataFetchCallback() {
             @Override
             public void fetchData(CityForecastInfo info) {
-
+            if(info!=null) {
                 String name=info.getName();
                 String temp=String.valueOf(prepareTempForDisplay(info));
                 String wind=String.valueOf(info.getWind().getSpeed());
                 String humidity=String.valueOf(info.getMain().getHumidity());
                 attachedView.updateWithNewData(name,temp,wind,humidity);
+            } else {
+                attachedView.errorHappened("Doslo je do greske");
+                }
             }
 
             @Override

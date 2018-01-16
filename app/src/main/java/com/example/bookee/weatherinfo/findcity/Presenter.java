@@ -3,7 +3,6 @@ package com.example.bookee.weatherinfo.findcity;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
-import com.example.bookee.weatherinfo.mvp.BaseView;
 
 
 import static com.example.bookee.weatherinfo.utils.Constants.CELSIOUS_FAHRENHEIT_DIFFERENCE;
@@ -22,8 +21,8 @@ public class Presenter implements MvpContract.Presenter {
 
 
     @Override
-    public void bindView(BaseView view) {
-       this.attachedView= (MvpContract.View) view;
+    public void bindView(MvpContract.View view) {
+       this.attachedView=  view;
     }
 
     private int prepareTempForDisplay(CityForecastInfo info) {
