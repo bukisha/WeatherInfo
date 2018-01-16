@@ -12,6 +12,4 @@ public interface WeatherApi {
      @GET("weather")
      Call<CityForecastInfo> getForecast(@Query("q") String city,@Query("appid") String apiKey);
 
-
-
 }

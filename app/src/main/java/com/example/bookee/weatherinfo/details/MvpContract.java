@@ -1,19 +1,16 @@
-package com.example.bookee.weatherinfo.home;
+package com.example.bookee.weatherinfo.details;
 
 import android.os.Bundle;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 
 
-public interface MvpContract {
-
+interface MvpContract {
 
     interface View  {
         void startNewActivity();
 
         void updateWithNewData(String name, String temp, String wind, String humid);
-
-       // void recieveDataFromPresenter(CityForecastInfo info);
 
         void errorHappened(String s);
     }
@@ -35,17 +32,13 @@ public interface MvpContract {
 
     interface Model  {
 
-        void fetchInitialData(InitialDataFetchCallback callback);
-
-
+        void fetchInitialData(InitialCityForecastFetchCallback callback);
     }
 
-    interface InitialDataFetchCallback {
+    interface InitialCityForecastFetchCallback {
 
-            void fetchData(CityForecastInfo info);
+            void fetchWeatherInfo(CityForecastInfo info);
 
-             void error();
+             void error(Throwable t);
     }
-
-
 }

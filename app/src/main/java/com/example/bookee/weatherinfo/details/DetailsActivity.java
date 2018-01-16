@@ -1,4 +1,4 @@
-package com.example.bookee.weatherinfo.home;
+package com.example.bookee.weatherinfo.details;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -15,7 +15,6 @@ import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.findcity.SearchActivity;
 
 
-
 public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
 
 
@@ -25,16 +24,15 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private TextView humidity;
 
 
-
     private MvpContract.Presenter weatherPresenter;
 
 
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
-        Log.i("DEBUG","onCREATE");
-        setContentView(R.layout.main_activity);
+        Log.i("DEBUG", "onCREATE");
+        setContentView(R.layout.details_activity);
+
         city = findViewById(R.id.current_city);
         temperature = findViewById(R.id.current_temp);
         windSpeed = findViewById(R.id.wind_info);
@@ -50,36 +48,27 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
                 weatherPresenter.ActionSomethingIsClicked();
             }
         });
-
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i("DEBUG","onPAUSE");
+        Log.i("DEBUG", "onPAUSE");
         weatherPresenter.unbindView();
-
-
-
-
     }
-
-
 
     @Override
     protected void onResume() {
         super.onResume();
         weatherPresenter.bindView(this);
-        Log.i("DEBUG","onRESUME");
+        Log.i("DEBUG", "onRESUME");
 
-//
-        Intent intent=getIntent();
+        Intent intent = getIntent();
 
         Bundle extras = intent.getExtras();
 
 
-        if (extras!=null) {
+        if (extras != null) {
             Log.i("DEBUG", "pre vadjenja iz extras");
             //Toast.makeText(getApplicationContext(),extras.getString("name"),Toast.LENGTH_LONG).show();
             weatherPresenter.displayNewData(extras);
@@ -88,15 +77,12 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
             Log.i("DEBUG", "NE VADIM NSITA IZ extras");
             weatherPresenter.getData();
         }
-
-
     }
 
     @Override
     public void errorHappened(String errorMessage) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
-
 
     @Override
     public void startNewActivity() {

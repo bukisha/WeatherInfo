@@ -15,19 +15,19 @@ import android.widget.Toast;
 
 import com.example.bookee.weatherinfo.R;
 
-import com.example.bookee.weatherinfo.home.DetailsActivity;
+import com.example.bookee.weatherinfo.details.DetailsActivity;
 
 
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
 
-
     private EditText cityName;
-    private MvpContract.Presenter presenter;
 
     private String name;
     private String temperature;
     private String windSpeed;
     private String humidity;
+
+    private MvpContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +44,11 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-
                     if (imm != null) {
                         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     }
-
                     return true;
-
-            }
+                }
                 return false;
         }
         });
@@ -64,10 +61,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
                 presenter.getData(desiredCity);
             }
         });
-
     }
-
-
 
     @Override
     protected void onResume() {
@@ -85,13 +79,12 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     @Override
     public void reciveDataFromPresenter(String name,String temp,String windSpeed,String humidity) {
 
-
         this.name = name;
         this.temperature=temp;
         this.windSpeed=windSpeed;
         this.humidity=humidity;
-        startNewActivity();
 
+        startNewActivity();
     }
 
     @Override
@@ -102,13 +95,14 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     @Override
     public void startNewActivity() {
         Intent i = new Intent(this, DetailsActivity.class);
+
         Bundle extraData = new Bundle();
+
         extraData.putString("name", name);
         extraData.putString("temp", temperature);
         extraData.putString("wind", windSpeed);
         extraData.putString("humid", humidity);
         i.putExtras(extraData);
-
 
         startActivity(i);
     }

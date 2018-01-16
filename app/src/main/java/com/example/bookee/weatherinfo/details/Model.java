@@ -1,4 +1,4 @@
-package com.example.bookee.weatherinfo.home;
+package com.example.bookee.weatherinfo.details;
 
 
 
@@ -24,24 +24,21 @@ public class Model implements MvpContract.Model {
     }
 
 
-
-
-
     @Override
-    public void fetchInitialData(final MvpContract.InitialDataFetchCallback callback) {
+    public void fetchInitialData(final MvpContract.InitialCityForecastFetchCallback callback) {
 
         Call<CityForecastInfo> call = repository.getApi().getForecast("belgrade", RetrofitCreator.getApiKey());
 
         call.enqueue(new Callback<CityForecastInfo>() {
             @Override
             public void onResponse(@NonNull Call<CityForecastInfo> call, @NonNull Response<CityForecastInfo> response) {
-                callback.fetchData(response.body());
+                callback.fetchWeatherInfo(response.body());
             }
 
             @Override
             public void onFailure(@NonNull Call<CityForecastInfo> call, @NonNull Throwable t) {
 
-                callback.error();
+                callback.error(t);
             }
         });
     }

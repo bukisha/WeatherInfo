@@ -17,9 +17,6 @@ public class Presenter implements MvpContract.Presenter {
 
     }
 
-
-
-
     @Override
     public void bindView(MvpContract.View view) {
        this.attachedView=  view;
@@ -31,11 +28,11 @@ public class Presenter implements MvpContract.Presenter {
 
    @Override
    public void getData(String desiredCity) {
-        attachedDataInstance.fetchData(desiredCity, new MvpContract.FetchNewDataCallback() {
+        attachedDataInstance.fetchData(desiredCity, new MvpContract.FetchNewCityWeatherInfoCallback() {
 
 
             @Override
-            public void fetchNewData(String cityName, CityForecastInfo info) {
+            public void fetchNewWeather(String cityName, CityForecastInfo info) {
                if(info!=null) {
                    String name = info.getName();
                    String temp = String.valueOf(prepareTempForDisplay(info));
@@ -49,9 +46,9 @@ public class Presenter implements MvpContract.Presenter {
             }
 
             @Override
-            public void error() {
+            public void error(Throwable t) {
 
-                attachedView.errorHappened("GRESKA");
+                attachedView.errorHappened("GRESKA"+t.toString());
             }
         });
 

@@ -3,13 +3,12 @@ package com.example.bookee.weatherinfo.findcity;
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 
 
-public interface MvpContract {
+interface MvpContract {
 
    interface View  {
        void startNewActivity();
 
        void reciveDataFromPresenter(String name,String temp,String windSpeed,String humidity);
-
 
        void errorHappened(String message);
    }
@@ -25,13 +24,13 @@ public interface MvpContract {
 
    interface Model {
 
-       void fetchData(String city,FetchNewDataCallback callback);
+       void fetchData(String city,FetchNewCityWeatherInfoCallback callback);
    }
 
-   interface FetchNewDataCallback {
+   interface FetchNewCityWeatherInfoCallback {
 
-       void fetchNewData(String cityName,CityForecastInfo info);
-       void error();
+       void fetchNewWeather(String cityName, CityForecastInfo info);
+       void error(Throwable t);
 
    }
 }

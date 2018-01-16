@@ -21,27 +21,24 @@ public class Model implements MvpContract.Model {
 
     Model(RetrofitWeatherRepository repository) {
         this.repository=  repository;
-
     }
 
     @Override
-   public void fetchData(final String city, final MvpContract.FetchNewDataCallback callback) {
+    public void fetchData(final String city, final MvpContract.FetchNewCityWeatherInfoCallback callback) {
         Call<CityForecastInfo> call = repository.getApi().getForecast(city, RetrofitCreator.getApiKey());
 
         call.enqueue(new Callback<CityForecastInfo>() {
             @Override
             public void onResponse(@NonNull Call<CityForecastInfo> call, @NonNull Response<CityForecastInfo> response) {
-                callback.fetchNewData(city,response.body());
+                callback.fetchNewWeather(city,response.body());
             }
 
             @Override
             public void onFailure(@NonNull Call<CityForecastInfo> call, @NonNull Throwable t) {
-                callback.error();
+                callback.error(t);
 
             }
         });
 
     }
-
-
 }

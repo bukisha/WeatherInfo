@@ -1,4 +1,4 @@
-package com.example.bookee.weatherinfo.home;
+package com.example.bookee.weatherinfo.details;
 
 
 import android.os.Bundle;
@@ -17,8 +17,6 @@ class Presenter implements MvpContract.Presenter {
     Presenter() {
         RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
         attachedDataInstance = new Model(repository);
-
-
     }
 
     @Override
@@ -30,12 +28,11 @@ class Presenter implements MvpContract.Presenter {
         return (int) (info.getMain().getTemp() - CELSIOUS_FAHRENHEIT_DIFFERENCE);
     }
 
-
-
     public void getData() {
-        attachedDataInstance.fetchInitialData(new MvpContract.InitialDataFetchCallback() {
+        attachedDataInstance.fetchInitialData(new MvpContract.InitialCityForecastFetchCallback() {
+
             @Override
-            public void fetchData(CityForecastInfo info) {
+            public void fetchWeatherInfo(CityForecastInfo info) {
             if(info!=null) {
                 String name=info.getName();
                 String temp=String.valueOf(prepareTempForDisplay(info));
@@ -48,15 +45,12 @@ class Presenter implements MvpContract.Presenter {
             }
 
             @Override
-            public void error() {
+            public void error(Throwable t) {
 
-                attachedView.errorHappened("GRESKA");
+                attachedView.errorHappened("GRESKA"+t.toString());
             }
         });
     }
-
-
-
 
     @Override
     public void unbindView() {
@@ -65,9 +59,7 @@ class Presenter implements MvpContract.Presenter {
 
     public void ActionSomethingIsClicked() {
         attachedView.startNewActivity();
-
     }
-
 
     public void displayNewData(Bundle extras) {
 
@@ -77,7 +69,6 @@ class Presenter implements MvpContract.Presenter {
             String temp = extras.getString("temp");
             String wind = extras.getString("wind");
             String humid = extras.getString("humid");
-
 
             attachedView.updateWithNewData(name, temp, wind, humid);
 
