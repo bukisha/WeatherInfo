@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
         return builder.build();
     }
 
-    public static String getApiKey() {
+    static String getApiKey() {
         return API_KEY;
     }
 }
