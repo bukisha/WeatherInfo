@@ -5,7 +5,7 @@ import retrofit2.http.GET;
 
 import retrofit2.http.Query;
 
-
+//todo empty lines
 public interface WeatherApi {
 
 

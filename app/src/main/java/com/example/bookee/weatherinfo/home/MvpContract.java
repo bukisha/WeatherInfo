@@ -39,7 +39,7 @@ public interface MvpContract {
 
 
     }
-
+//todo da li pored Initial postoji jos neki DataFetchCallback. Mislim da nema. Onda je Initial nepotrebno. Takodje, za ovo data vazi isto sto sam vec negde napisao :D
     interface InitialDataFetchCallback {
 
             void fetchData(CityForecastInfo info);

@@ -15,7 +15,7 @@ import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.findcity.SearchActivity;
 
 
-
+//todo Ovaj activity je DetailsActivity, ali ti se package zove Home. Jedno od ove dve stvari mora da se reimenuje
 public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
 
 
@@ -34,7 +34,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
         super.onCreate(savedInstanceState);
         Log.i("DEBUG","onCREATE");
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.main_activity);//todo promeni ime ovoh layout file u details_activity_layout, recimo
         city = findViewById(R.id.current_city);
         temperature = findViewById(R.id.current_temp);
         windSpeed = findViewById(R.id.wind_info);
@@ -73,7 +73,6 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         weatherPresenter.bindView(this);
         Log.i("DEBUG","onRESUME");
 
-//
         Intent intent=getIntent();
 
         Bundle extras = intent.getExtras();
@@ -100,7 +99,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
     @Override
     public void startNewActivity() {
-        Intent i = new Intent(this, SearchActivity.class);
+        Intent i = new Intent(this, SearchActivity.class);//todo znaci secem prste :D
         startActivity(i);
     }
 

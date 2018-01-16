@@ -1,10 +1,20 @@
 <resources>
     <string name="app_name">WeatherInfo</string>
     <string name="get_forecast">Get Forecast</string>
+    <!--todo ako se neki string koristi samo u jednom domenu (recimo details), onda to gledamo da ubacimo u sam key. Takodje gledamo da sto bolje opisemo gde se i kako koristi. Recimo-->
+    <string name="details_celsious_label"> °C</string>
+    <string name="details_wind_label">Wind</string>
+    <string name="details_humidity_label">Humidity</string>
+    
+    
     <string name="celsious"> °C</string>
     <string name="wind_label">Wind</string>
     <string name="humidity_label">Humidity</string>
     <string name="metres_per_second">" m/s"</string>
     <string name="percentage">" %"</string>
+    
+    
+    <!--todo a ovde moze, recimo-->
+    <string name="findcity_city_hint">enter name of the city</string>
     <string name="enter_name_of_the_city">enter name of the city</string>
 </resources>

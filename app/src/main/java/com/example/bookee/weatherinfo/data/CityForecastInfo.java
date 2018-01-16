@@ -4,9 +4,8 @@ package com.example.bookee.weatherinfo.data;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
-
+//todo ovde imas dooosta warninga sa strane.
 public class CityForecastInfo {
-
 
     private Coord coord = null;
     private List<Weather> weather = null;

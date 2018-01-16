@@ -4,19 +4,20 @@ package com.example.bookee.weatherinfo.findcity;
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 
-
 import static com.example.bookee.weatherinfo.utils.Constants.CELSIOUS_FAHRENHEIT_DIFFERENCE;
 
+//todo empty lines
 public class Presenter implements MvpContract.Presenter {
-    private MvpContract.Model attachedDataInstance;
-    private MvpContract.View attachedView;
+    private MvpContract.Model attachedDataInstance;//todo ako imamo instancu modela, onda se ta instanca zove, recimo attachedModelInstance a ne dataInstance. Takodje, svaka je attached. tako da ne moramo to pisati. Dovoljno je private MvpContract.Model model;
+    private MvpContract.View  attachedView;//todo isto kao i gore. private MvpContract.Viewview
 
     Presenter() {
-        RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
-        attachedDataInstance = new Model(repository);
+//        RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
+//        attachedDataInstance = new Model(repository);
 
+// todo sobzirom da ovu instancu repositoryja koristis samo ovde, onda moze ovako:
+        attachedDataInstance = new Model(new RetrofitWeatherRepository());
     }
-
 
 
 
