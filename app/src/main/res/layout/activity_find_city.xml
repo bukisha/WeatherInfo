@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/misty_mountain_bgd"
+    android:visibility="visible"
     tools:context="com.example.bookee.weatherinfo.findcity.SearchActivity">
 
 
@@ -13,12 +14,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:imeOptions="actionDone"
-        android:inputType="text"
-
         android:hint="@string/enter_name_of_the_city"
-        android:textColorHint="@color/white"
+        android:imeOptions="actionDone"
+
+        android:inputType="text"
         android:textColor="@color/white"
+        android:textColorHint="@color/white"
 
         />
 
@@ -31,6 +32,14 @@
         android:layout_marginTop="10dp"
 
 
-
         android:text="@string/get_forecast" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible" />
 </RelativeLayout>

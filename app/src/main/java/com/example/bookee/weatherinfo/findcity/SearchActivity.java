@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.example.bookee.weatherinfo.details.DetailsActivity;
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
 
     private EditText cityName;
+    private ProgressBar progressBar;
 
     private String name;
     private String temperature;
@@ -36,6 +38,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         Button getForecast;
         getForecast = findViewById(R.id.get_forecast_button);
         cityName = findViewById(R.id.desired_city_name);
+        progressBar=findViewById(R.id.progressBar);
 
         presenter = new Presenter();
 
@@ -58,6 +61,8 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
             public void onClick(View view) {
                 String desiredCity;
                 desiredCity = cityName.getText().toString();
+                cityName.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 presenter.getData(desiredCity);
             }
         });
@@ -95,6 +100,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         Log.i("DEBUG2",String.valueOf(extraData.isEmpty()));
         i.putExtras(extraData);
         setResult(RESULT_OK,i);
+        progressBar.setVisibility(View.INVISIBLE);
         finish();
         // startNewActivity();
     }
