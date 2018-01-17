@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.bookee.weatherinfo.R;
 
+import java.util.InvalidPropertiesFormatException;
+
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
 
     private EditText cityName;
@@ -94,6 +96,8 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     @Override
     public void errorHappened(String errorMessage) {
         Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
+        progressBar.setVisibility(View.INVISIBLE);
+        cityName.setVisibility(View.VISIBLE);
     }
 }
 
