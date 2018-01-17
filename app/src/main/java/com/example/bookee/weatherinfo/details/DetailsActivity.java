@@ -17,6 +17,7 @@ import com.example.bookee.weatherinfo.findcity.SearchActivity;
 
 
 public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
+    private static final int REQUEST_NEW_CITY = 2;
     private TextView city;
     private TextView temperature;
     private TextView windSpeed;
@@ -24,6 +25,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private ProgressBar progressBar;
 
     private MvpContract.Presenter weatherPresenter;
+    private boolean newCityData = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         temperature = findViewById(R.id.current_temp);
         windSpeed = findViewById(R.id.wind_info);
         humidity = findViewById(R.id.humidity_info);
-        progressBar=findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
 
         progressBar.setVisibility(View.INVISIBLE);
         weatherPresenter = new Presenter();
@@ -61,18 +63,21 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         weatherPresenter.bindView(this);
         Log.i("DEBUG", "onRESUME");
 
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
 
-        Bundle extras = intent.getExtras();
-        progressBar.setVisibility(View.VISIBLE);
-        if (extras != null) {
-            Log.i("DEBUG", "pre vadjenja iz extras");
-            weatherPresenter.displayNewData(extras);
+        Bundle extras = intent.getExtras();*/
 
-        } else {
-            Log.i("DEBUG", "NE VADIM NSITA IZ extras");
+        //if (extras != null) {
+        //Log.i("DEBUG", "pre vadjenja iz extras");
+        //   weatherPresenter.displayNewData(extras);
+
+        // } else {
+        Log.i("DEBUG", "NE VADIM NISTA IZ extras");
+        if (!newCityData) {
+            progressBar.setVisibility(View.VISIBLE);
             weatherPresenter.getData();
         }
+        // }
     }
 
     @Override
@@ -82,8 +87,29 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
     @Override
     public void startNewActivity() {
-        Intent i = new Intent(this, SearchActivity.class);
-        startActivity(i);
+        Intent newCityIntent = new Intent(this, SearchActivity.class);
+        Log.i("CODE", String.valueOf(REQUEST_NEW_CITY));
+        Log.i("DEBUG", "startActivityForRes");
+        startActivityForResult(newCityIntent, REQUEST_NEW_CITY);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("DEBUG novo ime", data.getExtras().getString("name"));
+        Log.i("DEBUG requestCode je", String.valueOf(requestCode));
+        Log.i("DEBUG resultCode je", String.valueOf(resultCode));
+        if (resultCode == RESULT_OK && requestCode == REQUEST_NEW_CITY) {
+            Bundle newCityWeather = data.getExtras();
+            Log.i("DEBUG novo ime 2", newCityWeather.getString("name"));
+            newCityData = true;
+            weatherPresenter.bindView(this);
+            weatherPresenter.displayNewData(newCityWeather);
+
+        } else {
+            errorHappened("nisu primljeni novi podaci");
+        }
+
     }
 
     @Override

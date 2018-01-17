@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -72,8 +73,8 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     @Override
     protected void onPause() {
         super.onPause();
-       presenter.unbindView();
-       finish();
+        presenter.unbindView();
+       //finish();
     }
 
     @Override
@@ -84,7 +85,18 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         this.windSpeed=windSpeed;
         this.humidity=humidity;
 
-        startNewActivity();
+        Intent i = new Intent();
+        Bundle extraData = new Bundle();
+
+        extraData.putString("name", name);
+        extraData.putString("temp", temperature);
+        extraData.putString("wind", windSpeed);
+        extraData.putString("humid", humidity);
+        Log.i("DEBUG2",String.valueOf(extraData.isEmpty()));
+        i.putExtras(extraData);
+        setResult(RESULT_OK,i);
+        finish();
+        // startNewActivity();
     }
 
     @Override
