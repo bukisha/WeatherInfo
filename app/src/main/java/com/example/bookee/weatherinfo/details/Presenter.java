@@ -10,17 +10,17 @@ import static com.example.bookee.weatherinfo.utils.Constants.CELSIOUS_FAHRENHEIT
 
 class Presenter implements MvpContract.Presenter {
 
-    private MvpContract.View  attachedView;
-    private MvpContract.Model attachedDataInstance;//todo lose imenovanje. Nit je attached nit je Data. Prosto je "model". SLicno kao gore
+    private MvpContract.View view;
+    private MvpContract.Model model;
 
     Presenter() {
         WeatherRepository repository = new RetrofitWeatherRepository();
-        attachedDataInstance = new Model(repository);
+        model = new Model(repository);
     }
 
     @Override
     public void bindView(MvpContract.View view) {
-        this.attachedView =  view;
+        this.view = view;
     }
 
     private int prepareTempForDisplay(CityForecastInfo info) {
@@ -28,52 +28,53 @@ class Presenter implements MvpContract.Presenter {
     }
 
     public void getData() {
-        attachedDataInstance.fetchInitialData(new MvpContract.InitialCityForecastFetchCallback() {
+        model.fetchInitialData(new MvpContract.InitialCityForecastFetchCallback() {
             @Override
-            public void fetchWeatherInfo(CityForecastInfo info) {
-                //todo kada god imas async operaciju, ne znas sta ce se desiti sa view dok tvoja operacija zavrsi. Tada se stitis sa:
-                if (attachedView == null){
-                    return;
-                }
-            if(info!=null) {
-                String name=info.getName();
-                String temp=String.valueOf(prepareTempForDisplay(info));
-                String wind=String.valueOf(info.getWind().getSpeed());
-                String humidity=String.valueOf(info.getMain().getHumidity());
-                attachedView.updateWithNewData(name,temp,wind,humidity);
-            } else {
-                attachedView.errorHappened("Doslo je do greske");
+            public void onSuccess(CityForecastInfo info) {
+                if (view == null) return;
+                if (info != null) {
+                    String name = info.getName();
+                    String temp = String.valueOf(prepareTempForDisplay(info));
+                    String wind = String.valueOf(info.getWind().getSpeed());
+                    String humidity = String.valueOf(info.getMain().getHumidity());
+
+                    view.updateWithNewData(name, temp, wind, humidity);
+                } else {
+
+                    view.errorHappened("Doslo je do greske");
                 }
             }
+
             @Override
             public void error(Throwable t) {
 
-                attachedView.errorHappened("GRESKA"+t.toString());
+                view.errorHappened("GRESKA" + t.toString());
             }
         });
     }
 
     @Override
     public void unbindView() {
-        attachedView = null;
+        view = null;
     }
 
     public void ActionSomethingIsClicked() {
-        attachedView.startNewActivity();
+        view.startNewActivity();
     }
 
     public void displayNewData(Bundle extras) {
-        if (!extras.isEmpty() ) {
+        if (view == null) return;
+        if (!extras.isEmpty()) {
             String name = extras.getString("name");
             String temp = extras.getString("temp");
             String wind = extras.getString("wind");
             String humid = extras.getString("humid");
-            //todo isto kao i gore
-            attachedView.updateWithNewData(name, temp, wind, humid);
+        
+            view.updateWithNewData(name, temp, wind, humid);
 
         } else {
 
-            attachedView.errorHappened("Pogresno uneto ime grada");
+            view.errorHappened("Pogresno uneto ime grada");
         }
     }
 }

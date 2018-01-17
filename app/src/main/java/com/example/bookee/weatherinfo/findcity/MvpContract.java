@@ -5,8 +5,8 @@ interface MvpContract {
 
    interface View  {
        void startNewActivity();
-//todo typo
-       void reciveDataFromPresenter(String name,String temp,String windSpeed,String humidity);
+
+       void receiveDataFromPresenter(String name,String temp,String windSpeed,String humidity);
 
        void errorHappened(String message);
    }

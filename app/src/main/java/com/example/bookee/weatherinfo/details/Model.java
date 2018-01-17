@@ -3,11 +3,11 @@ package com.example.bookee.weatherinfo.details;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.WeatherRepository;
-import static com.example.bookee.weatherinfo.utils.Constants.BELGRADE;//todo ako se konstanta koristi samo ovde, u modelu, onda nema potrebe da ide globalno.
+
 
 
 public class Model implements MvpContract.Model {
-
+    private static final String BELGRADE="Belgrade";
     private WeatherRepository repository;
 
     Model(WeatherRepository repository) {
@@ -21,7 +21,7 @@ public class Model implements MvpContract.Model {
 
                  @Override
                  public void onSuccess(CityForecastInfo info) {
-                     callback.fetchWeatherInfo(info);
+                     callback.onSuccess(info);
                  }
 
                  @Override

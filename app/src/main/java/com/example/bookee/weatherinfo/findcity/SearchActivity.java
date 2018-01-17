@@ -76,14 +76,14 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     }
 
     @Override
-    public void reciveDataFromPresenter(String name,String temp,String windSpeed,String humidity) {
+    public void receiveDataFromPresenter(String name,String temp,String windSpeed,String humidity) {
 
         this.name = name;
         this.temperature=temp;
         this.windSpeed=windSpeed;
         this.humidity=humidity;
 
-        startNewActivity();//
+        startNewActivity();
     }
 
     @Override
