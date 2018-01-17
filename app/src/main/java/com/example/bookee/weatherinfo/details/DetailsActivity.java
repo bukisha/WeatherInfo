@@ -61,9 +61,25 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
         if (!newCityData) {
             progressBar.setVisibility(View.VISIBLE);
+            hideInfoFields(true);
             weatherPresenter.getData();
         }
     }
+
+    private void hideInfoFields(boolean hide) {
+        if(hide) {
+        city.setVisibility(View.INVISIBLE);
+        temperature.setVisibility(View.INVISIBLE);
+        windSpeed.setVisibility(View.INVISIBLE);
+        humidity.setVisibility(View.INVISIBLE);
+        } else {
+            city.setVisibility(View.VISIBLE);
+            temperature.setVisibility(View.VISIBLE);
+            windSpeed.setVisibility(View.VISIBLE);
+            humidity.setVisibility(View.VISIBLE);
+        }
+    }
+
     @Override
     public void errorHappened(String errorMessage) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
@@ -95,5 +111,6 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         windSpeed.setText(wind);
         humidity.setText(humid);
         progressBar.setVisibility(View.INVISIBLE);
+        hideInfoFields(false);
     }
 }
