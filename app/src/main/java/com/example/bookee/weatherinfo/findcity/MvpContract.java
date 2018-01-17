@@ -4,8 +4,6 @@ import com.example.bookee.weatherinfo.data.CityForecastInfo;
 interface MvpContract {
 
    interface View  {
-       void startNewActivity();
-
        void receiveDataFromPresenter(String name,String temp,String windSpeed,String humidity);
 
        void errorHappened(String message);

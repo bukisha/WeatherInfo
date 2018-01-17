@@ -14,20 +14,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.bookee.weatherinfo.R;
-
-import com.example.bookee.weatherinfo.details.DetailsActivity;
 
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
 
     private EditText cityName;
     private ProgressBar progressBar;
-
-    private String name;
-    private String temperature;
-    private String windSpeed;
-    private String humidity;
 
     private MvpContract.Presenter presenter;
 
@@ -35,6 +27,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_city);
+
         Button getForecast;
         getForecast = findViewById(R.id.get_forecast_button);
         cityName = findViewById(R.id.desired_city_name);
@@ -79,22 +72,16 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     protected void onPause() {
         super.onPause();
         presenter.unbindView();
-       //finish();
     }
 
     @Override
     public void receiveDataFromPresenter(String name,String temp,String windSpeed,String humidity) {
 
-        this.name = name;
-        this.temperature=temp;
-        this.windSpeed=windSpeed;
-        this.humidity=humidity;
-
         Intent i = new Intent();
         Bundle extraData = new Bundle();
 
         extraData.putString("name", name);
-        extraData.putString("temp", temperature);
+        extraData.putString("temp", temp);
         extraData.putString("wind", windSpeed);
         extraData.putString("humid", humidity);
         Log.i("DEBUG2",String.valueOf(extraData.isEmpty()));
@@ -102,30 +89,12 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         setResult(RESULT_OK,i);
         progressBar.setVisibility(View.INVISIBLE);
         finish();
-        // startNewActivity();
-    }
 
+    }
     @Override
     public void errorHappened(String errorMessage) {
         Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
     }
-
-    @Override
-    public void startNewActivity() {
-        Intent i = new Intent(this, DetailsActivity.class);
-
-        Bundle extraData = new Bundle();
-
-        extraData.putString("name", name);
-        extraData.putString("temp", temperature);
-        extraData.putString("wind", windSpeed);
-        extraData.putString("humid", humidity);
-        i.putExtras(extraData);
-
-        startActivity(i);
-    }
-
-
 }
 
 
