@@ -73,6 +73,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     protected void onPause() {
         super.onPause();
        presenter.unbindView();
+       finish();
     }
 
     @Override
