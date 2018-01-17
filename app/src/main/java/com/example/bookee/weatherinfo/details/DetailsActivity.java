@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private TextView temperature;
     private TextView windSpeed;
     private TextView humidity;
+    private ProgressBar progressBar;
 
     private MvpContract.Presenter weatherPresenter;
 
@@ -32,7 +34,9 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         temperature = findViewById(R.id.current_temp);
         windSpeed = findViewById(R.id.wind_info);
         humidity = findViewById(R.id.humidity_info);
+        progressBar=findViewById(R.id.progressBar);
 
+        progressBar.setVisibility(View.INVISIBLE);
         weatherPresenter = new Presenter();
 
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
@@ -60,7 +64,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         Intent intent = getIntent();
 
         Bundle extras = intent.getExtras();
-
+        progressBar.setVisibility(View.VISIBLE);
         if (extras != null) {
             Log.i("DEBUG", "pre vadjenja iz extras");
             weatherPresenter.displayNewData(extras);
@@ -88,5 +92,6 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         temperature.setText(temp);
         windSpeed.setText(wind);
         humidity.setText(humid);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }
