@@ -1,15 +1,17 @@
 package com.example.bookee.weatherinfo.details;
 
 import android.os.Bundle;
+
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 import com.example.bookee.weatherinfo.data.WeatherRepository;
+
 import static com.example.bookee.weatherinfo.utils.Constants.CELSIOUS_FAHRENHEIT_DIFFERENCE;
 
 class Presenter implements MvpContract.Presenter {
 
-    private MvpContract.View attachedView;
-    private MvpContract.Model attachedDataInstance;
+    private MvpContract.View  attachedView;
+    private MvpContract.Model attachedDataInstance;//todo lose imenovanje. Nit je attached nit je Data. Prosto je "model". SLicno kao gore
 
     Presenter() {
         WeatherRepository repository = new RetrofitWeatherRepository();
@@ -29,6 +31,10 @@ class Presenter implements MvpContract.Presenter {
         attachedDataInstance.fetchInitialData(new MvpContract.InitialCityForecastFetchCallback() {
             @Override
             public void fetchWeatherInfo(CityForecastInfo info) {
+                //todo kada god imas async operaciju, ne znas sta ce se desiti sa view dok tvoja operacija zavrsi. Tada se stitis sa:
+                if (attachedView == null){
+                    return;
+                }
             if(info!=null) {
                 String name=info.getName();
                 String temp=String.valueOf(prepareTempForDisplay(info));
@@ -62,7 +68,7 @@ class Presenter implements MvpContract.Presenter {
             String temp = extras.getString("temp");
             String wind = extras.getString("wind");
             String humid = extras.getString("humid");
-
+            //todo isto kao i gore
             attachedView.updateWithNewData(name, temp, wind, humid);
 
         } else {

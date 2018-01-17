@@ -7,10 +7,7 @@ public interface WeatherRepository {
     WeatherApi getApi();
 
     interface ForecastCallback {
-
-        void onSucess(CityForecastInfo info);
-
+        void onSuccess(CityForecastInfo info);
         void onError(Throwable t);
-
     }
 }

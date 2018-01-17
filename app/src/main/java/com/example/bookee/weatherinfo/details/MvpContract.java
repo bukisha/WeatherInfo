@@ -34,7 +34,7 @@ interface MvpContract {
 
     interface InitialCityForecastFetchCallback {
 
-            void fetchWeatherInfo(CityForecastInfo info);
+            void fetchWeatherInfo(CityForecastInfo info);//todo "fetch" asocira na akciju. Bolje je ime "fetchedWeatherInfo". Ili samo onSuccess
 
              void error(Throwable t);
     }

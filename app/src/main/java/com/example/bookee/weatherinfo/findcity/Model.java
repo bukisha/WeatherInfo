@@ -16,7 +16,7 @@ public class Model implements MvpContract.Model {
 
         repository.fetchWeatherForCity(city, new WeatherRepository.ForecastCallback() {
             @Override
-            public void onSucess(CityForecastInfo info) {
+            public void onSuccess(CityForecastInfo info) {
                 callback.fetchNewWeather(info);
             }
 

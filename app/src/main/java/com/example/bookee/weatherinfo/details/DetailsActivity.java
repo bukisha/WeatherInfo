@@ -16,7 +16,6 @@ import com.example.bookee.weatherinfo.findcity.SearchActivity;
 
 
 public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
-
     private TextView city;
     private TextView temperature;
     private TextView windSpeed;
@@ -25,7 +24,6 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private MvpContract.Presenter weatherPresenter;
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         Log.i("DEBUG", "onCREATE");
         setContentView(R.layout.details_activity);
@@ -65,7 +63,6 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
         if (extras != null) {
             Log.i("DEBUG", "pre vadjenja iz extras");
-            //Toast.makeText(getApplicationContext(),extras.getString("name"),Toast.LENGTH_LONG).show();
             weatherPresenter.displayNewData(extras);
 
         } else {

@@ -23,7 +23,7 @@ public class RetrofitWeatherRepository implements WeatherRepository{
         call.enqueue(new Callback<CityForecastInfo>() {
             @Override
             public void onResponse(@NonNull Call<CityForecastInfo> call, @NonNull Response<CityForecastInfo> response) {
-                callback.onSucess(response.body());
+                callback.onSuccess(response.body());
             }
             @Override
             public void onFailure(@NonNull Call<CityForecastInfo> call, @NonNull Throwable t) {

@@ -3,9 +3,9 @@ package com.example.bookee.weatherinfo.data;
 import com.google.gson.annotations.SerializedName;
 
 public class CityForecastInfo {
+    private int id;
     private Main main = null;
     private Wind wind = null;
-    private int id;
     private String name;
 
 //=================================================================================================

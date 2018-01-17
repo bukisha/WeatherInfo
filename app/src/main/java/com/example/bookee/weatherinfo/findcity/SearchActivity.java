@@ -83,7 +83,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         this.windSpeed=windSpeed;
         this.humidity=humidity;
 
-        startNewActivity();
+        startNewActivity();//
     }
 
     @Override
