@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/misty_mountain_bgd"
     android:visibility="visible"
-    tools:context="com.example.bookee.weatherinfo.findcity.SearchActivity">
+    tools:context="com.example.bookee.weatherinfo.search.SearchActivity">
 
 
     <EditText

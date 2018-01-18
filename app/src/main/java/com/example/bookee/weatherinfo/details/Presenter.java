@@ -17,7 +17,6 @@ class Presenter implements MvpContract.Presenter {
         WeatherRepository repository = new RetrofitWeatherRepository();
         model = new Model(repository);
     }
-
     @Override
     public void bindView(MvpContract.View view) {
         this.view = view;
@@ -40,19 +39,15 @@ class Presenter implements MvpContract.Presenter {
 
                     view.updateWithNewData(name, temp, wind, humidity);
                 } else {
-
                     view.errorHappened("Doslo je do greske");
                 }
             }
-
             @Override
             public void error(Throwable t) {
-
                 view.errorHappened("GRESKA" + t.toString());
             }
         });
     }
-
     @Override
     public void unbindView() {
         view = null;
@@ -71,9 +66,7 @@ class Presenter implements MvpContract.Presenter {
             String humid = extras.getString("humid");
         
             view.updateWithNewData(name, temp, wind, humid);
-
         } else {
-
             view.errorHappened("Pogresno uneto ime grada");
         }
     }

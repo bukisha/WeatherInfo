@@ -1,4 +1,4 @@
-package com.example.bookee.weatherinfo.findcity;
+package com.example.bookee.weatherinfo.search;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.bookee.weatherinfo.R;
-
-import java.util.InvalidPropertiesFormatException;
 
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
 
@@ -50,7 +48,6 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
                 return false;
         }
         });
-
         getForecast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,20 +59,17 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
             }
         });
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         presenter.bindView(this);
 
     }
-
     @Override
     protected void onPause() {
         super.onPause();
         presenter.unbindView();
     }
-
     @Override
     public void receiveDataFromPresenter(String name,String temp,String windSpeed,String humidity) {
 

@@ -8,7 +8,6 @@ public class CityForecastInfo {
     private Wind wind = null;
     private String name;
 
-//=================================================================================================
     public static class CityForecastInfoBuilder {
         @SerializedName("main")
         private Main main = null;
@@ -35,7 +34,6 @@ public class CityForecastInfo {
         this.wind = builder.wind;
         this.id = builder.id;
         this.name = builder.name;
-
     }
 
     public Main getMain() {
@@ -57,7 +55,6 @@ public class CityForecastInfo {
     public static class Main {
         @SerializedName ("temp")
         private double temp;
-
         @SerializedName("humidity")
         private int humidity;
 
@@ -81,11 +78,9 @@ public class CityForecastInfo {
 
         public Wind(double speed) {
             this.speed = speed;
-
         }
         public double getSpeed() {
             return speed;
         }
-
     }
 }

@@ -1,4 +1,4 @@
-package com.example.bookee.weatherinfo.findcity;
+package com.example.bookee.weatherinfo.search;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.WeatherRepository;
@@ -19,7 +19,6 @@ public class Model implements MvpContract.Model {
             public void onSuccess(CityForecastInfo info) {
                 callback.fetchNewWeather(info);
             }
-
             @Override
             public void onError(Throwable t) {
                 callback.error(t);

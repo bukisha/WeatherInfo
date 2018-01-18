@@ -1,7 +1,8 @@
-package com.example.bookee.weatherinfo.findcity;
+package com.example.bookee.weatherinfo.search;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
+
 import static com.example.bookee.weatherinfo.utils.Constants.CELSIOUS_FAHRENHEIT_DIFFERENCE;
 
 public class Presenter implements MvpContract.Presenter {
@@ -12,7 +13,6 @@ public class Presenter implements MvpContract.Presenter {
         RetrofitWeatherRepository repository = new RetrofitWeatherRepository();
         model = new Model(repository);
     }
-
     @Override
     public void bindView(MvpContract.View view) {
         this.view = view;
@@ -21,15 +21,12 @@ public class Presenter implements MvpContract.Presenter {
     private int prepareTempForDisplay(CityForecastInfo info) {
         return (int) (info.getMain().getTemp() - CELSIOUS_FAHRENHEIT_DIFFERENCE);
     }
-
     @Override
     public void getData(String desiredCity) {
-
         model.fetchData(desiredCity, new MvpContract.FetchNewCityWeatherInfoCallback() {
-
             @Override
             public void fetchNewWeather(CityForecastInfo info) {
-                if(view==null) return;
+                if (view == null) return;
                 if (info != null) {
                     String name = info.getName();
                     String temp = String.valueOf(prepareTempForDisplay(info));
@@ -41,15 +38,12 @@ public class Presenter implements MvpContract.Presenter {
                     view.errorHappened("porgesno uneto ime grada");
                 }
             }
-
             @Override
             public void error(Throwable t) {
-
                 view.errorHappened("GRESKA" + t.toString());
             }
         });
     }
-
     @Override
     public void unbindView() {
         view = null;

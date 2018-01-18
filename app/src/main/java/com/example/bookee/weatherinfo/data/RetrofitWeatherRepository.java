@@ -7,7 +7,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RetrofitWeatherRepository implements WeatherRepository{
-
     private WeatherApi api;
 
     public WeatherApi getApi() {
