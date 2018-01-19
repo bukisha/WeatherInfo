@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bookee.weatherinfo.R;
+import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.example.bookee.weatherinfo.search.SearchActivity;
 
 public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
@@ -20,7 +21,8 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private TextView windSpeed;
     private TextView humidity;
     private MvpContract.Presenter weatherPresenter;
-    private boolean newCityData = false;//todo zasto imas ovaj flag ovde?
+    private boolean newCityData = false;//todo zasto imas ovaj flag ovde
+                                            //todo RESPONSE da bih svaki put u onResume mogao da proverim da li startujem app ili u DetailsActivity dolazim iz searcha sa novim podacima
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                weatherPresenter.ActionSomethingIsClicked();
+                weatherPresenter.actionSomethingIsClicked();
             }
         });
     }
@@ -50,27 +52,13 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     }
     @Override
     protected void onResume() {
+        Log.i("DEBUG", "onRESUME");
         super.onResume();
         weatherPresenter.bindView(this);
         Intent intent=getIntent();
         Bundle initialWeatherData=intent.getExtras();
-        Log.i("DEBUG", "onRESUME");//todo u glavnom se ovi method logovi stavljajuj da budu prva linija metode. jer ako dodje do crash pre ove linije, onda ne znas da je app ikada usla u onResume()
         if (!newCityData) {
             weatherPresenter.displayNewData(initialWeatherData);
-        }
-    }
-
-    private void hideInfoFields(boolean hide) {//todo unused
-        if(hide) {
-            city.setVisibility(View.INVISIBLE);
-            temperature.setVisibility(View.INVISIBLE);
-            windSpeed.setVisibility(View.INVISIBLE);
-            humidity.setVisibility(View.INVISIBLE);
-        } else {
-            city.setVisibility(View.VISIBLE);
-            temperature.setVisibility(View.VISIBLE);
-            windSpeed.setVisibility(View.VISIBLE);
-            humidity.setVisibility(View.VISIBLE);
         }
     }
     @Override
@@ -78,7 +66,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
     @Override
-    public void startNewActivity() {//todo kasnije cemo pricati i o ovome. Realno, View ne bi trebalo da zna niti startuje activity. To je samo glupi View. Zamisli TextView koji startuje activity. Prosto nema smisla!!! Ali za sada teraj ovako.
+    public void startNewActivity() {
         Intent newCityIntent = new Intent(this, SearchActivity.class);
         startActivityForResult(newCityIntent, REQUEST_NEW_CITY);
     }
@@ -95,10 +83,10 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         }
     }
     @Override
-    public void updateWithNewData(String name, String temp, String wind, String humid) {
-        city.setText(name);
-        temperature.setText(temp);
-        windSpeed.setText(wind);
-        humidity.setText(humid);
+    public void updateWithNewData(TemperatureData temperatureData) {
+        city.setText(temperatureData.getName());
+        temperature.setText(temperatureData.getTemp());
+        windSpeed.setText(temperatureData.getWindSpeed());
+        humidity.setText(temperatureData.getHumidity());
     }
 }

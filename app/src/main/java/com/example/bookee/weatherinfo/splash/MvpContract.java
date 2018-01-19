@@ -1,6 +1,7 @@
 package com.example.bookee.weatherinfo.splash;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
+import com.example.bookee.weatherinfo.data.TemperatureData;
 
 public interface MvpContract {
 
@@ -10,7 +11,7 @@ public interface MvpContract {
     }
 
     interface View {
-        void sendWeatherInfoToMain(String city,String temp,String wind,String humidity);
+        void startMainWithInitialData(TemperatureData data,long fetchDuration);
         void error(String message);
     }
     interface Model  {
@@ -18,7 +19,7 @@ public interface MvpContract {
     }
 
     interface InitialCityForecastFetchCallback {
-        void onSuccess(CityForecastInfo info);
+        void onSuccess(CityForecastInfo info,long durationOfFetching);
         void onFailure(Throwable t);
     }
 }

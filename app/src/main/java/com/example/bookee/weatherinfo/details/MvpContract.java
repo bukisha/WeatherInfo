@@ -2,19 +2,22 @@ package com.example.bookee.weatherinfo.details;
 
 import android.os.Bundle;
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
+import com.example.bookee.weatherinfo.data.TemperatureData;
 
 interface MvpContract {
 
     interface View  {
         void startNewActivity();
-        void updateWithNewData(String name, String temp, String wind, String humid);
+        void updateWithNewData(TemperatureData temperatureData);
         void errorHappened(String s);
+
+
     }
 
     interface Presenter  {
         void bindView(View v);
         void unbindView();
-        void ActionSomethingIsClicked();
+        void actionSomethingIsClicked();
         void displayNewData(Bundle extras);
         void getData();
     }

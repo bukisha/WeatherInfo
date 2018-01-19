@@ -11,10 +11,13 @@ public class Model implements  MvpContract.Model {
     }
     @Override
     public void fetchInitialData(final MvpContract.InitialCityForecastFetchCallback callback) {
+        final long startFetchTime=System.currentTimeMillis();
         repository.fetchWeatherForCity("belgrade", new WeatherRepository.ForecastCallback() {
+
+            long fetchingDuration=System.currentTimeMillis()-startFetchTime;
             @Override
             public void onSuccess(CityForecastInfo info) {
-               callback.onSuccess(info);
+               callback.onSuccess(info,fetchingDuration);
             }
             @Override
             public void onError(Throwable t) {

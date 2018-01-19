@@ -3,7 +3,7 @@ package com.example.bookee.weatherinfo.search;
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 
-import static com.example.bookee.weatherinfo.utils.Constants.CELSIOUS_FAHRENHEIT_DIFFERENCE;
+import static com.example.bookee.weatherinfo.utils.Constants.CELSIUS_FAHRENHEIT_DIFFERENCE;
 
 public class Presenter implements MvpContract.Presenter {
     private MvpContract.Model model;
@@ -19,7 +19,7 @@ public class Presenter implements MvpContract.Presenter {
     }
 
     private int prepareTempForDisplay(CityForecastInfo info) {
-        return (int) (info.getMain().getTemp() - CELSIOUS_FAHRENHEIT_DIFFERENCE);
+        return (int) (info.getMain().getTemp() - CELSIUS_FAHRENHEIT_DIFFERENCE);
     }
     @Override
     public void getData(String desiredCity) {
