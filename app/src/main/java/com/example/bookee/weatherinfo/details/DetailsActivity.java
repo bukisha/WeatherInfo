@@ -1,14 +1,14 @@
 package com.example.bookee.weatherinfo.details;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.search.SearchActivity;
 
@@ -19,10 +19,8 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private TextView temperature;
     private TextView windSpeed;
     private TextView humidity;
-
-
     private MvpContract.Presenter weatherPresenter;
-    private boolean newCityData = false;
+    private boolean newCityData = false;//todo zasto imas ovaj flag ovde?
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +54,13 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         weatherPresenter.bindView(this);
         Intent intent=getIntent();
         Bundle initialWeatherData=intent.getExtras();
-        Log.i("DEBUG", "onRESUME");
+        Log.i("DEBUG", "onRESUME");//todo u glavnom se ovi method logovi stavljajuj da budu prva linija metode. jer ako dodje do crash pre ove linije, onda ne znas da je app ikada usla u onResume()
         if (!newCityData) {
             weatherPresenter.displayNewData(initialWeatherData);
         }
     }
 
-    private void hideInfoFields(boolean hide) {
+    private void hideInfoFields(boolean hide) {//todo unused
         if(hide) {
             city.setVisibility(View.INVISIBLE);
             temperature.setVisibility(View.INVISIBLE);
@@ -80,7 +78,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
     @Override
-    public void startNewActivity() {
+    public void startNewActivity() {//todo kasnije cemo pricati i o ovome. Realno, View ne bi trebalo da zna niti startuje activity. To je samo glupi View. Zamisli TextView koji startuje activity. Prosto nema smisla!!! Ali za sada teraj ovako.
         Intent newCityIntent = new Intent(this, SearchActivity.class);
         startActivityForResult(newCityIntent, REQUEST_NEW_CITY);
     }

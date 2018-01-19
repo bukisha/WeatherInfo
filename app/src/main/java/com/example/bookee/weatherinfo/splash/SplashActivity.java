@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.example.bookee.weatherinfo.details.DetailsActivity;
 
 public class SplashActivity extends AppCompatActivity implements MvpContract.View {
-
+    //todo a sta ovaj splash prikazuje? On bi trebalo da radi branding, da prikaze logo, neki progress bar....
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +17,7 @@ public class SplashActivity extends AppCompatActivity implements MvpContract.Vie
         presenter.fetchInitialWeather();
     }
     @Override
-    public void sendWeatherInfoToMain(String city, String temp, String wind, String humidity) {
+    public void sendWeatherInfoToMain(String city, String temp, String wind, String humidity) {//todo realno, ovo ne salje nikakve info vec otvara novi activity. Najbolje ga je i imenovati tako.
         Intent startApp=new Intent(this, DetailsActivity.class);
         Bundle initialData=new Bundle();
         initialData.putString("name",city);
