@@ -9,16 +9,20 @@ public class Model implements  MvpContract.Model {
     Model(WeatherRepository repository) {
         this.repository = repository;
     }
+
     @Override
     public void fetchInitialData(final MvpContract.InitialCityForecastFetchCallback callback) {
-        final long startFetchTime=System.currentTimeMillis();
+        final long startFetchTime = System.currentTimeMillis();
+
         repository.fetchWeatherForCity("belgrade", new WeatherRepository.ForecastCallback() {
 
-            long fetchingDuration=System.currentTimeMillis()-startFetchTime;
+            long fetchingDuration = System.currentTimeMillis() - startFetchTime;
+
             @Override
             public void onSuccess(CityForecastInfo info) {
-               callback.onSuccess(info,fetchingDuration);
+                callback.onSuccess(info, fetchingDuration);
             }
+
             @Override
             public void onError(Throwable t) {
                 callback.onFailure(t);
@@ -26,3 +30,4 @@ public class Model implements  MvpContract.Model {
         });
     }
 }
+

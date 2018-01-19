@@ -22,7 +22,6 @@ public class SplashActivity extends AppCompatActivity implements MvpContract.Vie
     public void startMainWithInitialData(TemperatureData initialTemperatureData, final long fetchDuration) {
         final Intent startApp=new Intent(this, DetailsActivity.class);
 
-
         Bundle initialData=new Bundle();
         initialData.putString("name",initialTemperatureData.getName());
         initialData.putString("temp",initialTemperatureData.getTemp());
@@ -42,12 +41,9 @@ public class SplashActivity extends AppCompatActivity implements MvpContract.Vie
                     startActivity(startApp);
                     finish();
                 } else {
-                    try {
-                        sleep(10000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    startActivity(startApp);
+                    finish();
                     }
-                }
             }
         }).start();
 

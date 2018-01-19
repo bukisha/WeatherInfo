@@ -44,7 +44,6 @@ public class Presenter implements MvpContract.Presenter {
             }
         });
     }
-
     @Override
     public void bindView(MvpContract.View view) {
         this.view=view;

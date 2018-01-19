@@ -10,8 +10,6 @@ interface MvpContract {
         void startNewActivity();
         void updateWithNewData(TemperatureData temperatureData);
         void errorHappened(String s);
-
-
     }
 
     interface Presenter  {

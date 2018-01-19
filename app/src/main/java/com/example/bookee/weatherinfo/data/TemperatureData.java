@@ -1,10 +1,8 @@
 package com.example.bookee.weatherinfo.data;
 
-
 import android.os.Bundle;
 
-
-  public  class TemperatureData {
+public  class TemperatureData {
         private String name;
         private String temp;
         private String windSpeed;
