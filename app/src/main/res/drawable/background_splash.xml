@@ -8,5 +8,5 @@
             android:src="@drawable/splash_picture"
             android:gravity="center"/>
     </item>
-    
+
 </layer-list>

@@ -19,7 +19,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private TextView temperature;
     private TextView windSpeed;
     private TextView humidity;
-    private ProgressBar progressBar;
+
 
     private MvpContract.Presenter weatherPresenter;
     private boolean newCityData = false;
@@ -33,9 +33,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         temperature = findViewById(R.id.current_temp);
         windSpeed = findViewById(R.id.wind_info);
         humidity = findViewById(R.id.humidity_info);
-        progressBar = findViewById(R.id.progressBar);
 
-        progressBar.setVisibility(View.INVISIBLE);
         weatherPresenter = new Presenter();
 
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
@@ -56,11 +54,11 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     protected void onResume() {
         super.onResume();
         weatherPresenter.bindView(this);
+        Intent intent=getIntent();
+        Bundle initialWeatherData=intent.getExtras();
         Log.i("DEBUG", "onRESUME");
         if (!newCityData) {
-            progressBar.setVisibility(View.VISIBLE);
-            hideInfoFields(true);
-            weatherPresenter.getData();
+            weatherPresenter.displayNewData(initialWeatherData);
         }
     }
 
@@ -104,7 +102,5 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         temperature.setText(temp);
         windSpeed.setText(wind);
         humidity.setText(humid);
-        progressBar.setVisibility(View.INVISIBLE);
-        hideInfoFields(false);
     }
 }
