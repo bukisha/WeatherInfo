@@ -1,7 +1,5 @@
 package com.example.bookee.weatherinfo.splash;
 
-import android.os.Bundle;
-
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 import com.example.bookee.weatherinfo.data.WeatherRepository;
