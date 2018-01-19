@@ -3,6 +3,7 @@ package com.example.bookee.weatherinfo.splash;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.bookee.weatherinfo.details.DetailsActivity;
 
@@ -27,8 +28,10 @@ public class SplashActivity extends AppCompatActivity implements MvpContract.Vie
         startActivity(startApp);
         finish();
     }
+
     @Override
     public void error(String message) {
-
+        Toast.makeText(this,"Aplikacija nije startovana",Toast.LENGTH_LONG).show();
     }
+
 }
