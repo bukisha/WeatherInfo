@@ -1,7 +1,5 @@
 package com.example.bookee.weatherinfo.splash;
 
-
-
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
 
 public interface MvpContract {

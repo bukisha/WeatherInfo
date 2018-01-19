@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import com.example.bookee.weatherinfo.details.DetailsActivity;
 
+import static java.lang.Thread.sleep;
+
 public class SplashActivity extends AppCompatActivity implements MvpContract.View {
 
     @Override
@@ -18,12 +20,13 @@ public class SplashActivity extends AppCompatActivity implements MvpContract.Vie
     }
     @Override
     public void sendWeatherInfoToMain(String city, String temp, String wind, String humidity) {
-        Intent startApp=new Intent(this, DetailsActivity.class);
+        final Intent startApp=new Intent(this, DetailsActivity.class);
         Bundle initialData=new Bundle();
         initialData.putString("name",city);
         initialData.putString("temp",temp);
         initialData.putString("wind",wind);
         initialData.putString("humid",humidity);
+
         startApp.putExtras(initialData);
         startActivity(startApp);
         finish();
