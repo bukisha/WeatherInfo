@@ -46,8 +46,6 @@ public class SplashActivity extends AppCompatActivity implements MvpContract.Vie
                     }
             }
         }).start();
-
-
     }
     @Override
     public void error(String message) {
