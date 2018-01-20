@@ -113,8 +113,8 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
                         System.exit(0);
                     }
                 });
-        AlertDialog ad=builder.create();
-        ad.show();
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
     }
 }
 
