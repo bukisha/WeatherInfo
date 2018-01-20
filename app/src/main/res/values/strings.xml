@@ -7,4 +7,7 @@
     <string name="metres_per_second">" m/s"</string>
     <string name="percentage">" %"</string>
     <string name="enter_name_of_the_city">enter name of the city</string>
+    <string name="retry">Retry</string>
+    <string name="quit">Quit</string>
+    <string name="errorTitle">Error Happened</string>
 </resources>
