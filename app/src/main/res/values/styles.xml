@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Base application theme. -->
@@ -11,4 +12,16 @@
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
+
+    <style name="AlertDialogTheme">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:background">@color/colorPrimary</item>
+       
+        <item name="android:buttonStyle">@style/AlertDialogCustomButtonStyle</item>
+    </style>
+
+    <style name="AlertDialogCustomButtonStyle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

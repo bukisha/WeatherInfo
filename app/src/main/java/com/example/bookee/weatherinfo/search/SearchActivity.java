@@ -1,10 +1,13 @@
 package com.example.bookee.weatherinfo.search;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -13,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.example.bookee.weatherinfo.R;
 
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
@@ -85,13 +87,34 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         setResult(RESULT_OK,i);
         progressBar.setVisibility(View.INVISIBLE);
         finish();
-
     }
     @Override
     public void errorHappened(String errorMessage) {
-        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_LONG).show();
         progressBar.setVisibility(View.INVISIBLE);
         cityName.setVisibility(View.VISIBLE);
+        buildAlertDialog(errorMessage);
+    }
+
+    private void buildAlertDialog(String message) {
+        AlertDialog.Builder builder=new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogTheme));
+        builder.setTitle(R.string.errorTitle)
+                .setMessage(message)
+                .setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                     onResume();
+                    }
+                })
+                .setNegativeButton(R.string.quit, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        moveTaskToBack(true);
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                        System.exit(0);
+                    }
+                });
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
     }
 }
 
