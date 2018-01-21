@@ -35,7 +35,7 @@ public class Presenter implements MvpContract.Presenter {
 
                     view.receiveDataFromPresenter(name, temp, wind, humidity);
                 } else {
-                    view.errorHappened("porgesno uneto ime grada");
+                    view.errorHappened("Porgesno uneto ime grada");
                 }
             }
             @Override

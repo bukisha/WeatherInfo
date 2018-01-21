@@ -21,12 +21,12 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private TextView windSpeed;
     private TextView humidity;
     private MvpContract.Presenter weatherPresenter;
-    private boolean newCityData = false;//todo zasto imas ovaj flag ovde
+    private boolean newCityData;//todo zasto imas ovaj flag ovde
                                             //todo RESPONSE da bih svaki put u onResume mogao da proverim da li startujem app ili u DetailsActivity dolazim iz searcha sa novim podacima
 
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         Log.i("DEBUG", "onCREATE");
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.details_activity);
 
         city = findViewById(R.id.current_city);
@@ -43,11 +43,12 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
                 weatherPresenter.actionSomethingIsClicked();
             }
         });
+        newCityData=false;
     }
     @Override
     protected void onPause() {
-        super.onPause();
         Log.i("DEBUG", "onPAUSE");
+        super.onPause();
         weatherPresenter.unbindView();
     }
     @Override
@@ -55,9 +56,10 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         Log.i("DEBUG", "onRESUME");
         super.onResume();
         weatherPresenter.bindView(this);
-        Intent intent=getIntent();
-        Bundle initialWeatherData=intent.getExtras();
+
         if (!newCityData) {
+            Intent intent=getIntent();
+            Bundle initialWeatherData=intent.getExtras();
             weatherPresenter.displayNewData(initialWeatherData);
         }
     }
