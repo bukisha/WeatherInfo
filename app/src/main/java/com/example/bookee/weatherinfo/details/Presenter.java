@@ -22,24 +22,6 @@ class Presenter implements MvpContract.Presenter {
     public void bindView(MvpContract.View view) {
         this.view = view;
     }
-
- /*   public void getData() {
-        model.fetchInitialData(new MvpContract.InitialCityForecastFetchCallback() {
-            @Override
-            public void onSuccess(TemperatureData initialTemperatureData) {
-                if (view == null) return;
-                if(initialTemperatureData!=null) {
-                    view.updateWithNewData(initialTemperatureData);
-                } else {
-                    view.errorHappened("Doslo je do greske");
-                }
-            }
-            @Override
-            public void error(Throwable t) {
-                view.errorHappened("GRESKA" + t.toString());
-            }
-        });
-    }*/
     @Override
     public void unbindView() {
         view = null;

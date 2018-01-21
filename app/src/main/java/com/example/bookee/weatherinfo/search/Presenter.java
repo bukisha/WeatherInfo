@@ -25,12 +25,12 @@ public class Presenter implements MvpContract.Presenter {
                 if (newTemperatureData != null) {
                     view.receiveDataFromPresenter(newTemperatureData);
                 } else {
-                    view.errorHappened("Pogresno ime grada");
+                    view.errorHappened("Pogresno uneto ime grada");
                 }
             }
             @Override
             public void error(Throwable t) {
-                view.errorHappened("GRESKA" + t.toString());
+                view.errorHappened(t.toString());
             }
         });
     }
