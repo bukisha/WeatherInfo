@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 
@@ -74,13 +76,18 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     }
     @Override
     public void receiveDataFromPresenter(TemperatureData newTemperature) {
-
+        if(newTemperature!=null) {
         Intent i = new Intent();
 
         i.putExtra("newTemp",newTemperature);
         setResult(RESULT_OK,i);
         progressBar.setVisibility(View.INVISIBLE);
         finish();
+        } else {
+            progressBar.setVisibility(View.INVISIBLE);
+            cityName.setVisibility(View.VISIBLE);
+            Toast.makeText(this,"Pogresno uneto ime grada",Toast.LENGTH_LONG).show();
+        }
     }
     @Override
     public void errorHappened(String errorMessage) {

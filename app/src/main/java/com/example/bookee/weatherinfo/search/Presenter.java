@@ -22,15 +22,12 @@ public class Presenter implements MvpContract.Presenter {
             @Override
             public void fetchNewWeather(TemperatureData newTemperatureData) {
                 if (view == null) return;
-                if (newTemperatureData != null) {
-                    view.receiveDataFromPresenter(newTemperatureData);
-                } else {
-                    view.errorHappened("Pogresno uneto ime grada");
-                }
+                view.receiveDataFromPresenter(newTemperatureData);
             }
             @Override
             public void error(Throwable t) {
-                view.errorHappened(t.toString());
+                if(view == null) return;
+                view.errorHappened("No internet connection");
             }
         });
     }
