@@ -19,8 +19,8 @@ public class TemperatureData implements Parcelable {
     private String temp;
     private String windSpeed;
     private String humidity;
-
-    public void setName(String name) {
+//    might be usefull latter in development
+/*    public void setName(String name) {
         this.name = name;
     }
 
@@ -34,7 +34,7 @@ public class TemperatureData implements Parcelable {
 
     public void setHumidity(String humidity) {
         this.humidity = humidity;
-    }
+    }*/
 
     public TemperatureData(String name,String temperature,String windSpeed,String humidity) {
             this.name=name;

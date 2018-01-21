@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.View;
@@ -86,7 +85,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         } else {
             progressBar.setVisibility(View.INVISIBLE);
             cityName.setVisibility(View.VISIBLE);
-            Toast.makeText(this,"Pogresno uneto ime grada",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,R.string.errorWrongCityName,Toast.LENGTH_LONG).show();
         }
     }
     @Override
@@ -103,7 +102,9 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
                 .setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                     onResume();
+                        Intent reset=getIntent();
+                        finish();
+                        startActivity(reset);
                     }
                 })
                 .setNegativeButton(R.string.quit, new DialogInterface.OnClickListener() {

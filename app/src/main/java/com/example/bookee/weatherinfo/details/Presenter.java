@@ -1,23 +1,13 @@
 package com.example.bookee.weatherinfo.details;
 
-import android.os.Bundle;
-
-import com.example.bookee.weatherinfo.data.CityForecastInfo;
-import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 import com.example.bookee.weatherinfo.data.TemperatureData;
-import com.example.bookee.weatherinfo.data.WeatherRepository;
-
-import static com.example.bookee.weatherinfo.utils.Constants.CELSIUS_FAHRENHEIT_DIFFERENCE;
 
 class Presenter implements MvpContract.Presenter {
 
     private MvpContract.View view;
-    private MvpContract.Model model;
+    //private MvpContract.Model model;
 
-    Presenter() {
-        WeatherRepository repository = new RetrofitWeatherRepository();
-        model = new Model(repository);
-    }
+    Presenter() {}
     @Override
     public void bindView(MvpContract.View view) {
         this.view = view;

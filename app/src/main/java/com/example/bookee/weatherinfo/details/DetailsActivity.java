@@ -60,7 +60,10 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         if (!newCityData) {
             Intent intent=getIntent();
             Bundle initBundle=intent.getExtras();
-            TemperatureData initTemperature=initBundle.getParcelable("initialData");
+            TemperatureData initTemperature= null;
+            if (initBundle != null) {
+                initTemperature = initBundle.getParcelable("initialData");
+            }
             weatherPresenter.displayNewData(initTemperature);
         }
     }
@@ -79,7 +82,10 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         if (resultCode == RESULT_OK && requestCode == REQUEST_NEW_CITY) {
             Bundle newCityWeather = data.getExtras();
             newCityData = true;
-            TemperatureData newTemperature=newCityWeather.getParcelable("newTemp");
+            TemperatureData newTemperature= null;
+            if (newCityWeather != null) {
+                newTemperature = newCityWeather.getParcelable("newTemp");
+            }
             weatherPresenter.bindView(this);
             weatherPresenter.displayNewData(newTemperature);
         } else {

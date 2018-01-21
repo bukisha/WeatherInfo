@@ -1,7 +1,5 @@
 package com.example.bookee.weatherinfo.details;
 
-import android.os.Bundle;
-import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 
 interface MvpContract {

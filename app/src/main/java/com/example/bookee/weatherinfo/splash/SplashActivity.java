@@ -5,13 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
-
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.example.bookee.weatherinfo.details.DetailsActivity;
-
 import static java.lang.Thread.sleep;
 
 public class SplashActivity extends AppCompatActivity implements MvpContract.View {
