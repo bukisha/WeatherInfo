@@ -16,42 +16,32 @@ public class Presenter implements MvpContract.Presenter {
         WeatherRepository repository = new RetrofitWeatherRepository();
         model = new Model(repository);
     }
+
     @Override
     public void fetchInitialWeather() {
         model.fetchInitialData(new MvpContract.InitialCityForecastFetchCallback() {
             @Override
-            public void onSuccess(CityForecastInfo info,long fetchDuration) {
+            public void onSuccess(TemperatureData initTemp, long fetchDuration) {
                 if (view == null) return;
-                if (info != null) {
-                    String name = info.getName();
-                    String temp = String.valueOf(prepareTempForDisplay(info));
-                    String wind = String.valueOf(info.getWind().getSpeed());
-                    String humidity = String.valueOf(info.getMain().getHumidity());
-                    Bundle initData=new Bundle();
-                    initData.putString("name",name);
-                    initData.putString("temp",temp);
-                    initData.putString("wind",wind);
-                    initData.putString("humid",humidity);
-
-                    view.startMainWithInitialData(new TemperatureData (initData),fetchDuration);
+                if (initTemp != null) {
+                    view.startMainWithInitialData(initTemp, fetchDuration);
                 } else {
                     view.error("Doslo je do greske");
                 }
             }
+
             @Override
             public void onFailure(Throwable t) {
                 view.error("GRESKA" + t.toString());
             }
         });
     }
+
     @Override
     public void bindView(MvpContract.View view) {
-        this.view=view;
+        this.view = view;
     }
-
-    private int prepareTempForDisplay(CityForecastInfo info) {
-        return (int) (info.getMain().getTemp() - CELSIUS_FAHRENHEIT_DIFFERENCE);
-    }
-
 }
+
+
 

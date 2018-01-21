@@ -19,7 +19,7 @@ public interface MvpContract {
     }
 
     interface InitialCityForecastFetchCallback {
-        void onSuccess(CityForecastInfo info,long durationOfFetching);
+        void onSuccess(TemperatureData initTempData,long durationOfFetching);
         void onFailure(Throwable t);
     }
 }

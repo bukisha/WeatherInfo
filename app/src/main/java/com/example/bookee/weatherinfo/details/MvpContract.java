@@ -16,8 +16,7 @@ interface MvpContract {
         void bindView(View v);
         void unbindView();
         void actionSomethingIsClicked();
-        void displayNewData(Bundle extras);
-        void getData();
+        void displayNewData(TemperatureData neTemperatureData);
     }
 
     interface Model  {
@@ -25,7 +24,7 @@ interface MvpContract {
     }
 
     interface InitialCityForecastFetchCallback {
-        void onSuccess(CityForecastInfo info);
+        void onSuccess(TemperatureData temperatureData);
         void error(Throwable t);
     }
 }

@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.example.bookee.weatherinfo.R;
+import com.example.bookee.weatherinfo.data.TemperatureData;
 
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
 
@@ -65,7 +66,6 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     protected void onResume() {
         super.onResume();
         presenter.bindView(this);
-
     }
     @Override
     protected void onPause() {
@@ -73,17 +73,11 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         presenter.unbindView();
     }
     @Override
-    public void receiveDataFromPresenter(String name,String temp,String windSpeed,String humidity) {
+    public void receiveDataFromPresenter(TemperatureData newTemperature) {
 
         Intent i = new Intent();
-        Bundle extraData = new Bundle();
 
-        extraData.putString("name", name);
-        extraData.putString("temp", temp);
-        extraData.putString("wind", windSpeed);
-        extraData.putString("humid", humidity);
-        Log.i("DEBUG2",String.valueOf(extraData.isEmpty()));
-        i.putExtras(extraData);
+        i.putExtra("newTemp",newTemperature);
         setResult(RESULT_OK,i);
         progressBar.setVisibility(View.INVISIBLE);
         finish();

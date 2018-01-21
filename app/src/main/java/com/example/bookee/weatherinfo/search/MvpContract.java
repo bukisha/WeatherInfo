@@ -1,10 +1,10 @@
 package com.example.bookee.weatherinfo.search;
-import com.example.bookee.weatherinfo.data.CityForecastInfo;
+import com.example.bookee.weatherinfo.data.TemperatureData;
 
 interface MvpContract {
 
    interface View  {
-       void receiveDataFromPresenter(String name,String temp,String windSpeed,String humidity);
+       void receiveDataFromPresenter(TemperatureData data);
        void errorHappened(String message);
    }
     interface Presenter  {
@@ -16,7 +16,7 @@ interface MvpContract {
        void fetchData(String city,FetchNewCityWeatherInfoCallback callback);
    }
     interface FetchNewCityWeatherInfoCallback {
-       void fetchNewWeather( CityForecastInfo info);
+       void fetchNewWeather( TemperatureData temperatureData);
        void error(Throwable t);
    }
 }

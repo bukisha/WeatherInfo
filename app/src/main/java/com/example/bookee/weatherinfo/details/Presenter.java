@@ -23,28 +23,13 @@ class Presenter implements MvpContract.Presenter {
         this.view = view;
     }
 
-    private int prepareTempForDisplay(CityForecastInfo info) {
-        return (int) (info.getMain().getTemp() - CELSIUS_FAHRENHEIT_DIFFERENCE);
-    }
-
-    public void getData() {
+ /*   public void getData() {
         model.fetchInitialData(new MvpContract.InitialCityForecastFetchCallback() {
             @Override
-            public void onSuccess(CityForecastInfo info) {
+            public void onSuccess(TemperatureData initialTemperatureData) {
                 if (view == null) return;
-                if (info != null) {
-                    String name = info.getName();
-                    String temp = String.valueOf(prepareTempForDisplay(info));
-                    String wind = String.valueOf(info.getWind().getSpeed());
-                    String humidity = String.valueOf(info.getMain().getHumidity());
-
-                    Bundle weatherData=new Bundle();
-                    weatherData.putString("name",name);
-                    weatherData.putString("temp",temp);
-                    weatherData.putString("wind",wind);
-                    weatherData.putString("humid",humidity);
-
-                    view.updateWithNewData(new TemperatureData(weatherData));
+                if(initialTemperatureData!=null) {
+                    view.updateWithNewData(initialTemperatureData);
                 } else {
                     view.errorHappened("Doslo je do greske");
                 }
@@ -54,7 +39,7 @@ class Presenter implements MvpContract.Presenter {
                 view.errorHappened("GRESKA" + t.toString());
             }
         });
-    }
+    }*/
     @Override
     public void unbindView() {
         view = null;
@@ -64,10 +49,10 @@ class Presenter implements MvpContract.Presenter {
         view.startNewActivity();
     }
     @Override
-    public void displayNewData(Bundle extras) {
+    public void displayNewData(TemperatureData newTemperature) {
     if (view == null) return;
-    if (!extras.isEmpty()) {
-        view.updateWithNewData(new TemperatureData(extras));
+    if (newTemperature!=null) {
+        view.updateWithNewData(newTemperature);
     } else {
         view.errorHappened("Pogresno uneto ime grada");
     }

@@ -1,7 +1,10 @@
 package com.example.bookee.weatherinfo.splash;
 
 import com.example.bookee.weatherinfo.data.CityForecastInfo;
+import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.example.bookee.weatherinfo.data.WeatherRepository;
+
+import static com.example.bookee.weatherinfo.utils.Constants.CELSIUS_FAHRENHEIT_DIFFERENCE;
 
 public class Model implements  MvpContract.Model {
     private WeatherRepository repository;
@@ -20,7 +23,12 @@ public class Model implements  MvpContract.Model {
 
             @Override
             public void onSuccess(CityForecastInfo info) {
-                callback.onSuccess(info, fetchingDuration);
+                String temperature=String.valueOf(prepareTempForDisplay(info));
+                String windSpeed=String.valueOf(info.getWind().getSpeed());
+                String humidity=String.valueOf(info.getMain().getHumidity());
+
+                TemperatureData initialTemperatureData=new TemperatureData(info.getName(),temperature,windSpeed,humidity);
+                callback.onSuccess(initialTemperatureData, fetchingDuration);
             }
 
             @Override
@@ -28,6 +36,10 @@ public class Model implements  MvpContract.Model {
                 callback.onFailure(t);
             }
         });
+    }
+
+    private int prepareTempForDisplay(CityForecastInfo info) {
+        return (int) (info.getMain().getTemp()-CELSIUS_FAHRENHEIT_DIFFERENCE);
     }
 }
 

@@ -10,4 +10,7 @@
     <string name="retry">Retry</string>
     <string name="quit">Quit</string>
     <string name="errorTitle">Error Happened</string>
+
+    <string name="errorAppCrashOnLaunch">Aplikacija nije startovana</string>
+    <string name="errorWrongCityName">Pogresno uneto ime grada</string>
 </resources>
