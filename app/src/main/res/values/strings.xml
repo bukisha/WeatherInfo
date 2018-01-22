@@ -13,4 +13,6 @@
 
     <string name="errorAppCrashOnLaunch">Aplikacija nije startovana</string>
     <string name="errorWrongCityName">Pogresno uneto ime grada</string>
+    <string name="globalCityListName">globalCityList</string>
+    <string name="show_all_cities">show cities</string>
 </resources>

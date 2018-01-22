@@ -1,4 +1,8 @@
 package com.example.bookee.weatherinfo.search;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+
 import com.example.bookee.weatherinfo.data.TemperatureData;
 
 interface MvpContract {
@@ -11,7 +15,9 @@ interface MvpContract {
        void bindView(View v);
        void unbindView();
        void getData(String desiredCity);
-   }
+
+        void menuAction(AppCompatActivity searchActivity, MenuItem item, PresenterActivityCallback presenterActivityCallback);
+    }
     interface Model {
        void fetchData(String city,FetchNewCityWeatherInfoCallback callback);
    }
@@ -19,4 +25,8 @@ interface MvpContract {
        void fetchNewWeather( TemperatureData temperatureData);
        void error(Throwable t);
    }
+
+    public interface PresenterActivityCallback {
+       void openActivity(Intent i);
+    }
 }

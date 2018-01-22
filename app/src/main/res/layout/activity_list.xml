@@ -8,10 +8,22 @@
     android:layout_height="match_parent"
     android:scrollbars="vertical"
     tools:context="com.example.bookee.weatherinfo.list.ListActivity">
-    <ListView
-        android:layout_width="wrap_content"
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/white"
         android:layout_height="wrap_content"
-        android:id="@+id/city_list">
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:visibility="visible" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@android:id/list"
+        android:layout_below="@+id/toolbar">
 
     </ListView>
 </android.widget.RelativeLayout>

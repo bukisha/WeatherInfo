@@ -1,17 +1,24 @@
 package com.example.bookee.weatherinfo.details;
 
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+
 import com.example.bookee.weatherinfo.data.TemperatureData;
+import com.example.bookee.weatherinfo.list.ListActivity;
 
 class Presenter implements MvpContract.Presenter {
 
     private MvpContract.View view;
     //private MvpContract.Model model;
 
-    Presenter() {}
+    Presenter() {
+    }
+
     @Override
     public void bindView(MvpContract.View view) {
         this.view = view;
     }
+
     @Override
     public void unbindView() {
         view = null;
@@ -22,17 +29,25 @@ class Presenter implements MvpContract.Presenter {
     }
     @Override
     public void displayNewData(TemperatureData newTemperature) {
-    if (view == null) return;
-    if (newTemperature!=null) {
-        view.updateWithNewData(newTemperature);
-    } else {
-        view.errorHappened("Pogresno uneto ime grada");
+        if (view == null) return;
+        if (newTemperature != null) {
+            view.updateWithNewData(newTemperature);
+        } else {
+            view.errorHappened("Pogresno uneto ime grada");
+        }
+    }
+
+    @Override
+    public void menuAction(AppCompatActivity detailsActivity, int item, MvpContract.PresenterActivityCallback callback) {
+        switch(item) {
+            case 0: {
+                Intent openList=new  Intent(detailsActivity,ListActivity.class);
+                callback.openActivity(openList);
+            }
+        }
     }
 }
 
 
 
 
-
-
-}
