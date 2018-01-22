@@ -42,4 +42,8 @@ public class ListActivity extends android.app.ListActivity implements MvpContrac
         listView.setAdapter(adapter);
     }
 
+    @Override
+    public void listItemClicked() {
+        //TODO when i am done with my lunch and smoke
+    }
 }
