@@ -20,7 +20,6 @@ public class Presenter implements MvpContract.Presenter {
     public void bindView(MvpContract.View view) {
         this.view = view;
     }
-
     @Override
     public void getData(String desiredCity) {
         model.fetchData(desiredCity, new MvpContract.FetchNewCityWeatherInfoCallback() {
@@ -36,14 +35,11 @@ public class Presenter implements MvpContract.Presenter {
             }
         });
     }
-
-
     @Override
     public void menuAction(AppCompatActivity searchActivity, MenuItem item, MvpContract.PresenterActivityCallback callback) {
         Intent openList=new Intent(searchActivity, ListActivity.class);
         callback.openActivity(openList);
     }
-
     @Override
     public void unbindView() {
         view = null;

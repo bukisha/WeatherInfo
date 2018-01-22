@@ -36,7 +36,6 @@ class Presenter implements MvpContract.Presenter {
             view.errorHappened("Invalid city name");
         }
     }
-
     @Override
     public void menuAction(AppCompatActivity detailsActivity, int item, MvpContract.PresenterActivityCallback callback) {
         switch(item) {

@@ -15,7 +15,6 @@ interface MvpContract {
        void bindView(View v);
        void unbindView();
        void getData(String desiredCity);
-
         void menuAction(AppCompatActivity searchActivity, MenuItem item, PresenterActivityCallback presenterActivityCallback);
     }
     interface Model {
@@ -26,7 +25,7 @@ interface MvpContract {
        void error(String message);
    }
 
-    public interface PresenterActivityCallback {
+    interface PresenterActivityCallback {
        void openActivity(Intent i);
     }
 }

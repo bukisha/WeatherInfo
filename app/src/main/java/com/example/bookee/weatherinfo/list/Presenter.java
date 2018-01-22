@@ -1,13 +1,10 @@
 package com.example.bookee.weatherinfo.list;
 
-import android.content.Context;
 import android.content.Intent;
-
 import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.example.bookee.weatherinfo.details.DetailsActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 

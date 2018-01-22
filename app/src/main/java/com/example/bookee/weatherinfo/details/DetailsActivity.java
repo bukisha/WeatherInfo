@@ -1,10 +1,8 @@
 package com.example.bookee.weatherinfo.details;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -13,13 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
-
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.example.bookee.weatherinfo.search.SearchActivity;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 
 public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
     private static final int REQUEST_NEW_CITY = 2;
@@ -47,8 +42,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
                     @Override
                     public void openActivity(Intent i) {
                     startActivity(i);
-                    //TODO proveri dal zadovoljava spec
-                    finish();
+                        finish();
                     }
                 });
             return true;
@@ -128,14 +122,13 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
             }
             weatherPresenter.bindView(this);
             weatherPresenter.displayNewData(newTemperature);
-        } else {
-            if(resultCode==RESULT_CANCELED) {
+        } else if(resultCode==RESULT_CANCELED) {
                 finish();
             } else {
                 errorHappened("nisu primljeni novi podaci");
             }
         }
-    }
+
 
     @Override
     public void updateWithNewData(TemperatureData temperatureData) {

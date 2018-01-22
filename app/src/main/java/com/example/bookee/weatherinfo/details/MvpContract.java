@@ -18,7 +18,6 @@ interface MvpContract {
         void unbindView();
         void actionSomethingIsClicked();
         void displayNewData(TemperatureData neTemperatureData);
-
         void menuAction(AppCompatActivity detailsActivity, int item, PresenterActivityCallback callback);
     }
 

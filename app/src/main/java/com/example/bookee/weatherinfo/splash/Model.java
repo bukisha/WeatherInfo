@@ -20,7 +20,6 @@ public class Model implements  MvpContract.Model {
         repository.fetchWeatherForCity("belgrade", new WeatherRepository.ForecastCallback() {
 
             long fetchingDuration = System.currentTimeMillis() - startFetchTime;
-
             @Override
             public void onSuccess(CityForecastInfo info) {
                 String temperature=String.valueOf(prepareTempForDisplay(info));
@@ -30,7 +29,6 @@ public class Model implements  MvpContract.Model {
                 TemperatureData initialTemperatureData=new TemperatureData(info.getName(),temperature,windSpeed,humidity);
                 callback.onSuccess(initialTemperatureData, fetchingDuration);
             }
-
             @Override
             public void onError(Throwable t) {
                 callback.onFailure(t);

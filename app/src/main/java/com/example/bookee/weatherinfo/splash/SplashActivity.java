@@ -20,6 +20,7 @@ import static java.lang.Thread.sleep;
 
 public class SplashActivity extends AppCompatActivity implements MvpContract.View {
     private MvpContract.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

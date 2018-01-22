@@ -7,16 +7,8 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-
-
 import com.example.bookee.weatherinfo.R;
-import com.example.bookee.weatherinfo.data.TemperatureData;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ListActivity extends android.app.ListActivity implements MvpContract.View {
@@ -40,12 +32,11 @@ public class ListActivity extends android.app.ListActivity implements MvpContrac
                     }
                     @Override
                     public void onFailure() {
-                        //TODO what errors can happen here?!?!
+                        //TODO what errors can happen here?!?! think about it
                     }
                 });
             }
         });
-
     }
     @Override
     protected void onResume() {

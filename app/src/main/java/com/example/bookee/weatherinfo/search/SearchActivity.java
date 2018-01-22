@@ -23,12 +23,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -38,11 +36,10 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     private ProgressBar progressBar;
 
     private MvpContract.Presenter presenter;
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu,menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu, menu);
         return true;
     }
     @Override
@@ -51,7 +48,6 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
             @Override
             public void openActivity(Intent i) {
                 startActivity(i);
-                //TODO proveri
                 finish();
             }
         });
@@ -61,13 +57,13 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_city);
-        Toolbar toolbar=findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         Button getForecast;
         getForecast = findViewById(R.id.get_forecast_button);
         cityName = findViewById(R.id.desired_city_name);
-        progressBar=findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
 
         presenter = new Presenter();
 
@@ -75,14 +71,14 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (imm != null) {
                         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     }
                     return true;
                 }
                 return false;
-        }
+            }
         });
         getForecast.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,39 +103,38 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     }
     @Override
     public void receiveDataFromPresenter(TemperatureData newTemperature) {
-        if(newTemperature!=null) {
+        if (newTemperature != null) {
 
             addCityTemperatureToGlobal(newTemperature);
 
             Intent i = new Intent();
-            i.putExtra("newTemp",newTemperature);
-        setResult(RESULT_OK,i);
-        progressBar.setVisibility(View.INVISIBLE);
-        finish();
+            i.putExtra("newTemp", newTemperature);
+            setResult(RESULT_OK, i);
+            progressBar.setVisibility(View.INVISIBLE);
+            finish();
         } else {
             progressBar.setVisibility(View.INVISIBLE);
             cityName.setVisibility(View.VISIBLE);
-            Toast.makeText(this,R.string.errorWrongCityName,Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.errorWrongCityName, Toast.LENGTH_LONG).show();
         }
     }
-
     @SuppressLint("ApplySharedPref")
     private void addCityTemperatureToGlobal(TemperatureData newTemperature) {
-        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        Gson gson=new Gson();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
 
-        String oldGlobalCityList=sharedPreferences.getString(String.valueOf(R.string.globalCityListName),"");
-        Type type=new TypeToken<ArrayList<TemperatureData>>(){}.getType();
-        ArrayList<TemperatureData> globalCityList= gson.fromJson(oldGlobalCityList,type);
+        String oldGlobalCityList = sharedPreferences.getString(String.valueOf(R.string.globalCityListName), "");
+        Type type = new TypeToken<ArrayList<TemperatureData>>() {
+        }.getType();
+        ArrayList<TemperatureData> globalCityList = gson.fromJson(oldGlobalCityList, type);
 
         globalCityList.add(newTemperature);
 
-        String newGlobalCityList=gson.toJson(globalCityList);
-        editor.putString(String.valueOf(R.string.globalCityListName),newGlobalCityList);
+        String newGlobalCityList = gson.toJson(globalCityList);
+        editor.putString(String.valueOf(R.string.globalCityListName), newGlobalCityList);
         editor.commit();
     }
-
     @Override
     public void errorHappened(String errorMessage) {
         progressBar.setVisibility(View.INVISIBLE);
@@ -148,13 +143,13 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     }
 
     private void showErrorDialog(String message) {
-        AlertDialog.Builder builder=new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.AlertDialogTheme));
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogTheme));
         builder.setTitle(R.string.errorTitle)
                 .setMessage(message)
                 .setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent reset=getIntent();
+                        Intent reset = getIntent();
                         finish();
                         startActivity(reset);
                     }
@@ -167,7 +162,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
                         System.exit(0);
                     }
                 }).create()
-                  .show();
+                .show();
     }
 }
 
