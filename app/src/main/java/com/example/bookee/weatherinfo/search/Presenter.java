@@ -32,7 +32,8 @@ public class Presenter implements MvpContract.Presenter {
             @Override
             public void error(Throwable t) {
                 if(view == null) return;
-                view.errorHappened("No internet connection");//todo ovde si zakucao ovaj string. A sta ako je sa internetom sve u redu, a API nesto zajebava? Sta ako u samoj metodi fetchData() imas neki bug?
+
+                view.errorHappened(t.getMessage());
             }
         });
     }

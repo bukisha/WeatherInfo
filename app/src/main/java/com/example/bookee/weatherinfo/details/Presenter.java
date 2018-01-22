@@ -33,7 +33,7 @@ class Presenter implements MvpContract.Presenter {
         if (newTemperature != null) {
             view.updateWithNewData(newTemperature);
         } else {
-            view.errorHappened("Pogresno uneto ime grada");
+            view.errorHappened("Invalid city name");
         }
     }
 
