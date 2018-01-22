@@ -143,7 +143,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     public void errorHappened(String errorMessage) {
         progressBar.setVisibility(View.INVISIBLE);
         cityName.setVisibility(View.VISIBLE);
-        buildAlertDialog(errorMessage);
+        buildAlertDialog(errorMessage);//todo mozda je bolje ime fireErrorDialog(); ili showErrorDialog()
     }
 
     private void buildAlertDialog(String message) {
@@ -166,7 +166,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
                         System.exit(0);
                     }
                 });
-        AlertDialog alertDialog=builder.create();
+        AlertDialog alertDialog=builder.create();//todo Ne cinili ti se da je ova alertDialog ovde suvisna?
         alertDialog.show();
     }
 }
