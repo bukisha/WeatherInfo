@@ -51,6 +51,8 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
             @Override
             public void openActivity(Intent i) {
                 startActivity(i);
+                //TODO proveri
+                finish();
             }
         });
         return true;
@@ -107,8 +109,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     public void receiveDataFromPresenter(TemperatureData newTemperature) {
         if(newTemperature!=null) {
 
-
-           addCityTemperatureToGlobal(newTemperature);
+            addCityTemperatureToGlobal(newTemperature);
 
             Intent i = new Intent();
             i.putExtra("newTemp",newTemperature);
@@ -165,8 +166,8 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
                         android.os.Process.killProcess(android.os.Process.myPid());
                         System.exit(0);
                     }
-                }).create().show();
-
+                }).create()
+                  .show();
     }
 }
 

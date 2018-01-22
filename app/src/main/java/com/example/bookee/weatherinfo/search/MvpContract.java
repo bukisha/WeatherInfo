@@ -23,7 +23,7 @@ interface MvpContract {
    }
     interface FetchNewCityWeatherInfoCallback {
        void fetchNewWeather( TemperatureData temperatureData);
-       void error(Throwable t);
+       void error(String message);
    }
 
     public interface PresenterActivityCallback {

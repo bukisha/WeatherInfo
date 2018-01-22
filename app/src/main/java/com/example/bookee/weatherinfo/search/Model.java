@@ -33,7 +33,7 @@ public class Model implements MvpContract.Model {
             }
             @Override
             public void onError(Throwable t) {
-                callback.error(t);
+                callback.error("Error while fetching data");
             }
         });
     }

@@ -30,7 +30,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private TextView humidity;
     private MvpContract.Presenter weatherPresenter;
     private boolean newCityData;//todo zasto imas ovaj flag ovde
-    //todo RESPONSE da bih svaki put u onResume mogao da proverim da li startujem app ili u DetailsActivity dolazim iz searcha sa novim podacima
+    //todo RESPONSE da bih svaki put u onResume mogao da proverim da li startujem app ili u DetailsActivity dolazim iz searcha ili iz listActivity sa novim podacima
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,6 +47,8 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
                     @Override
                     public void openActivity(Intent i) {
                     startActivity(i);
+                    //TODO proveri dal zadovoljava spec
+                    finish();
                     }
                 });
             return true;
@@ -95,7 +97,12 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
             Bundle initBundle=intent.getExtras();
             TemperatureData initTemperature= null;
             if (initBundle != null) {
+               if(initBundle.containsKey("initialData")) {
                 initTemperature = initBundle.getParcelable("initialData");
+            } else {
+               if(initBundle.containsKey("selectedCityTemp")) {
+                   initTemperature = initBundle.getParcelable("selectedCityTemp");}
+               }
             }
             weatherPresenter.displayNewData(initTemperature);
         }
@@ -122,9 +129,14 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
             weatherPresenter.bindView(this);
             weatherPresenter.displayNewData(newTemperature);
         } else {
-            errorHappened("nisu primljeni novi podaci");
+            if(resultCode==RESULT_CANCELED) {
+                finish();
+            } else {
+                errorHappened("nisu primljeni novi podaci");
+            }
         }
     }
+
     @Override
     public void updateWithNewData(TemperatureData temperatureData) {
         city.setText(temperatureData.getName());

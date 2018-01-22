@@ -30,13 +30,13 @@ public class Presenter implements MvpContract.Presenter {
                 view.receiveDataFromPresenter(newTemperatureData);
             }
             @Override
-            public void error(Throwable t) {
+            public void error(String message) {
                 if(view == null) return;
-
-                view.errorHappened(t.getMessage());
+                view.errorHappened(message);
             }
         });
     }
+
 
     @Override
     public void menuAction(AppCompatActivity searchActivity, MenuItem item, MvpContract.PresenterActivityCallback callback) {

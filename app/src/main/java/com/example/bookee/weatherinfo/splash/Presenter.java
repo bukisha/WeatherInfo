@@ -23,7 +23,7 @@ public class Presenter implements MvpContract.Presenter {
             }
             @Override
             public void onFailure(Throwable t) {
-                view.error(t.getMessage());
+                view.error("Initialization Error");
             }
         });
     }
