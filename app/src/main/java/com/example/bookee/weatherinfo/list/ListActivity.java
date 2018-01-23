@@ -42,7 +42,7 @@ public class ListActivity extends android.app.ListActivity implements MvpContrac
     protected void onResume() {
         super.onResume();
         presenter.bindView(this);
-        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);//todo sta mislis, da li ovo pripada ovde? Ili mozda u modelu?
         String cityList=sharedPreferences.getString(String.valueOf(R.string.globalCityListName),"");
         presenter.getCityList(cityList);
     }

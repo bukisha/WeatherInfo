@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.TemperatureData;
+import com.example.bookee.weatherinfo.details.DetailsActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -108,7 +109,8 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
             addCityTemperatureToGlobal(newTemperature);
 
             Intent i = new Intent();
-            i.putExtra("newTemp", newTemperature);
+//            i.putExtra("newTemp", newTemperature);
+            i.putExtra(DetailsActivity.NEW_TEMP_KEY, newTemperature);//todo kada si izvukao key u konstantu, ovde mu pristupas.
             setResult(RESULT_OK, i);
             progressBar.setVisibility(View.INVISIBLE);
             finish();
