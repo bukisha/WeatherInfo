@@ -53,6 +53,12 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        Log.i("DEBUG", "onDESTROY");
+        super.onDestroy();
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("DEBUG", "onCREATE");
         super.onCreate(savedInstanceState);
@@ -67,15 +73,14 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
 
 
         weatherPresenter = new Presenter(this);
+        Intent intent = getIntent();
+        Bundle initBundle = intent.getExtras();
+        if(initBundle.containsKey(INITIAL_DATA_KEY)) {
+            temperatureToDisplay = initBundle.getParcelable(INITIAL_DATA_KEY);
+        } else if(initBundle.containsKey(SELECTED_CITY_KEY)) {
+            temperatureToDisplay =initBundle.getParcelable(SELECTED_CITY_KEY);
+        }
 
-            Intent intent = getIntent();
-            Bundle initBundle = intent.getExtras();
-
-            if(initBundle.containsKey(INITIAL_DATA_KEY)) {
-                temperatureToDisplay = initBundle.getParcelable(INITIAL_DATA_KEY);
-            } else if(initBundle.containsKey(SELECTED_CITY_KEY)) {
-                temperatureToDisplay =initBundle.getParcelable(SELECTED_CITY_KEY);
-            }
 
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -109,14 +114,14 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("DEBUG","onAvtivityRes");
+        Log.i("DEBUG","onActivityRes");
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQUEST_NEW_CITY) {
             Bundle newCityWeather = data.getExtras();
-            TemperatureData newTemperature= null;
-            if (newCityWeather != null) {
-                newTemperature = newCityWeather.getParcelable(NEW_TEMP_KEY);
-            }
+           // TemperatureData newTemperature= null;
+           // if (newCityWeather != null) {
+                TemperatureData newTemperature = newCityWeather.getParcelable(NEW_TEMP_KEY);
+           // }
            temperatureToDisplay =newTemperature;
         } else if(resultCode==RESULT_CANCELED) {
                 onResume();
