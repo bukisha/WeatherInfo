@@ -1,9 +1,7 @@
 package com.example.bookee.weatherinfo.list;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +10,7 @@ import com.example.bookee.weatherinfo.R;
 import java.util.ArrayList;
 
 public class ListActivity extends android.app.ListActivity implements MvpContract.View {
+
     private ListView listView;
     private MvpContract.Presenter presenter;
     @Override
@@ -19,7 +18,7 @@ public class ListActivity extends android.app.ListActivity implements MvpContrac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         listView=findViewById(android.R.id.list);
-        presenter=new Presenter() ;
+        presenter=new Presenter(getApplicationContext()) ;
 
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
@@ -42,13 +41,7 @@ public class ListActivity extends android.app.ListActivity implements MvpContrac
     protected void onResume() {
         super.onResume();
         presenter.bindView(this);
-
         presenter.getCityList(this);
-
-        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);//todo sta mislis, da li ovo pripada ovde? Ili mozda u modelu?
-        String cityList=sharedPreferences.getString(String.valueOf(R.string.globalCityListName),"");
-        presenter.getCityList(cityList);
-
     }
     @Override
     protected void onPause() {

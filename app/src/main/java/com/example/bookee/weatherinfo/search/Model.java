@@ -7,7 +7,7 @@ import com.example.bookee.weatherinfo.data.WeatherRepository;
 import static com.example.bookee.weatherinfo.utils.Constants.CELSIUS_FAHRENHEIT_DIFFERENCE;
 
 public class Model implements MvpContract.Model {
-
+    private static final String ERROR_FETCH_DATA = "nisu primljeni novi podaci";
     private WeatherRepository repository;
 
     Model(WeatherRepository repository) {
@@ -33,7 +33,7 @@ public class Model implements MvpContract.Model {
             }
             @Override
             public void onError(Throwable t) {
-                callback.error("Error while fetching data");
+                callback.error(ERROR_FETCH_DATA);
             }
         });
     }

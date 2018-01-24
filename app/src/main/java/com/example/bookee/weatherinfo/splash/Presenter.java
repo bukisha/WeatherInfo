@@ -1,17 +1,16 @@
 package com.example.bookee.weatherinfo.splash;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
-import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.RetrofitWeatherRepository;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.example.bookee.weatherinfo.data.WeatherRepository;
 import com.google.gson.Gson;
-
 import java.util.ArrayList;
 
 public class Presenter implements MvpContract.Presenter {
+    private static final String ERROR_INITIALIZATION ="initialization error" ;
     private MvpContract.Model model;
     private MvpContract.View view;
 
@@ -23,6 +22,7 @@ public class Presenter implements MvpContract.Presenter {
     @Override
     public void fetchInitialWeather(final SplashActivity splashActivity) {
         model.fetchInitialData(new MvpContract.InitialCityForecastFetchCallback() {
+            @SuppressLint("ApplySharedPref")
             @Override
             public void onSuccess(TemperatureData initTemp, long fetchDuration) {
                 if (view == null) return;
@@ -34,14 +34,14 @@ public class Presenter implements MvpContract.Presenter {
                     SharedPreferences.Editor sharedPrefEditor=sharedPreferences.edit();
                     Gson gson=new Gson();
                     String initialGlobaTemperaturelList=gson.toJson(allCitiesTemperatureList);
-                    sharedPrefEditor.putString(String.valueOf(R.string.globalCityListName),initialGlobaTemperaturelList);
+                    sharedPrefEditor.putString(String.valueOf(SplashActivity.GLOBAL_CITY_LIST_NAME),initialGlobaTemperaturelList);
                     sharedPrefEditor.commit();
                     view.startMainWithInitialData(initTemp, fetchDuration);
                 }
             }
             @Override
             public void onFailure(Throwable t) {
-                view.error("Initialization Error");
+                view.error(ERROR_INITIALIZATION);
             }
         });
     }

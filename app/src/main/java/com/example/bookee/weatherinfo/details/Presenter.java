@@ -1,6 +1,7 @@
 package com.example.bookee.weatherinfo.details;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.bookee.weatherinfo.data.TemperatureData;
@@ -11,7 +12,8 @@ class Presenter implements MvpContract.Presenter {
     private MvpContract.View view;
     //private MvpContract.Model model;
 
-    Presenter() {
+    Presenter(MvpContract.View view) {
+        this.view=view;
     }
 
     @Override
@@ -30,11 +32,7 @@ class Presenter implements MvpContract.Presenter {
     @Override
     public void displayNewData(TemperatureData newTemperature) {
         if (view == null) return;
-        if (newTemperature != null) {
-            view.updateWithNewData(newTemperature);
-        } else {
-            view.errorHappened("Invalid city name");
-        }
+        view.updateWithNewData(newTemperature);
     }
     @Override
     public void menuAction(AppCompatActivity detailsActivity, int item, MvpContract.PresenterActivityCallback callback) {

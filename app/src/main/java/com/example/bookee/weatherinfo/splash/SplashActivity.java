@@ -2,24 +2,17 @@ package com.example.bookee.weatherinfo.splash;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextThemeWrapper;
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.example.bookee.weatherinfo.details.DetailsActivity;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-
-import rx.Observable;
-
 import static java.lang.Thread.sleep;
 
 public class SplashActivity extends AppCompatActivity implements MvpContract.View {
+    public static final String GLOBAL_CITY_LIST_NAME = "globalCityList";
     private MvpContract.Presenter presenter;
 
     @Override
@@ -37,7 +30,7 @@ public class SplashActivity extends AppCompatActivity implements MvpContract.Vie
      public void startMainWithInitialData(TemperatureData initialTemperatureData, final long fetchDuration) {
         final Intent startApp=new Intent(this, DetailsActivity.class);
 
-         startApp.putExtra("initialData",initialTemperatureData);
+         startApp.putExtra(DetailsActivity.INITIAL_DATA_KEY,initialTemperatureData);
 
          new Thread(new Runnable() {
             @Override

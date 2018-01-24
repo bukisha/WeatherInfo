@@ -1,12 +1,9 @@
 package com.example.bookee.weatherinfo.search;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,10 +23,6 @@ import android.widget.Toast;
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.example.bookee.weatherinfo.details.DetailsActivity;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity implements MvpContract.View {
 
@@ -61,8 +54,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button getForecast;
-        getForecast = findViewById(R.id.get_forecast_button);
+        Button getForecast= findViewById(R.id.get_forecast_button);
         cityName = findViewById(R.id.desired_city_name);
         progressBar = findViewById(R.id.progressBar);
 
@@ -106,11 +98,8 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     public void receiveDataFromPresenter(TemperatureData newTemperature) {
         if (newTemperature != null) {
 
-            //addCityTemperatureToGlobal(newTemperature);
-
             Intent i = new Intent();
-//            i.putExtra("newTemp", newTemperature);
-            i.putExtra(DetailsActivity.NEW_TEMP_KEY, newTemperature);//todo kada si izvukao key u konstantu, ovde mu pristupas.
+            i.putExtra(DetailsActivity.NEW_TEMP_KEY, newTemperature);
             setResult(RESULT_OK, i);
             progressBar.setVisibility(View.INVISIBLE);
             finish();

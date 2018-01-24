@@ -1,12 +1,17 @@
 package com.example.bookee.weatherinfo.list;
 
-
 import android.content.Context;
 import android.content.Intent;
+import com.example.bookee.weatherinfo.data.TemperatureData;
 
 import java.util.ArrayList;
-//todo di je ovodje Model? Ovo neki _VP? :D
+
 public interface MvpContract {
+
+    interface Model {
+        void getGlobalCityList(ModelToPresenterCallback callback);
+        TemperatureData getSelectedCityTemperature(int i);
+    }
 
     interface View {
         void displaySearchedCities(ArrayList<String> listOfCityNames);
@@ -18,8 +23,14 @@ public interface MvpContract {
          void unbindView();
          void newCitySelected(int i, android.app.ListActivity activity, PresenterToActivityCallback callback);
      }
+
      interface PresenterToActivityCallback {
         void onSucess(Intent openActivity);
+        void onFailure();
+     }
+
+     interface ModelToPresenterCallback {
+        void onSucess(ArrayList<String > listOfCities);
         void onFailure();
      }
 }

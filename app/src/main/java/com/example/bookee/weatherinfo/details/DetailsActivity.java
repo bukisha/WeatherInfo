@@ -11,23 +11,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.example.bookee.weatherinfo.search.SearchActivity;
 
 
 public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
-    public static final  String NEW_TEMP_KEY     = "newTemp";
     private static final int    REQUEST_NEW_CITY = 2;
+    public static final  String NEW_TEMP_KEY     = "newTemp";
+    public static final String INITIAL_DATA_KEY ="initialData" ;
+    public static final String SELECTED_CITY_KEY = "selectedCityTemp";
+    public static final String ERROR_NO_NEW_DATA ="nisu primljeni novi podaci" ;
+
+    private   TemperatureData temperatureToDisplay;
 
     private TextView city;
     private TextView temperature;
     private TextView windSpeed;
     private TextView humidity;
     private MvpContract.Presenter weatherPresenter;
-    private boolean newCityData;//todo zasto imas ovaj flag ovde
-    //todo RESPONSE da bih svaki put u onResume mogao da proverim da li startujem app ili u DetailsActivity dolazim iz searcha ili iz listActivity sa novim podacima
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -41,7 +44,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
                 weatherPresenter.menuAction(this,0,new MvpContract.PresenterActivityCallback() {
                     @Override
                     public void openActivity(Intent i) {
-                    startActivity(i);
+                        startActivity(i);
                         finish();
                     }
                 });
@@ -55,15 +58,25 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         Log.i("DEBUG", "onCREATE");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details_activity);
-       android.support.v7.widget.Toolbar toolbar=findViewById(R.id.toolbar);
-       setSupportActionBar(toolbar);
+        android.support.v7.widget.Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         city = findViewById(R.id.current_city);
         temperature = findViewById(R.id.current_temp);
         windSpeed = findViewById(R.id.wind_info);
         humidity = findViewById(R.id.humidity_info);
 
-        weatherPresenter = new Presenter();
+
+        weatherPresenter = new Presenter(this);
+
+            Intent intent = getIntent();
+            Bundle initBundle = intent.getExtras();
+
+            if(initBundle.containsKey(INITIAL_DATA_KEY)) {
+                temperatureToDisplay = initBundle.getParcelable(INITIAL_DATA_KEY);
+            } else if(initBundle.containsKey(SELECTED_CITY_KEY)) {
+                temperatureToDisplay =initBundle.getParcelable(SELECTED_CITY_KEY);
+            }
 
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +85,6 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
                 weatherPresenter.actionSomethingIsClicked();
             }
         });
-        newCityData=false;
     }
     @Override
     protected void onPause() {
@@ -85,21 +97,7 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
         Log.i("DEBUG", "onRESUME");
         super.onResume();
         weatherPresenter.bindView(this);
-
-        if (!newCityData) {
-            Intent intent=getIntent();
-            Bundle initBundle=intent.getExtras();
-            TemperatureData initTemperature= null;
-            if (initBundle != null) {
-               if(initBundle.containsKey("initialData")) {
-                initTemperature = initBundle.getParcelable("initialData");
-            } else {
-               if(initBundle.containsKey("selectedCityTemp")) {
-                   initTemperature = initBundle.getParcelable("selectedCityTemp");}
-               }
-            }
-            weatherPresenter.displayNewData(initTemperature);
-        }
+        weatherPresenter.displayNewData(temperatureToDisplay);
     }
     @Override
     public void errorHappened(String errorMessage) {
@@ -112,20 +110,19 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i("DEBUG","onAvtivityRes");
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQUEST_NEW_CITY) {
             Bundle newCityWeather = data.getExtras();
-            newCityData = true;
             TemperatureData newTemperature= null;
             if (newCityWeather != null) {
-                newTemperature = newCityWeather.getParcelable(NEW_TEMP_KEY);//todo svaku konstantu izvlacis. Kasnije je kao takvu koristis: SearchActivity.java - line:112,113
+                newTemperature = newCityWeather.getParcelable(NEW_TEMP_KEY);
             }
-            weatherPresenter.bindView(this);
-            weatherPresenter.displayNewData(newTemperature);
+           temperatureToDisplay =newTemperature;
         } else if(resultCode==RESULT_CANCELED) {
                 onResume();
             } else {
-            errorHappened("nisu primljeni novi podaci");//todo izvlaci ovo u strings konstante, nesreco!
+            errorHappened(ERROR_NO_NEW_DATA);
             }
         }
     @Override
