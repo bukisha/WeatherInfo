@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import java.util.ArrayList;
-
+//todo di je ovodje Model? Ovo neki _VP? :D
 public interface MvpContract {
 
     interface View {

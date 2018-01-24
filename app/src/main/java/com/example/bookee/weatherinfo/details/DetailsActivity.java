@@ -11,13 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.example.bookee.weatherinfo.search.SearchActivity;
 
 
 public class DetailsActivity extends AppCompatActivity implements MvpContract.View {
-    private static final int REQUEST_NEW_CITY = 2;
+    public static final  String NEW_TEMP_KEY     = "newTemp";
+    private static final int    REQUEST_NEW_CITY = 2;
 
     private TextView city;
     private TextView temperature;
@@ -116,14 +118,14 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
             newCityData = true;
             TemperatureData newTemperature= null;
             if (newCityWeather != null) {
-                newTemperature = newCityWeather.getParcelable("newTemp");
+                newTemperature = newCityWeather.getParcelable(NEW_TEMP_KEY);//todo svaku konstantu izvlacis. Kasnije je kao takvu koristis: SearchActivity.java - line:112,113
             }
             weatherPresenter.bindView(this);
             weatherPresenter.displayNewData(newTemperature);
         } else if(resultCode==RESULT_CANCELED) {
                 onResume();
             } else {
-                errorHappened("nisu primljeni novi podaci");
+            errorHappened("nisu primljeni novi podaci");//todo izvlaci ovo u strings konstante, nesreco!
             }
         }
     @Override
