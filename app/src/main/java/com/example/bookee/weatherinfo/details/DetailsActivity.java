@@ -45,7 +45,6 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
                     @Override
                     public void openActivity(Intent i) {
                         startActivity(i);
-                        finish();
                     }
                 });
             return true;
