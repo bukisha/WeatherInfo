@@ -87,7 +87,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
                 desiredCity = cityName.getText().toString();
                 cityName.setVisibility(View.INVISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
-                presenter.getData(desiredCity);
+                presenter.getData(desiredCity,getApplicationContext());
             }
         });
     }
@@ -105,7 +105,7 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
     public void receiveDataFromPresenter(TemperatureData newTemperature) {
         if (newTemperature != null) {
 
-            addCityTemperatureToGlobal(newTemperature);
+            //addCityTemperatureToGlobal(newTemperature);
 
             Intent i = new Intent();
             i.putExtra("newTemp", newTemperature);
@@ -117,23 +117,6 @@ public class SearchActivity extends AppCompatActivity implements MvpContract.Vie
             cityName.setVisibility(View.VISIBLE);
             Toast.makeText(this, R.string.errorWrongCityName, Toast.LENGTH_LONG).show();
         }
-    }
-    @SuppressLint("ApplySharedPref")
-    private void addCityTemperatureToGlobal(TemperatureData newTemperature) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-
-        String oldGlobalCityList = sharedPreferences.getString(String.valueOf(R.string.globalCityListName), "");
-        Type type = new TypeToken<ArrayList<TemperatureData>>() {
-        }.getType();
-        ArrayList<TemperatureData> globalCityList = gson.fromJson(oldGlobalCityList, type);
-
-        globalCityList.add(newTemperature);
-
-        String newGlobalCityList = gson.toJson(globalCityList);
-        editor.putString(String.valueOf(R.string.globalCityListName), newGlobalCityList);
-        editor.commit();
     }
     @Override
     public void errorHappened(String errorMessage) {

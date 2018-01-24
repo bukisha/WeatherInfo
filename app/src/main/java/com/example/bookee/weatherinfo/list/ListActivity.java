@@ -42,9 +42,7 @@ public class ListActivity extends android.app.ListActivity implements MvpContrac
     protected void onResume() {
         super.onResume();
         presenter.bindView(this);
-        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(this);
-        String cityList=sharedPreferences.getString(String.valueOf(R.string.globalCityListName),"");
-        presenter.getCityList(cityList);
+        presenter.getCityList(this);
     }
     @Override
     protected void onPause() {
@@ -53,9 +51,7 @@ public class ListActivity extends android.app.ListActivity implements MvpContrac
     }
     @Override
     public void displaySearchedCities(ArrayList<String> listOfCityNames) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listOfCityNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listOfCityNames);
         listView.setAdapter(adapter);
     }
-
-
 }

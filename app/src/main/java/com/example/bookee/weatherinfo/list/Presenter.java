@@ -1,6 +1,11 @@
 package com.example.bookee.weatherinfo.list;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 import com.example.bookee.weatherinfo.details.DetailsActivity;
 import com.google.gson.Gson;
@@ -10,10 +15,13 @@ import java.util.ArrayList;
 
 public class Presenter implements MvpContract.Presenter {
     private MvpContract.View view;
-   private  ArrayList<TemperatureData> listOfCityTemps;
+    private  ArrayList<TemperatureData> listOfCityTemps;
     public Presenter() {}
     @Override
-    public void getCityList(String cityList) {
+    public void getCityList(Context listActivity) {
+
+        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(listActivity);
+        String cityList=sharedPreferences.getString(String.valueOf(R.string.globalCityListName),"");
         Gson gson=new Gson();
         Type type=new TypeToken<ArrayList<TemperatureData>>(){}.getType();
          listOfCityTemps=gson.fromJson(cityList,type);

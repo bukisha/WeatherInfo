@@ -26,14 +26,12 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
     private MvpContract.Presenter weatherPresenter;
     private boolean newCityData;//todo zasto imas ovaj flag ovde
     //todo RESPONSE da bih svaki put u onResume mogao da proverim da li startujem app ili u DetailsActivity dolazim iz searcha ili iz listActivity sa novim podacima
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
@@ -123,13 +121,11 @@ public class DetailsActivity extends AppCompatActivity implements MvpContract.Vi
             weatherPresenter.bindView(this);
             weatherPresenter.displayNewData(newTemperature);
         } else if(resultCode==RESULT_CANCELED) {
-                finish();
+                onResume();
             } else {
                 errorHappened("nisu primljeni novi podaci");
             }
         }
-
-
     @Override
     public void updateWithNewData(TemperatureData temperatureData) {
         city.setText(temperatureData.getName());

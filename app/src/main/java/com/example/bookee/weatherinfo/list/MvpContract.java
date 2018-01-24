@@ -1,6 +1,7 @@
 package com.example.bookee.weatherinfo.list;
 
 
+import android.content.Context;
 import android.content.Intent;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public interface MvpContract {
     }
 
      interface Presenter {
-         void getCityList(String cityList);
+         void getCityList(Context context);
          void bindView(View v);
          void unbindView();
          void newCitySelected(int i, android.app.ListActivity activity, PresenterToActivityCallback callback);

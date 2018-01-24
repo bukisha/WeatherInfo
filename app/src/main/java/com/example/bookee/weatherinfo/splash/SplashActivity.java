@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import com.example.bookee.weatherinfo.R;
 import com.example.bookee.weatherinfo.data.TemperatureData;
@@ -15,6 +14,8 @@ import com.example.bookee.weatherinfo.details.DetailsActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+
+import rx.Observable;
 
 import static java.lang.Thread.sleep;
 
@@ -30,25 +31,15 @@ public class SplashActivity extends AppCompatActivity implements MvpContract.Vie
     protected void onResume() {
         super.onResume();
         presenter.bindView(this);
-        presenter.fetchInitialWeather();
+        presenter.fetchInitialWeather(this);
     }
 
      public void startMainWithInitialData(TemperatureData initialTemperatureData, final long fetchDuration) {
         final Intent startApp=new Intent(this, DetailsActivity.class);
 
-         ArrayList<TemperatureData> allCitiesTemperatureList= new ArrayList<>();
-         allCitiesTemperatureList.add(initialTemperatureData);
-
-         SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-         SharedPreferences.Editor sharedPrefEditor=sharedPreferences.edit();
-         Gson gson=new Gson();
-         String initialGlobaTemperaturelList=gson.toJson(allCitiesTemperatureList);
-         sharedPrefEditor.putString(String.valueOf(R.string.globalCityListName),initialGlobaTemperaturelList);
-         sharedPrefEditor.commit();
-
          startApp.putExtra("initialData",initialTemperatureData);
 
-        new Thread(new Runnable() {
+         new Thread(new Runnable() {
             @Override
             public void run() {
                 if(fetchDuration<3000) {

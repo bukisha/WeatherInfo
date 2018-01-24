@@ -1,12 +1,11 @@
 package com.example.bookee.weatherinfo.splash;
 
-import com.example.bookee.weatherinfo.data.CityForecastInfo;
 import com.example.bookee.weatherinfo.data.TemperatureData;
 
 public interface MvpContract {
 
     interface Presenter {
-        void fetchInitialWeather();
+        void fetchInitialWeather(SplashActivity splashActivity);
         void bindView(View view);
     }
 

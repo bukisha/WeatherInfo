@@ -1,4 +1,5 @@
 package com.example.bookee.weatherinfo.search;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -14,7 +15,7 @@ interface MvpContract {
     interface Presenter  {
        void bindView(View v);
        void unbindView();
-       void getData(String desiredCity);
+       void getData(String desiredCity,Context context);
         void menuAction(AppCompatActivity searchActivity, MenuItem item, PresenterActivityCallback presenterActivityCallback);
     }
     interface Model {
